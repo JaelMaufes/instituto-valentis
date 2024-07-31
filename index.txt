@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seu Nome - Currículo</title>
+    <title>Conheça-me mais</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="bio">
-    <h1>Seu Nome</h1>
-    <p>Desenvolvedor Web apaixonado por tecnologia.</p>
+    <h1>Samuel Jafé Pereira Carvalho</h1>
+    <p>Nascimento: 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
+    <p>Profissão: Administrador e Pastor</p>
+    <p>Idiomas: Inglês, Espanhol, Francês e Português</p>
 </div>
 
 <div class="resume">
-    <h2>Experiência Profissional</h2>
+    <h2>Família</h2>
     <ul>
-        <li>Empresa A - Desenvolvedor Front-end</li>
-        <li>Empresa B - Estagiário em Web Design</li>
+        <li>Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
     </ul>
 
-    <h2>Formação Acadêmica</h2>
+    <h2>Minha Carreira</h2>
     <ul>
-        <li>Curso de Desenvolvimento Web - Universidade XYZ</li>
-        <li>Bacharelado em Ciência da Computação - Universidade ABC</li>
+        <li>Poliglota com experiência internacional;</li>
+        <li>Administrador com visão para o desenvolvimento e gestão eficiente;</li>
+        <li>Pastor comprometido com os valores morais e espirituais.</li>
     </ul>
 </div>
 <div class="contact">
     <h2>Contato</h2>
     <ul>
-        <li>E-mail: seuemail@example.com</li>
-        <li>Telefone: (XX) XXXX-XXXX</li>
-        <li><a href="https://linkedin.com/seuperfil" target="_blank">LinkedIn</a></li>
+        <li>E-mail: samueljpcarvalho@gmail.com</li>
+        <li>Telefone: (44) 99898-5343</li>
+        <li><a href="https://linkedin.com/samueljpcarvalho" target="_blank">LinkedIn</a></li>
         <!-- Adicione outros links sociais aqui -->
     </ul>
 </div>
