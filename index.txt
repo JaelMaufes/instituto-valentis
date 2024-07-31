@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Nome - Currículo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bio">
+    <h1>Seu Nome</h1>
+    <p>Desenvolvedor Web apaixonado por tecnologia.</p>
+</div>
+
+<div class="resume">
+    <h2>Experiência Profissional</h2>
+    <ul>
+        <li>Empresa A - Desenvolvedor Front-end</li>
+        <li>Empresa B - Estagiário em Web Design</li>
+    </ul>
+
+    <h2>Formação Acadêmica</h2>
+    <ul>
+        <li>Curso de Desenvolvimento Web - Universidade XYZ</li>
+        <li>Bacharelado em Ciência da Computação - Universidade ABC</li>
+    </ul>
+</div>
+<div class="contact">
+    <h2>Contato</h2>
+    <ul>
+        <li>E-mail: seuemail@example.com</li>
+        <li>Telefone: (XX) XXXX-XXXX</li>
+        <li><a href="https://linkedin.com/seuperfil" target="_blank">LinkedIn</a></li>
+        <!-- Adicione outros links sociais aqui -->
+    </ul>
+</div>
+</body>
+</html>
