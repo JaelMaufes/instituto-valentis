@@ -5,38 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samuel Jafé</title>
     <style>
-        body {
+       body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             color: #333;
             margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        main {
             padding: 20px;
         }
-        nav {
-            text-align: right;
-        }
-        nav a {
-            margin: 0 10px;
-            color: #007BFF;
-            text-decoration: none;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        section {
+        .bio, .resume, .contact {
             background-color: #fff;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
             padding: 20px;
-            margin-bottom: 20px;
+            max-width: 800px;
         }
+        h1, h2 {
         h1 {
             color: #FAFAFA;
-        } 
+        }
         h2 {
             color: #007BFF;
         }
@@ -54,23 +56,15 @@
         a:hover {
             text-decoration: underline;
         }
-        .header {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-top: 56.25%; /* 16:9 aspect ratio */
-            margin-bottom: 20px;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
         }
-        .header iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+        footer a {
+            color: #00aced;
         }
     </style>
 </head>
