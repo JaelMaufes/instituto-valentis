@@ -10,34 +10,33 @@
             background-color: #f8f9fa;
             color: #333;
             margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #007BFF;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        header img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-        main {
             padding: 20px;
         }
-        .bio, .resume, .contact {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 20px auto;
-            padding: 20px;
+        nav {
+            text-align: right;
+        }
+        nav a {
+            margin: 0 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
             max-width: 800px;
+            margin: 0 auto;
+        }
+        section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
         }
         h1 {
             color: #FAFAFA;
-        }
+        } 
         h2 {
             color: #007BFF;
         }
@@ -55,77 +54,144 @@
         a:hover {
             text-decoration: underline;
         }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-        }
-        footer a {
-            color: #00aced;
-        }
     </style>
 </head>
 <body>
-    <header>
-    <div style="position: relative; width: 100px; height: 100px; padding-top: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); 
-        margin: 0 auto; overflow: hidden; border-radius: 50%; will-change: transform;">
-        <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-            src="https://www.canva.com/design/DAF4CGi52n4/gruWz3Vn79q8zu_eM2y0MA/view?embed" 
-            allowfullscreen="allowfullscreen" allow="fullscreen">
-        </iframe>
-    </div>
-    <h1>Samuel Jafé Pereira Carvalho</h1>
-    <p>Administrador | Pastor | Político</p>
-    </header>
+    <nav>
+        <a href="#" onclick="setLanguage('pt')">Português</a> | 
+        <a href="#" onclick="setLanguage('en')">English</a>
+    </nav>
 
-    <main>
-        <div class="bio">
-            <p>Nascido em 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
-            <p>Profissão: Administrador e Pastor</p>
-            <p>Idiomas: Inglês, Espanhol, Francês e Português</p>
-            <p>Pessoa de vocação política. Atualmente, filiado ao Partido Republicanos.</p>
-        </div>
-        <div class="resume">
-            <h2>Família</h2>
+    <div class="container">
+        <header>
+            <h1 id="title">Samuel Jafé Pereira Carvalho</h1>
+            <p id="subtitle">Administrador | Pastor | Político</p>
+        </header>
+
+        <section>
+            <h2 id="bio-title">Biografia</h2>
+            <p id="bio-text">Nascido em 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
+            <p id="bio-profession">Profissão: Administrador e Pastor</p>
+            <p id="bio-languages">Idiomas: Inglês, Espanhol, Francês e Português</p>
+            <p id="bio-political">Pessoa de vocação política. Atualmente, filiado ao Partido Republicanos.</p>
+        </section>
+
+        <section>
+            <h2 id="family-title">Família</h2>
             <ul>
-                <li>Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
-                <li>Legendário. LGND #83532.</li>
+                <li id="family-item1">Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
+                <li id="family-item2">Legendário. LGND #83532.</li>
             </ul>
-            <h2>Minha Carreira</h2>
+        </section>
+
+        <section>
+            <h2 id="career-title">Minha Carreira</h2>
             <ul>
-                <li>Poliglota com experiência internacional;</li>
-                <li>Administrador com visão para o desenvolvimento e gestão eficiente;</li>
-                <li>Pastor comprometido com os valores morais e espirituais.</li>
-                <li>Ex-CEO Valentis Business.</li>
+                <li id="career-item1">Administrador com visão para o desenvolvimento e gestão eficiente.</li>
+                <li id="career-item2">Poliglota com experiência internacional.</li>
+                <li id="career-item3">Pastor comprometido com os valores morais e espirituais.</li>
+                <li id="career-item4">Ex-CEO Valentis Business.</li>
             </ul>
-            <h2>Trabalho Comunitário</h2>
+        </section>
+
+        <section>
+            <h2 id="community-title">Trabalho Comunitário</h2>
             <ul>
-                <li>Fundador do Instituto Valentis;</li>
-                <li>Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.</li>
+                <li id="community-item1">Fundador do Instituto Valentis.</li>
+                <li id="community-item2">Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.</li>
             </ul>
-            <h2>Minha Visão</h2>
+        </section>
+
+        <section>
+            <h2 id="vision-title">Minha Visão</h2>
+            <p id="vision-text">Promover a SEGURANÇA e o BEM-ESTAR da comunidade. Fomentar a EDUCAÇÃO e a CULTURA. Apoiar o DESENVOLVIMENTO ECONÔMICO local.</p>
+        </section>
+
+        <section>
+            <h2 id="commitment-title">Meu Compromisso</h2>
+            <p id="commitment-text">TRANSPARÊNCIA na gestão pública. DIÁLOGO constante com a comunidade. INOVAÇÃO nas soluções dos desafios municipais.</p>
+        </section>
+
+        <section>
+            <h2 id="contact-title">Contato</h2>
             <ul>
-                <li>Promover a SEGURANÇA e o BEM-ESTAR da comunidade. Fomentar a EDUCAÇÃO e a CULTURA. Apoiar o DESENVOLVIMENTO ECONÔMICO local.</li>
+                <li id="contact-item1">E-mail: contato@ivalentis.com</li>
+                <li id="contact-item2">WhatsApp: (44) 99898-5343</li>
+                <li id="contact-item3"><a href="https://linkedin.com/samueljpcarvalho" target="_blank">LinkedIn</a></li>
             </ul>
-            <h2>Meu Compromisso</h2>
-            <ul>
-                <li>TRANSPARÊNCIA na gestão pública. DIÁLOGO constante com a comunidade. INOVAÇÃO nas soluções dos desafios municipais.</li>
-            </ul>
-        </div>
-        <div class="contact">
-            <h2>Contato</h2>
-            <ul>
-                <li>E-mail: <a href="mailto:contato@ivalentis.com">contato@ivalentis.com</a></li>
-                <li>WhatsApp: (44) 99898-5343</li>
-                <li><a href="https://linkedin.com/samueljpcarvalho" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            </ul>
-        </div>
-    </main>
-    <footer>
-        <p>© 2025 Samuel Jafé - Todos os direitos reservados.</p>
-        <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
-    </footer>
+        </section>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                title: "Samuel Jafé Pereira Carvalho",
+                subtitle: "Administrator | Pastor | Politician",
+                "bio-title": "Biography",
+                "bio-text": "Born on May 30, 1993, in Petrópolis, Rio de Janeiro",
+                "bio-profession": "Profession: Administrator and Pastor",
+                "bio-languages": "Languages: English, Spanish, French, and Portuguese",
+                "bio-political": "Politically inclined. Currently affiliated with the Republican Party.",
+                "family-title": "Family",
+                "family-item1": "Married, father of two, dedicated to family and family values.",
+                "family-item2": "Legendary. LGND #83532.",
+                "career-title": "My Career",
+                "career-item1": "Administrator with a vision for development and efficient management.",
+                "career-item2": "Multilingual with international experience.",
+                "career-item3": "Pastor committed to moral and spiritual values.",
+                "career-item4": "Former CEO of Valentis Business.",
+                "community-title": "Community Work",
+                "community-item1": "Founder of Instituto Valentis.",
+                "community-item2": "President of the Community Security Council (CONSEG) in Ivatuba, Paraná - 2024-2025 term.",
+                "vision-title": "My Vision",
+                "vision-text": "Promote SAFETY and WELL-BEING in the community. Foster EDUCATION and CULTURE. Support local ECONOMIC DEVELOPMENT.",
+                "commitment-title": "My Commitment",
+                "commitment-text": "TRANSPARENCY in public management. CONSTANT DIALOGUE with the community. INNOVATION in addressing municipal challenges.",
+                "contact-title": "Contact",
+                "contact-item1": "Email: contato@ivalentis.com",
+                "contact-item2": "WhatsApp: +55 (44) 99898-5343",
+                "contact-item3": "<a href='https://linkedin.com/samueljpcarvalho' target='_blank'>LinkedIn</a>"
+            },
+            pt: {
+                title: "Samuel Jafé Pereira Carvalho",
+                subtitle: "Administrador | Pastor | Político",
+                "bio-title": "Biografia",
+                "bio-text": "Nascido em 30 de maio de 1993, Petrópolis, Rio de Janeiro",
+                "bio-profession": "Profissão: Administrador e Pastor",
+                "bio-languages": "Idiomas: Inglês, Espanhol, Francês e Português",
+                "bio-political": "Pessoa de vocação política. Atualmente, filiado ao Partido Republicanos.",
+                "family-title": "Família",
+                "family-item1": "Casado, pai de dois filhos, dedicado à família e aos valores familiares.",
+                "family-item2": "Legendário. LGND #83532.",
+                "career-title": "Minha Carreira",
+                "career-item1": "Administrador com visão para o desenvolvimento e gestão eficiente.",
+                "career-item2": "Poliglota com experiência internacional.",
+                "career-item3": "Pastor comprometido com os valores morais e espirituais.",
+                "career-item4": "Ex-CEO Valentis Business.",
+                "community-title": "Trabalho Comunitário",
+                "community-item1": "Fundador do Instituto Valentis.",
+                "community-item2": "Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.",
+                "vision-title": "Minha Visão",
+                "vision-text": "Promover a SEGURANÇA e o BEM-ESTAR da comunidade. Fomentar a EDUCAÇÃO e a CULTURA. Apoiar o DESENVOLVIMENTO ECONÔMICO local.",
+                "commitment-title": "Meu Compromisso",
+                "commitment-text": "TRANSPARÊNCIA na gestão pública. DIÁLOGO constante com a comunidade. INOVAÇÃO nas soluções dos desafios municipais.",
+                "contact-title": "Contato",
+                "contact-item1": "E-mail: contato@ivalentis.com",
+                "contact-item2": "WhatsApp: (44) 99898-5343",
+                "contact-item3": "<a href='https://linkedin.com/samueljpcarvalho' target='_blank'>LinkedIn</a>"
+            }
+        };
+
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll("[id]");
+            elements.forEach(el => {
+                const translation = translations[lang][el.id];
+                if (translation) el.innerHTML = translation;
+            });
+        }
+
+        // Idioma inicial como Português
+        setLanguage('pt');
+    </script>
 </body>
 </html>
