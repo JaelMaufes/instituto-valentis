@@ -7,9 +7,24 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f8f9fa;
             color: #333;
             margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        main {
             padding: 20px;
         }
         .bio, .resume, .contact {
@@ -37,50 +52,70 @@
         a:hover {
             text-decoration: underline;
         }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #00aced;
+        }
     </style>
 </head>
 <body>
-    <div class="bio">
+    <header>
+        <img src="https://via.placeholder.com/100" alt="Samuel Jafé">
         <h1>Samuel Jafé Pereira Carvalho</h1>
-        <p>Nascido em 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
-        <p>Profissão: Administrador e Pastor</p>
-        <p>Idiomas: Inglês, Espanhol, Francês e Português</p>
-        <p>Pessoa de vocação política. Atualmente, filiado ao Partido Republicanos.</p>
-    </div>
-    <div class="resume">
-        <h2>Família</h2>
-        <ul>
-            <li>Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
-            <li>Legendário. LGND #83532.</li>
-        </ul>
-        <h2>Minha Carreira</h2>
-        <ul>
-            <li>Poliglota com experiência internacional;</li>
-            <li>Administrador com visão para o desenvolvimento e gestão eficiente;</li>
-            <li>Pastor comprometido com os valores morais e espirituais.</li>
-            <li>Ex-CEO Valentis Business.</li>
-        </ul>
-        <h2>Trabalho Comunitário</h2>
-        <ul>
-            <li>Fundador do Instituto Valentis;</li>
-            <li>Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.</li>
-        </ul>
-        <h2>Minha Visão</h2>
-        <ul>
-            <li>Promover a SEGURANÇA e o BEM-ESTAR da comunidade. Fomentar a EDUCAÇÃO e a CULTURA. Apoiar o DESENVOLVIMENTO ECONÔMICO local.</li>
-        </ul>
-        <h2>Meu Compromisso</h2>
-        <ul>
-            <li>TRANSPARÊNCIA na gestão pública. DIÁLOGO constante com a comunidade. INOVAÇÃO nas soluções dos desafios municipais.</li>
-        </ul>
-    </div>
-    <div class="contact">
-        <h2>Contato</h2>
-        <ul>
-            <li>E-mail: contato@ivalentis.com</li>
-            <li>WhatsApp: (44) 99898-5343</li>
-            <li><a href="https://linkedin.com/samueljpcarvalho" target="_blank">LinkedIn</a></li>
-        </ul>
-    </div>
+        <p>Administrador | Pastor | Político</p>
+    </header>
+    <main>
+        <div class="bio">
+            <p>Nascido em 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
+            <p>Profissão: Administrador e Pastor</p>
+            <p>Idiomas: Inglês, Espanhol, Francês e Português</p>
+            <p>Pessoa de vocação política. Atualmente, filiado ao Partido Republicanos.</p>
+        </div>
+        <div class="resume">
+            <h2>Família</h2>
+            <ul>
+                <li>Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
+                <li>Legendário. LGND #83532.</li>
+            </ul>
+            <h2>Minha Carreira</h2>
+            <ul>
+                <li>Poliglota com experiência internacional;</li>
+                <li>Administrador com visão para o desenvolvimento e gestão eficiente;</li>
+                <li>Pastor comprometido com os valores morais e espirituais.</li>
+                <li>Ex-CEO Valentis Business.</li>
+            </ul>
+            <h2>Trabalho Comunitário</h2>
+            <ul>
+                <li>Fundador do Instituto Valentis;</li>
+                <li>Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.</li>
+            </ul>
+            <h2>Minha Visão</h2>
+            <ul>
+                <li>Promover a SEGURANÇA e o BEM-ESTAR da comunidade. Fomentar a EDUCAÇÃO e a CULTURA. Apoiar o DESENVOLVIMENTO ECONÔMICO local.</li>
+            </ul>
+            <h2>Meu Compromisso</h2>
+            <ul>
+                <li>TRANSPARÊNCIA na gestão pública. DIÁLOGO constante com a comunidade. INOVAÇÃO nas soluções dos desafios municipais.</li>
+            </ul>
+        </div>
+        <div class="contact">
+            <h2>Contato</h2>
+            <ul>
+                <li>E-mail: <a href="mailto:contato@ivalentis.com">contato@ivalentis.com</a></li>
+                <li>WhatsApp: (44) 99898-5343</li>
+                <li><a href="https://linkedin.com/samueljpcarvalho" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 Samuel Jafé - Todos os direitos reservados.</p>
+        <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+    </footer>
 </body>
 </html>
