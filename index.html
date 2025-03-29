@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instituto Valentis</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
     <header class="header">
-        <h1 id="title">Instituto Valentis</h1>
+        <h1>Instituto Valentis</h1>
         <nav class="navbar">
             <a href="index.html">Início</a>
             <a href="sobre.html">Sobre</a>
@@ -20,43 +19,9 @@
     </header>
 
     <main class="content">
-        <section id="sobre" class="fade-in">
-            <h2>Sobre o Instituto</h2>
-            <p>O Instituto Valentis é uma organização sem fins lucrativos dedicada ao fomento da educação, inovação e sustentabilidade, com base em princípios cristãos protestantes.</p>
-            <p>Atuamos em diversas frentes, incluindo cursos livres, palestras, workshops, feiras de ciência e tecnologia, aulas de futebol, fanfarra, banda, e atividades semelhantes ao escoteirismo.</p>
-        </section>
-
-        <section id="fundador" class="fade-in">
-            <h2>O Fundador</h2>
-            <p><strong>Samuel Jafé Pereira Carvalho</strong>, administrador, pastor e líder comunitário, idealizou o Instituto Valentis para impactar positivamente a sociedade.</p>
-            <p>Com vasta experiência em liderança e gestão, Samuel acredita que a educação e a inovação são pilares essenciais para o desenvolvimento social e econômico.</p>
-        </section>
-
-        <section id="galeria" class="fade-in">
-            <h2>Galeria de Fotos</h2>
-            <div class="gallery">
-                <img src="images/foto1.jpg" alt="Foto do Instituto" class="zoom-effect">
-                <img src="images/foto2.jpg" alt="Evento do Instituto" class="zoom-effect">
-                <img src="images/foto3.jpg" alt="Atividade comunitária" class="zoom-effect">
-                <img src="images/foto4.jpg" alt="Projeto social" class="zoom-effect">
-            </div>
-        </section>
-
-        <section id="contato" class="fade-in">
-            <h2>Contato</h2>
-            <p>Entre em contato conosco para saber mais sobre nossos projetos e como participar.</p>
-            <form class="contact-form">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" placeholder="Seu Nome" required>
-                
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" placeholder="Seu E-mail" required>
-                
-                <label for="mensagem">Mensagem:</label>
-                <textarea id="mensagem" placeholder="Sua Mensagem" required></textarea>
-                
-                <button type="submit">Enviar</button>
-            </form>
+        <section class="hero">
+            <h2>Transformando vidas através da educação e inovação</h2>
+            <p>O Instituto Valentis promove o desenvolvimento social por meio de projetos educativos, culturais e esportivos.</p>
         </section>
     </main>
 
@@ -64,26 +29,6 @@
         <p>&copy; 2025 Instituto Valentis - Todos os direitos reservados.</p>
         <p><a href="politica.html">Política de Privacidade</a> | <a href="termos.html">Termos de Uso</a></p>
     </footer>
-
-    <script>
-        // Animação do título
-        gsap.from("#title", { duration: 1, opacity: 0, y: -50 });
-        
-        // Animação de fade-in nas seções
-        gsap.utils.toArray(".fade-in").forEach(section => {
-            gsap.from(section, { duration: 1, opacity: 0, y: 50, scrollTrigger: section });
-        });
-
-        // Efeito de zoom nas imagens da galeria
-        document.querySelectorAll(".zoom-effect").forEach(img => {
-            img.addEventListener("mouseenter", () => {
-                gsap.to(img, { scale: 1.1, duration: 0.3 });
-            });
-            img.addEventListener("mouseleave", () => {
-                gsap.to(img, { scale: 1, duration: 0.3 });
-            });
-        });
-    </script>
 </body>
 </html>
 
