@@ -3,129 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samuel Jafé</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #007BFF;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        header img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-        main {
-            padding: 20px;
-        }
-        .bio, .resume, .contact {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 800px;
-        }
-        h1 {
-            color: #FAFAFA;
-        }
-        h2 {
-            color: #007BFF;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        ul li {
-            margin: 10px 0;
-        }
-        a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-        }
-        footer a {
-            color: #00aced;
-        }
-    </style>
+    <title>Instituto Valentis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-    <header>
-    <div style="position: relative; width: 100px; height: 100px; padding-top: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); 
-        margin: 0 auto; overflow: hidden; border-radius: 50%; will-change: transform;">
-        <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-            src="https://www.canva.com/design/DAF4CGi52n4/gruWz3Vn79q8zu_eM2y0MA/view?embed" 
-            allowfullscreen="allowfullscreen" allow="fullscreen">
-        </iframe>
-    </div>
-    <h1>Samuel Jafé Pereira Carvalho</h1>
-    <p>Administrador | Pastor | Político</p>
+    <header class="header">
+        <h1 id="title">Instituto Valentis</h1>
+        <nav class="navbar">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="fundador.html">Fundador</a>
+            <a href="fotos.html">Galeria</a>
+            <a href="contato.html">Contato</a>
+        </nav>
     </header>
 
-    <main>
-        <div class="bio">
-            <p>Nascido em 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
-            <p>Profissão: Administrador e Pastor</p>
-            <p>Idiomas: Inglês, Espanhol, Francês e Português</p>
-            <p>Pessoa de vocação política. Atualmente, filiado ao Partido Republicanos.</p>
-        </div>
-        <div class="resume">
-            <h2>Família</h2>
-            <ul>
-                <li>Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
-                <li>Legendário. LGND #83532.</li>
-            </ul>
-            <h2>Carreira</h2>
-            <ul>
-                <li>Poliglota com experiência internacional;</li>
-                <li>Administrador com visão para o desenvolvimento e gestão eficiente;</li>
-                <li>Pastor comprometido com os valores morais e espirituais.</li>
-                <li>Ex-CEO Valentis Business.</li>
-            </ul>
-            <h2>Trabalho Comunitário</h2>
-            <ul>
-                <li>Fundador do Instituto Valentis;</li>
-                <li>Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.</li>
-            </ul>
-            <h2>Visão</h2>
-            <ul>
-                <li>Promover a SEGURANÇA e o BEM-ESTAR da comunidade. Fomentar a EDUCAÇÃO e a CULTURA. Apoiar o DESENVOLVIMENTO ECONÔMICO local.</li>
-            </ul>
-            <h2>Compromisso</h2>
-            <ul>
-                <li>TRANSPARÊNCIA na gestão pública. DIÁLOGO constante com a comunidade. INOVAÇÃO nas soluções dos desafios municipais.</li>
-            </ul>
-        </div>
-        <div class="contact">
+    <main class="content">
+        <section id="sobre" class="fade-in">
+            <h2>Sobre o Instituto</h2>
+            <p>O Instituto Valentis é uma organização sem fins lucrativos dedicada ao fomento da educação, inovação e sustentabilidade, com base em princípios cristãos protestantes.</p>
+            <p>Atuamos em diversas frentes, incluindo cursos livres, palestras, workshops, feiras de ciência e tecnologia, aulas de futebol, fanfarra, banda, e atividades semelhantes ao escoteirismo.</p>
+        </section>
+
+        <section id="fundador" class="fade-in">
+            <h2>O Fundador</h2>
+            <p><strong>Samuel Jafé Pereira Carvalho</strong>, administrador, pastor e líder comunitário, idealizou o Instituto Valentis para impactar positivamente a sociedade.</p>
+            <p>Com vasta experiência em liderança e gestão, Samuel acredita que a educação e a inovação são pilares essenciais para o desenvolvimento social e econômico.</p>
+        </section>
+
+        <section id="galeria" class="fade-in">
+            <h2>Galeria de Fotos</h2>
+            <div class="gallery">
+                <img src="images/foto1.jpg" alt="Foto do Instituto" class="zoom-effect">
+                <img src="images/foto2.jpg" alt="Evento do Instituto" class="zoom-effect">
+                <img src="images/foto3.jpg" alt="Atividade comunitária" class="zoom-effect">
+                <img src="images/foto4.jpg" alt="Projeto social" class="zoom-effect">
+            </div>
+        </section>
+
+        <section id="contato" class="fade-in">
             <h2>Contato</h2>
-            <ul>
-                <li>E-mail: <a href="mailto:contato@ivalentis.com">contato@ivalentis.com</a></li>
-                <li>WhatsApp: (44) 99898-5343</li>
-                <li><a href="https://www.linkedin.com/in/samueljpcarvalho/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            </ul>
-        </div>
+            <p>Entre em contato conosco para saber mais sobre nossos projetos e como participar.</p>
+            <form class="contact-form">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Seu Nome" required>
+                
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" placeholder="Seu E-mail" required>
+                
+                <label for="mensagem">Mensagem:</label>
+                <textarea id="mensagem" placeholder="Sua Mensagem" required></textarea>
+                
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
     </main>
-    <footer>
-        <p>© 2025 Samuel Jafé - Todos os direitos reservados.</p>
-        <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+
+    <footer class="footer">
+        <p>&copy; 2025 Instituto Valentis - Todos os direitos reservados.</p>
+        <p><a href="politica.html">Política de Privacidade</a> | <a href="termos.html">Termos de Uso</a></p>
     </footer>
+
+    <script>
+        // Animação do título
+        gsap.from("#title", { duration: 1, opacity: 0, y: -50 });
+        
+        // Animação de fade-in nas seções
+        gsap.utils.toArray(".fade-in").forEach(section => {
+            gsap.from(section, { duration: 1, opacity: 0, y: 50, scrollTrigger: section });
+        });
+
+        // Efeito de zoom nas imagens da galeria
+        document.querySelectorAll(".zoom-effect").forEach(img => {
+            img.addEventListener("mouseenter", () => {
+                gsap.to(img, { scale: 1.1, duration: 0.3 });
+            });
+            img.addEventListener("mouseleave", () => {
+                gsap.to(img, { scale: 1, duration: 0.3 });
+            });
+        });
+    </script>
 </body>
 </html>
+
