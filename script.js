@@ -1,48 +1,57 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Efeito de rolagem suave ao clicar nos links do menu
-    document.querySelectorAll(".navbar a").forEach(anchor => {
-        anchor.addEventListener("click", function (event) {
-            event.preventDefault();
-            const targetId = this.getAttribute("href").substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 50,
-                    behavior: "smooth"
-                });
-            }
-        });
-    });
-
-    // Menu responsivo para dispositivos móveis
-    const menuToggle = document.getElementById("menu-toggle");
-    const navbar = document.querySelector(".navbar");
-    
-    if (menuToggle) {
-        menuToggle.addEventListener("click", function () {
-            navbar.classList.toggle("active");
-        });
+    // Animação do título (Máquina de Escrever)
+    const titulo = "Instituto Valentis";
+    let index = 0;
+    function escreverTitulo() {
+        if (index < titulo.length) {
+            document.getElementById("titulo-principal").textContent += titulo.charAt(index);
+            index++;
+            setTimeout(escreverTitulo, 150);
+        }
     }
+    escreverTitulo();
 
-    // Efeito de fade-in ao carregar a página
-    document.querySelectorAll(".fade-in").forEach(element => {
-        element.style.opacity = 0;
-        element.style.transition = "opacity 1s ease-in-out";
-        
-        setTimeout(() => {
-            element.style.opacity = 1;
-        }, 500);
+    // Carrossel de Imagens
+    let slideIndex = 0;
+    function showSlides() {
+        let slides = document.getElementsByClassName("carousel-slide");
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1; }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000); // Muda a imagem a cada 3s
+    }
+    showSlides();
+
+    // Efeito de Rolagem Suave
+    document.querySelectorAll(".navbar a").forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            document.getElementById(targetId).scrollIntoView({
+                behavior: "smooth"
+            });
+        });
     });
 
-    // Zoom ao passar o mouse nas imagens da galeria
-    document.querySelectorAll(".gallery img").forEach(image => {
-        image.addEventListener("mouseover", function () {
-            this.style.transform = "scale(1.1)";
-            this.style.transition = "transform 0.3s ease-in-out";
-        });
-        image.addEventListener("mouseout", function () {
-            this.style.transform = "scale(1)";
-        });
+    // Botão "Voltar ao Topo"
+    const btnTopo = document.createElement("button");
+    btnTopo.textContent = "⬆ Voltar ao Topo";
+    btnTopo.id = "btn-topo";
+    btnTopo.style.display = "none";
+    document.body.appendChild(btnTopo);
+    
+    btnTopo.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {
+            btnTopo.style.display = "block";
+        } else {
+            btnTopo.style.display = "none";
+        }
     });
 });
