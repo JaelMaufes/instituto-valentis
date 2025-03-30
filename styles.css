@@ -13,20 +13,27 @@ body {
     color: white;
     padding: 20px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .navbar {
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
 .navbar a {
     color: white;
     text-decoration: none;
-    margin: 0 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
 }
 
 .navbar a:hover {
-    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
 }
 
 /* Seção principal */
@@ -37,22 +44,56 @@ body {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
 }
 
-.carousel-slide { display: none; width: 100%; }
-#btn-topo { position: fixed; bottom: 20px; right: 20px; display: none; background: #007BFF; color: white; padding: 10px; border: none; cursor: pointer; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.carousel-slide {
+    display: none;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#btn-topo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#btn-topo:hover {
+    background: #0056b3;
+}
 
 /* Seção do Fundador */
 .founder-profile {
     display: flex;
     align-items: center;
     gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .profile-image img {
     border-radius: 50%;
     width: 120px;
     height: 120px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-info {
+    text-align: center;
 }
 
 .resume ul {
@@ -62,6 +103,9 @@ body {
 
 .resume ul li {
     margin-bottom: 10px;
+    background: rgba(0, 123, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 /* Rodapé */
@@ -69,10 +113,16 @@ body {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     margin-top: 20px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .footer a {
     color: #00aced;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #007BFF;
 }
