@@ -24,23 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     showSlides();
 
-    .carousel-slide img {
-        width: 100%;  /* Faz a imagem ocupar toda a largura disponível */
-        height: auto; /* Mantém a proporção correta */
-        display: block; /* Evita espaços extras ao redor da imagem */
-    }
-    
-    .carousel-container {
-        width: 100%;
-        overflow: hidden; /* Evita que imagens maiores quebrem o layout */
-    }
-
-    .carousel-slide {
-        width: 100vw;  /* Ocupa 100% da largura da tela */
-        height: 60vh;  /* Define uma altura proporcional */
-        object-fit: cover;  /* Garante que a imagem preencha o espaço sem distorção */
-    }    
-
     // Efeito de Rolagem Suave (apenas para âncoras internas)
     document.querySelectorAll(".navbar a[href^='#']").forEach(anchor => {
         anchor.addEventListener("click", function (e) {
