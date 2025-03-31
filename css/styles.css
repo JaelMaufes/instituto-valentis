@@ -99,21 +99,33 @@ a:hover {
     text-decoration: underline;
 }
 
-.carousel-slide img {
-    width: 100%;  /* Faz a imagem ocupar toda a largura disponível */
-    height: auto; /* Mantém a proporção correta */
-    display: block; /* Evita espaços extras ao redor da imagem */
+/* Ajusta todas as imagens da página */
+img {
+    width: 100%; /* Faz a imagem ocupar toda a largura */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Remove espaços em branco ao redor da imagem */
 }
 
+/* Contêiner do carrossel */
 .carousel-container {
     width: 100%;
-    overflow: hidden; /* Evita que imagens maiores quebrem o layout */
+    max-width: 1200px; /* Ajuste conforme necessário */
+    height: 400px; /* Define uma altura fixa */
+    overflow: hidden; /* Evita rolagem se a imagem for maior */
+    margin: auto;
 }
 
+/* Slides do carrossel */
 .carousel-slide {
-    width: 100vw;  /* Ocupa 100% da largura da tela */
-    height: 60vh;  /* Define uma altura proporcional */
-    object-fit: cover;  /* Garante que a imagem preencha o espaço sem distorção */
+    width: 100%; /* Ocupa 100% da largura disponível */
+    height: 60vh; /* Define uma altura proporcional à tela */
+}
+
+/* Imagens dentro do carrossel */
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
 }
 
 /* Rodapé */
