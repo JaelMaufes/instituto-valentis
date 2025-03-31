@@ -3,8 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const titulo = "Instituto Valentis";
     let index = 0;
     function escreverTitulo() {
-        if (index < titulo.length) {
-            document.getElementById("titulo-principal").textContent += titulo.charAt(index);
+        const tituloElemento = document.getElementById("titulo-principal");
+        if (tituloElemento && index < titulo.length) {
+            tituloElemento.textContent += titulo.charAt(index);
             index++;
             setTimeout(escreverTitulo, 150);
         }
@@ -12,25 +13,26 @@ document.addEventListener("DOMContentLoaded", function () {
     escreverTitulo();
 
     // Carrossel de Imagens
+    let slideIndex = 0;
     function showSlides() {
-    let slides = document.querySelectorAll(".carousel-container img");
-    slides.forEach(slide => slide.style.display = "none"); 
-    slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1; }
-    slides[slideIndex - 1].style.display = "block";
-    setTimeout(showSlides, 3000);
-}
+        let slides = document.querySelectorAll(".carousel-container img");
+        slides.forEach(slide => slide.style.display = "none"); 
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1; }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000);
     }
     showSlides();
 
-    // Efeito de Rolagem Suave
-    document.querySelectorAll(".navbar a").forEach(anchor => {
+    // Efeito de Rolagem Suave (apenas para âncoras internas)
+    document.querySelectorAll(".navbar a[href^='#']").forEach(anchor => {
         anchor.addEventListener("click", function (e) {
             e.preventDefault();
             const targetId = this.getAttribute("href").substring(1);
-            document.getElementById(targetId).scrollIntoView({
-                behavior: "smooth"
-            });
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth" });
+            }
         });
     });
 
