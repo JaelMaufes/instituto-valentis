@@ -36,6 +36,19 @@ body {
     padding: 0;
 }
 
+/* Banner com a logo */
+.banner {
+    width: 100%;
+    background-color: #F4AF37;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.banner img {
+    max-width: 300px;
+    height: auto;
+}
+
 /* Cabeçalho */
 .header {
     background-color: #004AAD;
