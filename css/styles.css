@@ -1,6 +1,35 @@
+/* Importando fontes personalizadas */
+@font-face {
+    font-family: 'KulachatSerifRegular';
+    src: url('fonts/KulachatSerifDemoRegular-ZVB1m.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KulachatSerifBold';
+    src: url('fonts/KulachatSerifDemoBold-axvKR.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KulachatHcRegular';
+    src: url('fonts/KulachatHcDemoRegular-GOLdm.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KulachatHcBold';
+    src: url('fonts/KulachatHcDemoBold-1GAAj.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
 /* Estilos gerais */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'KulachatSerifRegular', Arial, sans-serif;
     background-color: #f8f9fa;
     color: #333;
     margin: 0;
@@ -14,6 +43,7 @@ body {
     padding: 20px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'KulachatSerifBold', Arial, sans-serif;
 }
 
 .header img {
@@ -39,6 +69,7 @@ body {
     border-radius: 5px;
     transition: background 0.3s, transform 0.2s;
     font-weight: bold;
+    font-family: 'KulachatHcBold', Arial, sans-serif;
 }
 
 .navbar a:hover {
@@ -55,6 +86,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1s ease-in-out;
+    font-family: 'KulachatHcRegular', Arial, sans-serif;
 }
 
 @keyframes fadeIn {
@@ -74,10 +106,12 @@ body {
 
 h1 {
     color: #FFFFFF;
+    font-family: 'KulachatSerifBold', Arial, sans-serif;
 }
 
 h2 {
     color: #004AAD;
+    font-family: 'KulachatSerifRegular', Arial, sans-serif;
 }
 
 ul {
@@ -93,6 +127,7 @@ a {
     color: #004AAD;
     text-decoration: none;
     font-weight: bold;
+    font-family: 'KulachatHcRegular', Arial, sans-serif;
 }
 
 a:hover {
@@ -101,31 +136,31 @@ a:hover {
 
 /* Ajusta todas as imagens da página */
 img {
-    width: 100%; /* Faz a imagem ocupar toda a largura */
-    height: auto; /* Mantém a proporção da imagem */
-    display: block; /* Remove espaços em branco ao redor da imagem */
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Contêiner do carrossel */
 .carousel-container {
     width: 100%;
-    max-width: 1200px; /* Ajuste conforme necessário */
-    height: 400px; /* Define uma altura fixa */
-    overflow: hidden; /* Evita rolagem se a imagem for maior */
+    max-width: 1200px;
+    height: 400px;
+    overflow: hidden;
     margin: auto;
 }
 
 /* Slides do carrossel */
 .carousel-slide {
-    width: 100%; /* Ocupa 100% da largura disponível */
-    height: 60vh; /* Define uma altura proporcional à tela */
+    width: 100%;
+    height: 60vh;
 }
 
 /* Imagens dentro do carrossel */
 .carousel-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+    object-fit: cover;
 }
 
 /* Rodapé */
@@ -136,6 +171,7 @@ img {
     padding: 15px;
     margin-top: 20px;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'KulachatHcRegular', Arial, sans-serif;
 }
 
 .footer a {
