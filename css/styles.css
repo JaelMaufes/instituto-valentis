@@ -2,10 +2,57 @@
 
 body {
     font-family: 'Lora', serif;
+}
+
+/* Importando fontes personalizadas */
+/*@font-face {
+    font-family: 'KulachatSerifRegular';
+    src: url('/fonts/KulachatSerifDemoRegular-ZVB1m.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KulachatSerifBold';
+    src: url('/fonts/KulachatSerifDemoBold-axvKR.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KulachatHcRegular';
+    src: url('/fonts/KulachatHcDemoRegular-GOLdm.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KulachatHcBold';
+    src: url('/fonts/KulachatHcDemoBold-1GAAj.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+} */
+
+/* Estilos gerais */
+body {
+    font-family: 'KulachatSerifRegular', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
     margin: 0;
     padding: 0;
+}
+
+/* Banner com a logo */
+/*.banner {
     width: 100%;
-    overflow-x: hidden;
+    background-color: #F4AF37;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/*.banner img {
+    max-width: 300px;
+    height: auto;
 }
 
 /* Cabeçalho */
@@ -19,7 +66,7 @@ body {
     justify-content: center; /* Centraliza verticalmente */
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
+    font-family: 'KulachatSerifBold', Arial, sans-serif;
 }
 
 .header img {
@@ -33,10 +80,8 @@ body {
 .navbar {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     gap: 15px;
     margin-top: 10px;
-    width: 100%;
 }
 
 .navbar a {
@@ -47,7 +92,7 @@ body {
     border-radius: 5px;
     transition: background 0.3s, transform 0.2s;
     font-weight: bold;
-    font-family: 'Lora', serif;
+    font-family: 'KulachatHcBold', Arial, sans-serif;
 }
 
 .navbar a:hover {
@@ -57,19 +102,75 @@ body {
 
 /* Seção principal */
 .content {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 20px auto;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     animation: fadeIn 1s ease-in-out;
-    width: 90%;
+    font-family: 'KulachatHcRegular', Arial, sans-serif;
 }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* Seções internas */
+.bio, .resume, .contact {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+}
+
+body {
+    font-family: 'KulachatSerifRegular', Arial, sans-serif;
+}
+
+h1, h2 {
+    font-family: 'KulachatSerifBold', Georgia, serif;
+}
+
+.navbar a {
+    font-family: 'KulachatHcBold', Verdana, sans-serif;
+}
+
+.content, .footer {
+    font-family: 'KulachatHcRegular', Tahoma, sans-serif;
+}
+
+h1 {
+    color: #FFFFFF;
+    font-family: 'KulachatSerifBold', Arial, sans-serif;
+}
+
+h2 {
+    color: #004AAD;
+    font-family: 'KulachatSerifRegular', Arial, sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+a {
+    color: #004AAD;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'KulachatHcRegular', Arial, sans-serif;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 /* Ajusta todas as imagens da página */
@@ -109,5 +210,14 @@ img {
     padding: 15px;
     margin-top: 20px;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
+    font-family: 'KulachatHcRegular', Arial, sans-serif;
+}
+
+.footer a {
+    color: #F4AF37;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #E89A20;
 }
