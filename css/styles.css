@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+
+body {
+    font-family: 'Lora', serif;
+}
+
 /* Importando fontes personalizadas */
-@font-face {
+/*@font-face {
     font-family: 'KulachatSerifRegular';
     src: url('/fonts/KulachatSerifDemoRegular-ZVB1m.woff') format('woff');
     font-weight: normal;
@@ -25,7 +31,7 @@
     src: url('/fonts/KulachatHcDemoBold-1GAAj.woff') format('woff');
     font-weight: bold;
     font-style: normal;
-}
+} */
 
 /* Estilos gerais */
 body {
@@ -193,7 +199,7 @@ img {
 .carousel-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 /* Rodapé */
