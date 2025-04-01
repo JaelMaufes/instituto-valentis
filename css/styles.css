@@ -121,6 +121,22 @@ body {
     max-width: 800px;
 }
 
+body {
+    font-family: 'KulachatSerifRegular', Arial, sans-serif;
+}
+
+h1, h2 {
+    font-family: 'KulachatSerifBold', Georgia, serif;
+}
+
+.navbar a {
+    font-family: 'KulachatHcBold', Verdana, sans-serif;
+}
+
+.content, .footer {
+    font-family: 'KulachatHcRegular', Tahoma, sans-serif;
+}
+
 h1 {
     color: #FFFFFF;
     font-family: 'KulachatSerifBold', Arial, sans-serif;
