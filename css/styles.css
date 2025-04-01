@@ -1,28 +1,28 @@
 /* Importando fontes personalizadas */
 @font-face {
     font-family: 'KulachatSerifRegular';
-    src: url('fonts/KulachatSerifDemoRegular-ZVB1m.woff') format('woff');
+    src: url('/fonts/KulachatSerifDemoRegular-ZVB1m.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'KulachatSerifBold';
-    src: url('fonts/KulachatSerifDemoBold-axvKR.woff') format('woff');
+    src: url('/fonts/KulachatSerifDemoBold-axvKR.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'KulachatHcRegular';
-    src: url('fonts/KulachatHcDemoRegular-GOLdm.woff') format('woff');
+    src: url('/fonts/KulachatHcDemoRegular-GOLdm.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'KulachatHcBold';
-    src: url('fonts/KulachatHcDemoBold-1GAAj.woff') format('woff');
+    src: url('/fonts/KulachatHcDemoBold-1GAAj.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
