@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +10,6 @@
             background-color: #f4f4f4;
             padding: 20px;
         }
-
         .property-card {
             border: 1px solid #ddd;
             padding: 15px;
@@ -19,52 +17,25 @@
             background: #fff;
             border-radius: 8px;
         }
-
         .carousel img {
             max-height: 200px;
             object-fit: cover;
         }
-
         .form-section {
             background: #fff;
             padding: 20px;
             border-radius: 8px;
             margin-top: 40px;
         }
-
-        h1,
-        h2 {
+        h1, h2 {
             text-align: center;
             margin-bottom: 20px;
         }
+        .alert {
+            margin-top: 20px;
+        }
     </style>
 </head>
-<!-- Modal para Editar Status -->
-<div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editStatusModalLabel">Editar Status do Imóvel</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="edit-status-form">
-                    <div class="mb-3">
-                        <label for="edit-status" class="form-label">Novo Status</label>
-                        <select class="form-control" id="edit-status" required>
-                            <option value="disponivel">Disponível</option>
-                            <option value="vendido">Vendido</option>
-                            <option value="alugado">Alugado</option>
-                        </select>
-                    </div>
-                    <input type="hidden" id="edit-index">
-                    <button type="submit" class="btn btn-primary w-100">Salvar Alteração</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <body>
     <div class="container">
         <h1>Imóveis em Ivatuba</h1>
@@ -158,6 +129,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Cadastrar Imóvel</button>
             </form>
+            <div id="form-feedback" class="alert" style="display: none;"></div>
         </div>
     </div>
 
@@ -174,48 +146,48 @@
             properties.filter(property => property.approvalStatus === 'approved').forEach((property, index) => {
                 const photosHtml = property.photos.length > 0
                     ? `
-                <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        ${property.photos.map((photo, i) => `
-                            <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
+                        <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                ${property.photos.map((photo, i) => `
+                                    <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                                        <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
+                                    </div>
+                                `).join('')}
                             </div>
-                        `).join('')}
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            `
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    `
                     : '<p>Sem fotos disponíveis</p>';
 
                 const card = `
-            <div class="col-md-4">
-                <div class="property-card">
-                    ${photosHtml}
-                    <p><strong>Status:</strong> ${property.status.charAt(0).toUpperCase() + property.status.slice(1)}</p>
-                    <h3>${property.owner}</h3>
-                    <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
-                    <p><strong>Valor:</strong> R$ ${parseFloat(property.value).toFixed(2)}</p>
-                    <p><strong>Descrição:</strong> ${property.description}</p>
-                    <p><strong>Quartos:</strong> ${property.bedrooms}</p>
-                    <p><strong>Suítes:</strong> ${property.suites}</p>
-                    <p><strong>Salas:</strong> ${property.livingrooms}</p>
-                    <p><strong>Cozinhas:</strong> ${property.kitchens}</p>
-                    <p><strong>Banheiros:</strong> ${property.bathrooms}</p>
-                    <p><strong>Garagem:</strong> ${property.garage === 'sim' ? `Sim (${property.garageSpaces} vagas)` : 'Não'}</p>
-                    <p><strong>Contato:</strong> ${property.email} | ${property.phone}</p>
-                    <p><strong>Endereço:</strong> ${property.address}</p>
-                    <p><strong>Área:</strong> ${property.area} m²</p>
-                    <p><strong>Data de Publicação:</strong> ${property.date}</p>
-                </div>
-            </div>
-        `;
+                    <div class="col-md-4">
+                        <div class="property-card">
+                            ${photosHtml}
+                            <p><strong>Status:</strong> ${property.status.charAt(0).toUpperCase() + property.status.slice(1)}</p>
+                            <h3>${property.owner}</h3>
+                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
+                            <p><strong>Valor:</strong> R$ ${parseFloat(property.value).toFixed(2)}</p>
+                            <p><strong>Descrição:</strong> ${property.description}</p>
+                            <p><strong>Quartos:</strong> ${property.bedrooms}</p>
+                            <p><strong>Suítes:</strong> ${property.suites}</p>
+                            <p><strong>Salas:</strong> ${property.livingrooms}</p>
+                            <p><strong>Cozinhas:</strong> ${property.kitchens}</p>
+                            <p><strong>Banheiros:</strong> ${property.bathrooms}</p>
+                            <p><strong>Garagem:</strong> ${property.garage === 'sim' ? `Sim (${property.garageSpaces} vagas)` : 'Não'}</p>
+                            <p><strong>Contato:</strong> ${property.email} | ${property.phone}</p>
+                            <p><strong>Endereço:</strong> ${property.address}</p>
+                            <p><strong>Área:</strong> ${property.area} m²</p>
+                            <p><strong>Data de Publicação:</strong> ${property.date}</p>
+                        </div>
+                    </div>
+                `;
                 propertiesList.innerHTML += card;
             });
         }
@@ -303,6 +275,15 @@
             displayProperties();
             document.getElementById('property-form').reset();
             document.getElementById('garage-spaces').disabled = true;
+
+            // Exibe mensagem de feedback
+            const feedback = document.getElementById('form-feedback');
+            feedback.innerHTML = 'Imóvel cadastrado com sucesso! Aguardando aprovação do administrador.';
+            feedback.className = 'alert alert-success';
+            feedback.style.display = 'block';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 5000);
         });
 
         // Habilita/desabilita campo de vagas na garagem
@@ -313,5 +294,4 @@
         });
     </script>
 </body>
-
 </html>
