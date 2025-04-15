@@ -54,12 +54,36 @@
         .modal-body .form-control, .modal-body .form-select {
             height: 48px;
         }
+        .photos-preview img {
+            max-width: 100px;
+            height: auto;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .fullscreen-carousel img {
+            max-height: 80vh;
+            width: auto;
+            margin: auto;
+            object-fit: contain;
+        }
+        .modal-fullscreen .modal-dialog {
+            max-width: 100%;
+            margin: 0;
+        }
+        .modal-fullscreen .modal-content {
+            border: none;
+            border-radius: 0;
+            background: rgba(0, 0, 0, 0.9);
+        }
         @media (max-width: 576px) {
             h1 { font-size: 1.5rem; }
             h2, h3 { font-size: 1.2rem; }
             .property-info { font-size: 0.9rem; }
             .btn { font-size: 0.9rem; height: 40px; }
             .form-control { font-size: 0.9rem; }
+            .photos-preview img { max-width: 80px; }
+            .fullscreen-carousel img { max-height: 70vh; }
         }
     </style>
 </head>
@@ -113,6 +137,30 @@
         </div>
     </div>
 
+    <!-- Modal para Carrossel em Tela Cheia -->
+    <div class="modal fade modal-fullscreen" id="fullscreenCarouselModal" tabindex="-1" aria-labelledby="fullscreenCarouselModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="fullscreen-carousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" id="fullscreen-carousel-inner"></div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#fullscreen-carousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#fullscreen-carousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const ADMIN_PASSWORD = 'admin123'; // Senha estática (mude para algo seguro)
@@ -140,17 +188,26 @@
             const propertyList = document.getElementById('property-list');
             propertyList.innerHTML = '';
             properties.forEach((property, index) => {
-                const item = document.createElement('div');
-                item.className = 'property-item';
                 const statusText = property.approvalStatus === 'pending' ? 'Pendente' : 'Aprovado';
                 const locationText = property.latitude && property.longitude
                     ? `Lat ${property.latitude.toFixed(4)}, Long ${property.longitude.toFixed(4)}`
                     : 'Localização não fornecida';
+                const photosHtml = property.photos.length > 0
+                    ? `<div class="photos-preview">${property.photos.map((photo, i) => `
+                        <img src="${photo}" alt="Miniatura" loading="lazy" onclick="openFullscreenCarousel(${index}, ${i})">
+                    `).join('')}</div>`
+                    : '<p class="text-muted">Sem fotos</p>';
+
+                const item = document.createElement('div');
+                item.className = 'property-item';
                 item.innerHTML = `
                     <div class="property-info">
                         <span><strong>Índice ${index}</strong>: ${property.owner} - ${property.address} (${statusText})</span>
                         <br>
                         <span><strong>Localização do Cadastro:</strong> ${locationText}</span>
+                        <br>
+                        <span><strong>Fotos:</strong></span>
+                        ${photosHtml}
                     </div>
                     <div class="d-flex flex-column gap-2">
                         ${property.approvalStatus === 'pending' ? `<button class="btn btn-success" onclick="approveProperty(${index})">Aprovar</button>` : ''}
@@ -191,7 +248,7 @@
                 item.innerHTML = `
                     <span><strong>Imóvel ${index}</strong>: ${locationText}</span>
                 `;
-                item.appendChild(item);
+                cadastroList.appendChild(item);
             });
         }
 
@@ -208,6 +265,18 @@
             document.getElementById('edit-index').value = index;
             document.getElementById('edit-status').value = properties[index].status;
             new bootstrap.Modal(document.getElementById('editStatusModal')).show();
+        }
+
+        // Abre o carrossel em tela cheia
+        function openFullscreenCarousel(propertyIndex, startIndex) {
+            const property = properties[propertyIndex];
+            const carouselInner = document.getElementById('fullscreen-carousel-inner');
+            carouselInner.innerHTML = property.photos.map((photo, i) => `
+                <div class="carousel-item ${i === startIndex ? 'active' : ''}">
+                    <img src="${photo}" class="fullscreen-carousel" alt="Foto do imóvel">
+                </div>
+            `).join('');
+            new bootstrap.Modal(document.getElementById('fullscreenCarouselModal')).show();
         }
 
         // Manipula o formulário de edição de status

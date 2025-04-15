@@ -38,6 +38,7 @@
             height: 200px;
             object-fit: cover;
             border-radius: 8px;
+            cursor: pointer;
         }
         .carousel-control-prev, .carousel-control-next {
             width: 10%;
@@ -73,6 +74,21 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        .fullscreen-carousel img {
+            max-height: 80vh;
+            width: auto;
+            margin: auto;
+            object-fit: contain;
+        }
+        .modal-fullscreen .modal-dialog {
+            max-width: 100%;
+            margin: 0;
+        }
+        .modal-fullscreen .modal-content {
+            border: none;
+            border-radius: 0;
+            background: rgba(0, 0, 0, 0.9);
+        }
         @media (max-width: 576px) {
             h1 { font-size: 1.5rem; }
             h2 { font-size: 1.2rem; }
@@ -80,6 +96,7 @@
             .carousel img { height: 150px; }
             .form-control, .form-select { font-size: 0.9rem; }
             .btn-primary { font-size: 1rem; }
+            .fullscreen-carousel img { max-height: 70vh; }
         }
     </style>
 </head>
@@ -170,7 +187,7 @@
                         </select>
                     </div>
                     <div class="col-12">
-                        <label for="photos" class="form-label">Fotos do Imóvel</label>
+                        <label for="photos" class="form-label">Fotos do Imóvel (máximo 15)</label>
                         <input type="file" class="form-control" id="photos" accept="image/*" multiple>
                     </div>
                     <div class="col-12">
@@ -179,6 +196,30 @@
                 </div>
             </form>
             <div id="form-feedback" class="alert" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Modal para Carrossel em Tela Cheia -->
+    <div class="modal fade modal-fullscreen" id="fullscreenCarouselModal" tabindex="-1" aria-labelledby="fullscreenCarouselModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="fullscreen-carousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" id="fullscreen-carousel-inner"></div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#fullscreen-carousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#fullscreen-carousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -199,7 +240,7 @@
                             <div class="carousel-inner">
                                 ${property.photos.map((photo, i) => `
                                     <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                        <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
+                                        <img src="${photo}" class="d-block w-100" alt="Foto do imóvel" loading="lazy" onclick="openFullscreenCarousel(${index}, ${i})">
                                     </div>
                                 `).join('')}
                             </div>
@@ -244,6 +285,18 @@
             });
         }
 
+        // Função para abrir o carrossel em tela cheia
+        function openFullscreenCarousel(propertyIndex, startIndex) {
+            const property = properties[propertyIndex];
+            const carouselInner = document.getElementById('fullscreen-carousel-inner');
+            carouselInner.innerHTML = property.photos.map((photo, i) => `
+                <div class="carousel-item ${i === startIndex ? 'active' : ''}">
+                    <img src="${photo}" class="fullscreen-carousel" alt="Foto do imóvel">
+                </div>
+            `).join('');
+            new bootstrap.Modal(document.getElementById('fullscreenCarouselModal')).show();
+        }
+
         // Função para lidar com o upload de fotos
         function handlePhotos(files) {
             return Promise.all([...files].map(file => {
@@ -285,6 +338,7 @@
                     longitude: location.longitude,
                     timestamp: new Date().toLocaleString('pt-BR')
                 });
+                accessLocations = accessLocations.slice(-50); // Limita a 50 acessos
                 localStorage.setItem('accessLocations', JSON.stringify(accessLocations));
             }
             displayProperties();
@@ -293,8 +347,21 @@
         // Manipula o formulário
         document.getElementById('property-form').addEventListener('submit', async (e) => {
             e.preventDefault();
+            const feedback = document.getElementById('form-feedback');
             const garage = document.getElementById('garage').value;
             const photos = document.getElementById('photos').files;
+
+            // Valida o número de imagens
+            if (photos.length > 15) {
+                feedback.innerHTML = 'Erro: Você pode enviar no máximo 15 imagens.';
+                feedback.className = 'alert alert-danger';
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 5000);
+                return;
+            }
+
             const photoData = await handlePhotos(photos);
             const location = await getLocation();
 
@@ -329,7 +396,6 @@
             document.getElementById('garage-spaces').disabled = true;
 
             // Exibe mensagem de feedback
-            const feedback = document.getElementById('form-feedback');
             feedback.innerHTML = 'Imóvel cadastrado com sucesso! Aguardando aprovação do administrador.';
             feedback.className = 'alert alert-success';
             feedback.style.display = 'block';
