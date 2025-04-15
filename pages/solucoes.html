@@ -91,6 +91,12 @@
             border-radius: 0;
             background: rgba(0, 0, 0, 0.9);
         }
+        .no-properties {
+            text-align: center;
+            color: #6c757d;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
         @media (max-width: 576px) {
             h1 { font-size: 1.5rem; }
             h2 { font-size: 1.2rem; }
@@ -228,17 +234,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Carrega imóveis e acessos do localStorage ao iniciar
-        let properties = JSON.parse(localStorage.getItem('properties')) || [];
+        let properties = [];
+        try {
+            const storedProperties = localStorage.getItem('properties');
+            if (storedProperties) {
+                properties = JSON.parse(storedProperties);
+                console.log('Imóveis carregados do localStorage:', properties);
+            } else {
+                console.log('Nenhum imóvel encontrado no localStorage.');
+            }
+        } catch (error) {
+            console.error('Erro ao carregar localStorage:', error);
+            properties = [];
+        }
         let accessLocations = JSON.parse(localStorage.getItem('accessLocations')) || [];
 
         // Função para exibir imóveis (apenas aprovados)
         function displayProperties() {
             const propertiesList = document.getElementById('properties-list');
             propertiesList.innerHTML = '';
-            properties.filter(property => property.approvalStatus === 'approved').forEach((property, index) => {
-                const photosHtml = property.photos.length > 0
+            const approvedProperties = properties.filter(property => property.approvalStatus === 'approved');
+            console.log('Imóveis aprovados para exibição:', approvedProperties);
+
+            if (approvedProperties.length === 0) {
+                propertiesList.innerHTML = '<p class="no-properties">Nenhum imóvel aprovado disponível.</p>';
+                return;
+            }
+
+            approvedProperties.forEach((property, index) => {
+                const photosHtml = property.photos && property.photos.length > 0
                     ? `
-                        <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
+                        <div id="carousel-${index}" class="carousel slide">
                             <div class="carousel-inner">
                                 ${property.photos.map((photo, i) => `
                                     <div class="carousel-item ${i === 0 ? 'active' : ''}">
@@ -262,23 +288,23 @@
                     <div class="col-12">
                         <div class="property-card">
                             ${photosHtml}
-                            <h3 class="mt-3">${property.owner}</h3>
-                            <p><strong>Status:</strong> ${property.status.charAt(0).toUpperCase() + property.status.slice(1)}</p>
+                            <h3 class="mt-3">${property.owner || 'Proprietário não informado'}</h3>
+                            <p><strong>Status:</strong> ${property.status ? property.status.charAt(0).toUpperCase() + property.status.slice(1) : 'Indefinido'}</p>
                             <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
-                            <p><strong>Valor:</strong> R$ ${parseFloat(property.value).toFixed(2)}</p>
+                            <p><strong>Valor:</strong> R$ ${property.value ? parseFloat(property.value).toFixed(2) : '0.00'}</p>
                             <details>
                                 <summary>Mais Detalhes</summary>
-                                <p><strong>Descrição:</strong> ${property.description}</p>
-                                <p><strong>Quartos:</strong> ${property.bedrooms}</p>
-                                <p><strong>Suítes:</strong> ${property.suites}</p>
-                                <p><strong>Salas:</strong> ${property.livingrooms}</p>
-                                <p><strong>Cozinhas:</strong> ${property.kitchens}</p>
-                                <p><strong>Banheiros:</strong> ${property.bathrooms}</p>
-                                <p><strong>Garagem:</strong> ${property.garage === 'sim' ? `Sim (${property.garageSpaces} vagas)` : 'Não'}</p>
-                                <p><strong>Contato:</strong> ${property.email} | ${property.phone}</p>
-                                <p><strong>Endereço:</strong> ${property.address}</p>
-                                <p><strong>Área:</strong> ${property.area} m²</p>
-                                <p><strong>Data de Publicação:</strong> ${property.date}</p>
+                                <p><strong>Descrição:</strong> ${property.description || 'Sem descrição'}</p>
+                                <p><strong>Quartos:</strong> ${property.bedrooms || 0}</p>
+                                <p><strong>Suítes:</strong> ${property.suites || 0}</p>
+                                <p><strong>Salas:</strong> ${property.livingrooms || 0}</p>
+                                <p><strong>Cozinhas:</strong> ${property.kitchens || 0}</p>
+                                <p><strong>Banheiros:</strong> ${property.bathrooms || 0}</p>
+                                <p><strong>Garagem:</strong> ${property.garage === 'sim' ? `Sim (${property.garageSpaces || 0} vagas)` : 'Não'}</p>
+                                <p><strong>Contato:</strong> ${property.email || 'N/A'} | ${property.phone || 'N/A'}</p>
+                                <p><strong>Endereço:</strong> ${property.address || 'Não informado'}</p>
+                                <p><strong>Área:</strong> ${property.area || 0} m²</p>
+                                <p><strong>Data de Publicação:</strong> ${property.date || 'N/A'}</p>
                             </details>
                         </div>
                     </div>
@@ -289,14 +315,22 @@
 
         // Função para abrir o carrossel em tela cheia
         function openFullscreenCarousel(propertyIndex, startIndex) {
-            const property = properties[propertyIndex];
+            const property = properties.filter(p => p.approvalStatus === 'approved')[propertyIndex];
+            if (!property || !property.photos) {
+                console.error('Imóvel ou fotos não encontrados:', propertyIndex);
+                return;
+            }
             const carouselInner = document.getElementById('fullscreen-carousel-inner');
             carouselInner.innerHTML = property.photos.map((photo, i) => `
                 <div class="carousel-item ${i === startIndex ? 'active' : ''}">
                     <img src="${photo}" class="fullscreen-carousel" alt="Foto do imóvel">
                 </div>
             `).join('');
-            new bootstrap.Modal(document.getElementById('fullscreenCarouselModal')).show();
+            try {
+                new bootstrap.Modal(document.getElementById('fullscreenCarouselModal')).show();
+            } catch (error) {
+                console.error('Erro ao abrir modal:', error);
+            }
         }
 
         // Função para comprimir imagens
@@ -311,7 +345,7 @@
                         const ctx = canvas.getContext('2d');
                         let width = img.width;
                         let height = img.height;
-                        const maxDim = 1024; // Redimensiona para no máximo 1024px
+                        const maxDim = 1024;
                         if (width > height && width > maxDim) {
                             height *= maxDim / width;
                             width = maxDim;
@@ -322,8 +356,9 @@
                         canvas.width = width;
                         canvas.height = height;
                         ctx.drawImage(img, 0, 0, width, height);
-                        resolve(canvas.toDataURL('image/jpeg', 0.7)); // Qualidade 70%
+                        resolve(canvas.toDataURL('image/jpeg', 0.7));
                     };
+                    img.onerror = () => resolve(null);
                 };
                 reader.readAsDataURL(file);
             });
@@ -331,13 +366,14 @@
 
         // Função para lidar com o upload de fotos
         function handlePhotos(files) {
-            return Promise.all([...files].slice(0, 15).map(file => compressImage(file)));
+            return Promise.all([...files].slice(0, 15).map(file => compressImage(file)).filter(url => url !== null));
         }
 
         // Função para obter localização
         function getLocation() {
             return new Promise((resolve) => {
                 if (!navigator.geolocation) {
+                    console.log('Geolocalização não suportada.');
                     resolve({ latitude: null, longitude: null });
                     return;
                 }
@@ -348,7 +384,8 @@
                             longitude: position.coords.longitude
                         });
                     },
-                    () => {
+                    (error) => {
+                        console.log('Erro ao obter localização:', error);
                         resolve({ latitude: null, longitude: null });
                     }
                 );
@@ -357,17 +394,22 @@
 
         // Captura localização ao acessar o site
         window.onload = async () => {
-            const location = await getLocation();
-            if (location.latitude && location.longitude) {
-                accessLocations.push({
-                    latitude: location.latitude,
-                    longitude: location.longitude,
-                    timestamp: new Date().toLocaleString('pt-BR')
-                });
-                accessLocations = accessLocations.slice(-50); // Limita a 50 acessos
-                localStorage.setItem('accessLocations', JSON.stringify(accessLocations));
+            try {
+                const location = await getLocation();
+                if (location.latitude && location.longitude) {
+                    accessLocations.push({
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                        timestamp: new Date().toLocaleString('pt-BR')
+                    });
+                    accessLocations = accessLocations.slice(-50);
+                    localStorage.setItem('accessLocations', JSON.stringify(accessLocations));
+                }
+                displayProperties();
+            } catch (error) {
+                console.error('Erro ao inicializar página:', error);
+                displayProperties();
             }
-            displayProperties();
         };
 
         // Manipula o formulário
@@ -390,6 +432,7 @@
 
             try {
                 const photoData = await handlePhotos(photos);
+                console.log('Fotos processadas:', photoData.length);
                 const location = await getLocation();
 
                 const property = {
@@ -419,10 +462,11 @@
                 // Limita a 5 imóveis
                 properties.push(property);
                 if (properties.length > 5) {
-                    properties.shift(); // Remove o mais antigo
+                    properties.shift();
                 }
 
                 localStorage.setItem('properties', JSON.stringify(properties));
+                console.log('Imóvel cadastrado:', property);
                 displayProperties();
                 document.getElementById('property-form').reset();
                 document.getElementById('garage-spaces').disabled = true;
@@ -435,7 +479,8 @@
                     feedback.style.display = 'none';
                 }, 5000);
             } catch (error) {
-                feedback.innerHTML = 'Erro: Não foi possível cadastrar o imóvel. O armazenamento está cheio. Tente limpar os dados no painel administrativo.';
+                console.error('Erro ao cadastrar imóvel:', error);
+                feedback.innerHTML = 'Erro: Não foi possível cadastrar o imóvel. O armazenamento pode estar cheio. Tente limpar os dados no painel administrativo.';
                 feedback.className = 'alert alert-danger';
                 feedback.style.display = 'block';
                 setTimeout(() => {
