@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soluções | Imóveis em Ivatuba/title>
+    <title>Imóveis | Instituto Valentis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Favicon embutido para evitar erro 404 -->
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGBgYGBkZGRkZGSkZGTkZGRkZAQAOK4G/B8z8/gAAAAASUVORK5CYII=">
     <style>
         body {
             background-color: #f8f9fa;
@@ -187,7 +189,7 @@
                         </select>
                     </div>
                     <div class="col-12">
-                        <label for="photos" class="form-label">Fotos do Imóvel</label>
+                        <label for="photos" class="form-label">Fotos do Imóvel (máximo 15)</label>
                         <input type="file" class="form-control" id="photos" accept="image/*" multiple>
                     </div>
                     <div class="col-12">
@@ -297,15 +299,39 @@
             new bootstrap.Modal(document.getElementById('fullscreenCarouselModal')).show();
         }
 
+        // Função para comprimir imagens
+        function compressImage(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        let width = img.width;
+                        let height = img.height;
+                        const maxDim = 1024; // Redimensiona para no máximo 1024px
+                        if (width > height && width > maxDim) {
+                            height *= maxDim / width;
+                            width = maxDim;
+                        } else if (height > maxDim) {
+                            width *= maxDim / height;
+                            height = maxDim;
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', 0.7)); // Qualidade 70%
+                    };
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
         // Função para lidar com o upload de fotos
         function handlePhotos(files) {
-            return Promise.all([...files].map(file => {
-                return new Promise((resolve) => {
-                    const reader = new FileReader();
-                    reader.onload = () => resolve(reader.result);
-                    reader.readAsDataURL(file);
-                });
-            }));
+            return Promise.all([...files].slice(0, 15).map(file => compressImage(file)));
         }
 
         // Função para obter localização
@@ -352,8 +378,8 @@
             const photos = document.getElementById('photos').files;
 
             // Valida o número de imagens
-            if (photos.length > 1) {
-                feedback.innerHTML = 'Erro: Você pode enviar no máximo 1 imagem.';
+            if (photos.length > 15) {
+                feedback.innerHTML = 'Erro: Você pode enviar no máximo 15 imagens.';
                 feedback.className = 'alert alert-danger';
                 feedback.style.display = 'block';
                 setTimeout(() => {
@@ -362,46 +388,60 @@
                 return;
             }
 
-            const photoData = await handlePhotos(photos);
-            const location = await getLocation();
+            try {
+                const photoData = await handlePhotos(photos);
+                const location = await getLocation();
 
-            const property = {
-                owner: document.getElementById('owner').value,
-                type: document.getElementById('type').value,
-                value: document.getElementById('value').value,
-                description: document.getElementById('description').value,
-                bedrooms: document.getElementById('bedrooms').value,
-                suites: document.getElementById('suites').value,
-                livingrooms: document.getElementById('livingrooms').value,
-                kitchens: document.getElementById('kitchens').value,
-                bathrooms: document.getElementById('bathrooms').value,
-                garage: garage,
-                garageSpaces: garage === 'sim' ? document.getElementById('garage-spaces').value : 0,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                address: document.getElementById('address').value,
-                area: document.getElementById('area').value,
-                status: document.getElementById('status').value,
-                date: new Date().toLocaleDateString('pt-BR'),
-                photos: photoData,
-                approvalStatus: 'pending',
-                latitude: location.latitude,
-                longitude: location.longitude
-            };
+                const property = {
+                    owner: document.getElementById('owner').value,
+                    type: document.getElementById('type').value,
+                    value: document.getElementById('value').value,
+                    description: document.getElementById('description').value,
+                    bedrooms: document.getElementById('bedrooms').value,
+                    suites: document.getElementById('suites').value,
+                    livingrooms: document.getElementById('livingrooms').value,
+                    kitchens: document.getElementById('kitchens').value,
+                    bathrooms: document.getElementById('bathrooms').value,
+                    garage: garage,
+                    garageSpaces: garage === 'sim' ? document.getElementById('garage-spaces').value : 0,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    area: document.getElementById('area').value,
+                    status: document.getElementById('status').value,
+                    date: new Date().toLocaleDateString('pt-BR'),
+                    photos: photoData,
+                    approvalStatus: 'pending',
+                    latitude: location.latitude,
+                    longitude: location.longitude
+                };
 
-            properties.push(property);
-            localStorage.setItem('properties', JSON.stringify(properties));
-            displayProperties();
-            document.getElementById('property-form').reset();
-            document.getElementById('garage-spaces').disabled = true;
+                // Limita a 5 imóveis
+                properties.push(property);
+                if (properties.length > 5) {
+                    properties.shift(); // Remove o mais antigo
+                }
 
-            // Exibe mensagem de feedback
-            feedback.innerHTML = 'Imóvel cadastrado com sucesso! Aguardando aprovação do administrador.';
-            feedback.className = 'alert alert-success';
-            feedback.style.display = 'block';
-            setTimeout(() => {
-                feedback.style.display = 'none';
-            }, 5000);
+                localStorage.setItem('properties', JSON.stringify(properties));
+                displayProperties();
+                document.getElementById('property-form').reset();
+                document.getElementById('garage-spaces').disabled = true;
+
+                // Exibe mensagem de feedback
+                feedback.innerHTML = 'Imóvel cadastrado com sucesso! Aguardando aprovação do administrador.';
+                feedback.className = 'alert alert-success';
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 5000);
+            } catch (error) {
+                feedback.innerHTML = 'Erro: Não foi possível cadastrar o imóvel. O armazenamento está cheio. Tente limpar os dados no painel administrativo.';
+                feedback.className = 'alert alert-danger';
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 5000);
+            }
         });
 
         // Habilita/desabilita campo de vagas na garagem
