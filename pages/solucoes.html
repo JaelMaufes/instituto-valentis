@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
             background-color: #f4f4f4;
             padding: 20px;
         }
+
         .property-card {
             border: 1px solid #ddd;
             padding: 15px;
@@ -17,17 +19,21 @@
             background: #fff;
             border-radius: 8px;
         }
+
         .carousel img {
             max-height: 200px;
             object-fit: cover;
         }
+
         .form-section {
             background: #fff;
             padding: 20px;
             border-radius: 8px;
             margin-top: 40px;
         }
-        h1, h2 {
+
+        h1,
+        h2 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -58,6 +64,7 @@
         </div>
     </div>
 </div>
+
 <body>
     <div class="container">
         <h1>Imóveis para Alugar ou Vender</h1>
@@ -156,58 +163,59 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Carrega imóveis do localStorage ao iniciar
+        // Carrega imóveis e acessos do localStorage ao iniciar
         let properties = JSON.parse(localStorage.getItem('properties')) || [];
+        let accessLocations = JSON.parse(localStorage.getItem('accessLocations')) || [];
 
-        // Função para exibir imóveis
+        // Função para exibir imóveis (apenas aprovados)
         function displayProperties() {
             const propertiesList = document.getElementById('properties-list');
             propertiesList.innerHTML = '';
-            properties.forEach((property, index) => {
+            properties.filter(property => property.approvalStatus === 'approved').forEach((property, index) => {
                 const photosHtml = property.photos.length > 0
                     ? `
-                        <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                ${property.photos.map((photo, i) => `
-                                    <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                        <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
-                                    </div>
-                                `).join('')}
+                <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        ${property.photos.map((photo, i) => `
+                            <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                                <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    `
+                        `).join('')}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            `
                     : '<p>Sem fotos disponíveis</p>';
 
                 const card = `
-                    <div class="col-md-4">
-                        <div class="property-card">
-                            ${photosHtml}
-                            <h3>${property.owner}</h3>
-                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
-                            <p><strong>Valor:</strong> R$ ${parseFloat(property.value).toFixed(2)}</p>
-                            <p><strong>Descrição:</strong> ${property.description}</p>
-                            <p><strong>Quartos:</strong> ${property.bedrooms}</p>
-                            <p><strong>Suítes:</strong> ${property.suites}</p>
-                            <p><strong>Salas:</strong> ${property.livingrooms}</p>
-                            <p><strong>Cozinhas:</strong> ${property.kitchens}</p>
-                            <p><strong>Banheiros:</strong> ${property.bathrooms}</p>
-                            <p><strong>Garagem:</strong> ${property.garage === 'sim' ? `Sim (${property.garageSpaces} vagas)` : 'Não'}</p>
-                            <p><strong>Contato:</strong> ${property.email} | ${property.phone}</p>
-                            <p><strong>Endereço:</strong> ${property.address}</p>
-                            <p><strong>Área:</strong> ${property.area} m²</p>
-                            <p><strong>Status:</strong> ${property.status.charAt(0).toUpperCase() + property.status.slice(1)}</p>
-                            <p><strong>Data de Publicação:</strong> ${property.date}</p>
-                        </div>
-                    </div>
-                `;
+            <div class="col-md-4">
+                <div class="property-card">
+                    ${photosHtml}
+                    <p><strong>Status:</strong> ${property.status.charAt(0).toUpperCase() + property.status.slice(1)}</p>
+                    <h3>${property.owner}</h3>
+                    <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
+                    <p><strong>Valor:</strong> R$ ${parseFloat(property.value).toFixed(2)}</p>
+                    <p><strong>Descrição:</strong> ${property.description}</p>
+                    <p><strong>Quartos:</strong> ${property.bedrooms}</p>
+                    <p><strong>Suítes:</strong> ${property.suites}</p>
+                    <p><strong>Salas:</strong> ${property.livingrooms}</p>
+                    <p><strong>Cozinhas:</strong> ${property.kitchens}</p>
+                    <p><strong>Banheiros:</strong> ${property.bathrooms}</p>
+                    <p><strong>Garagem:</strong> ${property.garage === 'sim' ? `Sim (${property.garageSpaces} vagas)` : 'Não'}</p>
+                    <p><strong>Contato:</strong> ${property.email} | ${property.phone}</p>
+                    <p><strong>Endereço:</strong> ${property.address}</p>
+                    <p><strong>Área:</strong> ${property.area} m²</p>
+                    <p><strong>Data de Publicação:</strong> ${property.date}</p>
+                </div>
+            </div>
+        `;
                 propertiesList.innerHTML += card;
             });
         }
@@ -223,12 +231,48 @@
             }));
         }
 
+        // Função para obter localização
+        function getLocation() {
+            return new Promise((resolve) => {
+                if (!navigator.geolocation) {
+                    resolve({ latitude: null, longitude: null });
+                    return;
+                }
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        resolve({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        });
+                    },
+                    () => {
+                        resolve({ latitude: null, longitude: null });
+                    }
+                );
+            });
+        }
+
+        // Captura localização ao acessar o site
+        window.onload = async () => {
+            const location = await getLocation();
+            if (location.latitude && location.longitude) {
+                accessLocations.push({
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    timestamp: new Date().toLocaleString('pt-BR')
+                });
+                localStorage.setItem('accessLocations', JSON.stringify(accessLocations));
+            }
+            displayProperties();
+        };
+
         // Manipula o formulário
         document.getElementById('property-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const garage = document.getElementById('garage').value;
             const photos = document.getElementById('photos').files;
             const photoData = await handlePhotos(photos);
+            const location = await getLocation();
 
             const property = {
                 owner: document.getElementById('owner').value,
@@ -248,7 +292,10 @@
                 area: document.getElementById('area').value,
                 status: document.getElementById('status').value,
                 date: new Date().toLocaleDateString('pt-BR'),
-                photos: photoData
+                photos: photoData,
+                approvalStatus: 'pending',
+                latitude: location.latitude,
+                longitude: location.longitude
             };
 
             properties.push(property);
@@ -264,9 +311,7 @@
             garageSpaces.disabled = e.target.value === 'nao';
             if (e.target.value === 'nao') garageSpaces.value = '';
         });
-
-        // Inicializa a exibição
-        displayProperties();
     </script>
 </body>
+
 </html>

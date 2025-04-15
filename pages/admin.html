@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo - Excluir Imóveis</title>
+    <title>Painel Administrativo - Gerenciar Imóveis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -17,16 +17,27 @@
             max-width: 800px;
             margin: 0 auto;
         }
-        h1, h2 {
+        h1, h2, h3 {
             text-align: center;
             margin-bottom: 20px;
         }
-        .property-list {
+        .property-list, .access-list {
             margin-bottom: 20px;
         }
-        .property-item {
+        .property-item, .access-item {
             padding: 10px;
             border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .property-item select {
+            width: 150px;
+        }
+        .property-info {
+            flex: 1;
+            min-width: 200px;
         }
     </style>
 </head>
@@ -39,18 +50,21 @@
             <button class="btn btn-primary w-100" onclick="authenticate()">Entrar</button>
         </div>
         <div id="admin-content" style="display: none;">
-            <h2>Excluir Imóveis</h2>
+            <h2>Gerenciar Imóveis</h2>
+            <h3>Imóveis Cadastrados</h3>
             <div class="property-list" id="property-list"></div>
             <div class="mb-3">
                 <label for="delete-index" class="form-label">Índice do Imóvel para Excluir</label>
                 <input type="number" id="delete-index" class="form-control" placeholder="Digite o índice">
             </div>
             <button class="btn btn-danger w-100" onclick="deleteProperty()">Excluir Imóvel</button>
+            <h3>Acessos ao Site</h3>
+            <div class="access-list" id="access-list"></div>
         </div>
     </div>
 
     <script>
-        const ADMIN_PASSWORD = 'sotenta'; // Senha estática (mude para algo seguro)
+        const ADMIN_PASSWORD = 'admin123'; // Senha estática (mude para algo seguro)
 
         // Autenticar administrador
         function authenticate() {
@@ -59,13 +73,15 @@
                 document.getElementById('auth-section').style.display = 'none';
                 document.getElementById('admin-content').style.display = 'block';
                 displayProperties();
+                displayAccesses();
             } else {
                 alert('Senha incorreta');
             }
         }
 
-        // Carrega imóveis do localStorage
+        // Carrega imóveis e acessos do localStorage
         let properties = JSON.parse(localStorage.getItem('properties')) || [];
+        let accessLocations = JSON.parse(localStorage.getItem('accessLocations')) || [];
 
         // Exibe lista de imóveis
         function displayProperties() {
@@ -74,25 +90,51 @@
             properties.forEach((property, index) => {
                 const item = document.createElement('div');
                 item.className = 'property-item';
-                item.innerHTML = `<strong>Índice ${index}</strong>: ${property.owner} - ${property.address}`;
+                const statusText = property.approvalStatus === 'pending' ? 'Pendente' : 'Aprovado';
+                const locationText = property.latitude && property.longitude
+                    ? `Lat ${property.latitude}, Long ${property.longitude}`
+                    : 'Localização não fornecida';
+                item.innerHTML = `
+                    <div class="property-info">
+                        <span><strong>Índice ${index}</strong>: ${property.owner} - ${property.address} (${statusText})</span>
+                        <br>
+                        <span><strong>Localização do Cadastro:</strong> ${locationText}</span>
+                    </div>
+                    <div>
+                        ${property.approvalStatus === 'pending' ? `<button class="btn btn-success btn-sm me-2" onclick="approveProperty(${index})">Aprovar</button>` : ''}
+                        <select onchange="updateStatus(${index}, this.value)">
+                            <option value="disponivel" ${property.status === 'disponivel' ? 'selected' : ''}>Disponível</option>
+                            <option value="alugado" ${property.status === 'alugado' ? 'selected' : ''}>Alugado</option>
+                            <option value="vendido" ${property.status === 'vendido' ? 'selected' : ''}>Vendido</option>
+                        </select>
+                    </div>
+                `;
                 propertyList.appendChild(item);
             });
         }
 
-        // Exclui imóvel
-        function deleteProperty() {
-            const index = parseInt(document.getElementById('delete-index').value);
-            if (isNaN(index) || index < 0 || index >= properties.length) {
-                alert('Índice inválido');
-                return;
-            }
-            if (confirm('Tem certeza que deseja excluir este imóvel?')) {
-                properties.splice(index, 1);
-                localStorage.setItem('properties', JSON.stringify(properties));
-                displayProperties();
-                document.getElementById('delete-index').value = '';
-            }
+        // Exibe lista de acessos
+        function displayAccesses() {
+            const accessList = document.getElementById('access-list');
+            accessList.innerHTML = '';
+            accessLocations.forEach((access, index) => {
+                const item = document.createElement('div');
+                item.className = 'access-item';
+                const locationText = access.latitude && access.longitude
+                    ? `Lat ${access.latitude}, Long ${access.longitude}`
+                    : 'Localização não fornecida';
+                item.innerHTML = `
+                    <span><strong>Acesso ${index + 1}</strong>: ${locationText} (${access.timestamp})</span>
+                `;
+                accessList.appendChild(item);
+            });
         }
-    </script>
-</body>
-</html>
+
+        // Aprova imóvel
+        function approveProperty(index) {
+            properties[index].approvalStatus = 'approved';
+            localStorage.setItem('properties', JSON.stringify(properties));
+            displayProperties();
+        }
+
+        // Atualiza status do imóvel
