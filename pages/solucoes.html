@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Imóveis | Instituto Valentis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .property-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #fff;
+            border-radius: 8px;
+        }
+        .carousel img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .form-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<!-- Modal para Editar Status -->
+<div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editStatusModalLabel">Editar Status do Imóvel</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-status-form">
+                    <div class="mb-3">
+                        <label for="edit-status" class="form-label">Novo Status</label>
+                        <select class="form-control" id="edit-status" required>
+                            <option value="disponivel">Disponível</option>
+                            <option value="vendido">Vendido</option>
+                            <option value="alugado">Alugado</option>
+                        </select>
+                    </div>
+                    <input type="hidden" id="edit-index">
+                    <button type="submit" class="btn btn-primary w-100">Salvar Alteração</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<body>
+    <div class="container">
+        <h1>Imóveis para Alugar ou Vender</h1>
+
+        <!-- Seção de Exibição -->
+        <div id="properties-list" class="row"></div>
+
+        <!-- Seção de Cadastro -->
+        <div class="form-section">
+            <h2>Cadastrar Novo Imóvel</h2>
+            <form id="property-form">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="owner" class="form-label">Nome do Proprietário</label>
+                        <input type="text" class="form-control" id="owner" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="type" class="form-label">Tipo</label>
+                        <select class="form-control" id="type" required>
+                            <option value="locacao">Locação</option>
+                            <option value="venda">Venda</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="value" class="form-label">Valor (R$)</label>
+                        <input type="number" class="form-control" id="value" step="0.01" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="description" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="description" required></textarea>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="bedrooms" class="form-label">Quartos</label>
+                        <input type="number" class="form-control" id="bedrooms" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="suites" class="form-label">Suítes</label>
+                        <input type="number" class="form-control" id="suites" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="livingrooms" class="form-label">Salas</label>
+                        <input type="number" class="form-control" id="livingrooms" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="kitchens" class="form-label">Cozinhas</label>
+                        <input type="number" class="form-control" id="kitchens" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="bathrooms" class="form-label">Banheiros</label>
+                        <input type="number" class="form-control" id="bathrooms" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="garage" class="form-label">Garagem</label>
+                        <select class="form-control" id="garage" required>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="garage-spaces" class="form-label">Vagas na Garagem</label>
+                        <input type="number" class="form-control" id="garage-spaces" disabled>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="email" class="form-label">E-mail de Contato</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="phone" class="form-label">Telefone de Contato</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="address" class="form-label">Endereço</label>
+                        <input type="text" class="form-control" id="address" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="area" class="form-label">Área (m²)</label>
+                        <input type="number" class="form-control" id="area" step="0.01" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-control" id="status" required>
+                            <option value="disponivel">Disponível</option>
+                            <option value="vendido">Vendido</option>
+                            <option value="alugado">Alugado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="photos" class="form-label">Fotos do Imóvel</label>
+                        <input type="file" class="form-control" id="photos" accept="image/*" multiple>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Cadastrar Imóvel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Carrega imóveis do localStorage ao iniciar
+        let properties = JSON.parse(localStorage.getItem('properties')) || [];
+
+        // Função para exibir imóveis
+        function displayProperties() {
+            const propertiesList = document.getElementById('properties-list');
+            propertiesList.innerHTML = '';
+            properties.forEach((property, index) => {
+                const photosHtml = property.photos.length > 0
+                    ? `
+                        <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                ${property.photos.map((photo, i) => `
+                                    <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                                        <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    `
+                    : '<p>Sem fotos disponíveis</p>';
+
+                const card = `
+                    <div class="col-md-4">
+                        <div class="property-card">
+                            ${photosHtml}
+                            <h3>${property.owner}</h3>
+                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
+                            <p><strong>Valor:</strong> R$ ${parseFloat(property.value).toFixed(2)}</p>
+                            <p><strong>Descrição:</strong> ${property.description}</p>
+                            <p><strong>Quartos:</strong> ${property.bedrooms}</p>
+                            <p><strong>Suítes:</strong> ${property.suites}</p>
+                            <p><strong>Salas:</strong> ${property.livingrooms}</p>
+                            <p><strong>Cozinhas:</strong> ${property.kitchens}</p>
+                            <p><strong>Banheiros:</strong> ${property.bathrooms}</p>
+                            <p><strong>Garagem:</strong> ${property.garage === 'sim' ? `Sim (${property.garageSpaces} vagas)` : 'Não'}</p>
+                            <p><strong>Contato:</strong> ${property.email} | ${property.phone}</p>
+                            <p><strong>Endereço:</strong> ${property.address}</p>
+                            <p><strong>Área:</strong> ${property.area} m²</p>
+                            <p><strong>Status:</strong> ${property.status.charAt(0).toUpperCase() + property.status.slice(1)}</p>
+                            <p><strong>Data de Publicação:</strong> ${property.date}</p>
+                        </div>
+                    </div>
+                `;
+                propertiesList.innerHTML += card;
+            });
+        }
+
+        // Função para lidar com o upload de fotos
+        function handlePhotos(files) {
+            return Promise.all([...files].map(file => {
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
+            }));
+        }
+
+        // Manipula o formulário
+        document.getElementById('property-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const garage = document.getElementById('garage').value;
+            const photos = document.getElementById('photos').files;
+            const photoData = await handlePhotos(photos);
+
+            const property = {
+                owner: document.getElementById('owner').value,
+                type: document.getElementById('type').value,
+                value: document.getElementById('value').value,
+                description: document.getElementById('description').value,
+                bedrooms: document.getElementById('bedrooms').value,
+                suites: document.getElementById('suites').value,
+                livingrooms: document.getElementById('livingrooms').value,
+                kitchens: document.getElementById('kitchens').value,
+                bathrooms: document.getElementById('bathrooms').value,
+                garage: garage,
+                garageSpaces: garage === 'sim' ? document.getElementById('garage-spaces').value : 0,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                area: document.getElementById('area').value,
+                status: document.getElementById('status').value,
+                date: new Date().toLocaleDateString('pt-BR'),
+                photos: photoData
+            };
+
+            properties.push(property);
+            localStorage.setItem('properties', JSON.stringify(properties));
+            displayProperties();
+            document.getElementById('property-form').reset();
+            document.getElementById('garage-spaces').disabled = true;
+        });
+
+        // Habilita/desabilita campo de vagas na garagem
+        document.getElementById('garage').addEventListener('change', (e) => {
+            const garageSpaces = document.getElementById('garage-spaces');
+            garageSpaces.disabled = e.target.value === 'nao';
+            if (e.target.value === 'nao') garageSpaces.value = '';
+        });
+
+        // Inicializa a exibição
+        displayProperties();
+    </script>
+</body>
+</html>
