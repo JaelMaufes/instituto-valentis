@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             padding: 15px;
             font-family: 'Arial', sans-serif;
         }
+
         .admin-section {
             background: #fff;
             padding: 20px;
@@ -18,16 +20,31 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 100%;
         }
-        h1, h2, h3 {
+
+        h1,
+        h2,
+        h3 {
             text-align: center;
             margin-bottom: 20px;
         }
-        h1 { font-size: 1.8rem; }
-        h2, h3 { font-size: 1.5rem; }
-        .property-list, .access-list, .cadastro-list {
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        h2,
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        .property-list,
+        .access-list,
+        .cadastro-list {
             margin-bottom: 20px;
         }
-        .property-item, .access-item {
+
+        .property-item,
+        .access-item {
             padding: 12px;
             border-bottom: 1px solid #eee;
             display: flex;
@@ -35,25 +52,32 @@
             align-items: stretch;
             gap: 10px;
         }
+
         .property-info {
             font-size: 1rem;
         }
+
         .btn {
             height: 45px;
             font-size: 1rem;
             border-radius: 8px;
             margin: 5px 0;
         }
+
         .form-control {
             height: 48px;
             font-size: 1rem;
         }
+
         .modal-content {
             border-radius: 12px;
         }
-        .modal-body .form-control, .modal-body .form-select {
+
+        .modal-body .form-control,
+        .modal-body .form-select {
             height: 48px;
         }
+
         .photos-preview img {
             max-width: 100px;
             height: auto;
@@ -61,32 +85,59 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .fullscreen-carousel img {
             max-height: 80vh;
             width: auto;
             margin: auto;
             object-fit: contain;
         }
+
         .modal-fullscreen .modal-dialog {
             max-width: 100%;
             margin: 0;
         }
+
         .modal-fullscreen .modal-content {
             border: none;
             border-radius: 0;
             background: rgba(0, 0, 0, 0.9);
         }
+
         @media (max-width: 576px) {
-            h1 { font-size: 1.5rem; }
-            h2, h3 { font-size: 1.2rem; }
-            .property-info { font-size: 0.9rem; }
-            .btn { font-size: 0.9rem; height: 40px; }
-            .form-control { font-size: 0.9rem; }
-            .photos-preview img { max-width: 80px; }
-            .fullscreen-carousel img { max-height: 70vh; }
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2,
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .property-info {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                height: 40px;
+            }
+
+            .form-control {
+                font-size: 0.9rem;
+            }
+
+            .photos-preview img {
+                max-width: 80px;
+            }
+
+            .fullscreen-carousel img {
+                max-height: 70vh;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="admin-section">
         <h1>Painel Administrativo</h1>
@@ -112,7 +163,8 @@
     </div>
 
     <!-- Modal para Editar Status -->
-    <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -138,20 +190,24 @@
     </div>
 
     <!-- Modal para Carrossel em Tela Cheia -->
-    <div class="modal fade modal-fullscreen" id="fullscreenCarouselModal" tabindex="-1" aria-labelledby="fullscreenCarouselModalLabel" aria-hidden="true">
+    <div class="modal fade modal-fullscreen" id="fullscreenCarouselModal" tabindex="-1"
+        aria-labelledby="fullscreenCarouselModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header border-0">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-0">
                     <div id="fullscreen-carousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" id="fullscreen-carousel-inner"></div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#fullscreen-carousel" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#fullscreen-carousel"
+                            data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#fullscreen-carousel" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#fullscreen-carousel"
+                            data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
@@ -307,4 +363,5 @@
         }
     </script>
 </body>
+
 </html>
