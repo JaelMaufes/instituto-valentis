@@ -215,7 +215,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-0">
-                    <div id="fullscreen-carousel" class="carousel slide" data-bs-ride="carousel">
+                    <div id="fullscreen-carousel" class="carousel slide">
                         <div class="carousel-inner" id="fullscreen-carousel-inner"></div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#fullscreen-carousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -240,14 +240,22 @@
             if (storedProperties) {
                 properties = JSON.parse(storedProperties);
                 console.log('Imóveis carregados do localStorage:', properties);
+                alert(`Carregados ${properties.length} imóveis, com ${properties.filter(p => p.approvalStatus === 'approved').length} aprovados.`);
             } else {
                 console.log('Nenhum imóvel encontrado no localStorage.');
+                alert('Nenhum imóvel encontrado. Cadastre e aprove um imóvel no painel administrativo.');
             }
         } catch (error) {
             console.error('Erro ao carregar localStorage:', error);
+            alert('Erro ao carregar dados. O armazenamento pode estar corrompido. Tente limpar no painel administrativo.');
             properties = [];
         }
-        let accessLocations = JSON.parse(localStorage.getItem('accessLocations')) || [];
+        let accessLocations = [];
+        try {
+            accessLocations = JSON.parse(localStorage.getItem('accessLocations')) || [];
+        } catch (error) {
+            console.error('Erro ao carregar accessLocations:', error);
+        }
 
         // Função para exibir imóveis (apenas aprovados)
         function displayProperties() {
@@ -257,7 +265,7 @@
             console.log('Imóveis aprovados para exibição:', approvedProperties);
 
             if (approvedProperties.length === 0) {
-                propertiesList.innerHTML = '<p class="no-properties">Nenhum imóvel aprovado disponível.</p>';
+                propertiesList.innerHTML = '<p class="no-properties">Nenhum imóvel aprovado disponível. Acesse o painel administrativo para aprovar.</p>';
                 return;
             }
 
@@ -268,7 +276,7 @@
                             <div class="carousel-inner">
                                 ${property.photos.map((photo, i) => `
                                     <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                        <img src="${photo}" class="d-block w-100" alt="Foto do imóvel" loading="lazy" onclick="openFullscreenCarousel(${index}, ${i})">
+                                        <img src="${photo}" class="d-block w-100" alt="Foto do imóvel" onclick="openFullscreenCarousel(${index}, ${i})">
                                     </div>
                                 `).join('')}
                             </div>
@@ -315,9 +323,11 @@
 
         // Função para abrir o carrossel em tela cheia
         function openFullscreenCarousel(propertyIndex, startIndex) {
-            const property = properties.filter(p => p.approvalStatus === 'approved')[propertyIndex];
+            const approvedProperties = properties.filter(p => p.approvalStatus === 'approved');
+            const property = approvedProperties[propertyIndex];
             if (!property || !property.photos) {
                 console.error('Imóvel ou fotos não encontrados:', propertyIndex);
+                alert('Erro: Imóvel não encontrado ou sem fotos.');
                 return;
             }
             const carouselInner = document.getElementById('fullscreen-carousel-inner');
@@ -330,6 +340,7 @@
                 new bootstrap.Modal(document.getElementById('fullscreenCarouselModal')).show();
             } catch (error) {
                 console.error('Erro ao abrir modal:', error);
+                alert('Erro ao abrir carrossel.');
             }
         }
 
@@ -358,7 +369,14 @@
                         ctx.drawImage(img, 0, 0, width, height);
                         resolve(canvas.toDataURL('image/jpeg', 0.7));
                     };
-                    img.onerror = () => resolve(null);
+                    img.onerror = () => {
+                        console.error('Erro ao carregar imagem:', file.name);
+                        resolve(null);
+                    };
+                };
+                reader.onerror = () => {
+                    console.error('Erro ao ler arquivo:', file.name);
+                    resolve(null);
                 };
                 reader.readAsDataURL(file);
             });
@@ -408,6 +426,7 @@
                 displayProperties();
             } catch (error) {
                 console.error('Erro ao inicializar página:', error);
+                alert('Erro ao carregar página. Verifique o console para detalhes.');
                 displayProperties();
             }
         };
@@ -465,22 +484,32 @@
                     properties.shift();
                 }
 
-                localStorage.setItem('properties', JSON.stringify(properties));
-                console.log('Imóvel cadastrado:', property);
-                displayProperties();
-                document.getElementById('property-form').reset();
-                document.getElementById('garage-spaces').disabled = true;
+                try {
+                    localStorage.setItem('properties', JSON.stringify(properties));
+                    console.log('Imóvel cadastrado:', property);
+                    displayProperties();
+                    document.getElementById('property-form').reset();
+                    document.getElementById('garage-spaces').disabled = true;
 
-                // Exibe mensagem de feedback
-                feedback.innerHTML = 'Imóvel cadastrado com sucesso! Aguardando aprovação do administrador.';
-                feedback.className = 'alert alert-success';
-                feedback.style.display = 'block';
-                setTimeout(() => {
-                    feedback.style.display = 'none';
-                }, 5000);
+                    // Exibe mensagem de feedback
+                    feedback.innerHTML = 'Imóvel cadastrado com sucesso! Aguardando aprovação do administrador.';
+                    feedback.className = 'alert alert-success';
+                    feedback.style.display = 'block';
+                    setTimeout(() => {
+                        feedback.style.display = 'none';
+                    }, 5000);
+                } catch (storageError) {
+                    console.error('Erro ao salvar no localStorage:', storageError);
+                    feedback.innerHTML = 'Erro: Armazenamento cheio. Limpe os dados no painel administrativo e tente novamente.';
+                    feedback.className = 'alert alert-danger';
+                    feedback.style.display = 'block';
+                    setTimeout(() => {
+                        feedback.style.display = 'none';
+                    }, 5000);
+                }
             } catch (error) {
                 console.error('Erro ao cadastrar imóvel:', error);
-                feedback.innerHTML = 'Erro: Não foi possível cadastrar o imóvel. O armazenamento pode estar cheio. Tente limpar os dados no painel administrativo.';
+                feedback.innerHTML = 'Erro ao cadastrar imóvel. Verifique o console para detalhes.';
                 feedback.className = 'alert alert-danger';
                 feedback.style.display = 'block';
                 setTimeout(() => {
