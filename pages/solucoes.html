@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imóveis | Instituto Valentis</title>
+    <title>Imóveis | Aluguel e Venda</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon"
-        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGBgYGBkZGRkZGSkZGTkZGRkZAQAOK4G/B8z8/gAAAAASUVORK5CYII=">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGBgYGBkZGRkZGSkZGTkZGRkZAQAOK4G/B8z8/gAAAAASUVORK5CYII=">
     <style>
         :root {
             --azul-neutro: #4B6587;
@@ -29,21 +27,38 @@
 
         .header {
             background-color: var(--branco);
-            padding: 15px 0;
+            padding: 15px 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: padding 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 8px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
         .header img {
             max-width: 150px;
             height: auto;
-            margin-bottom: 10px;
+            transition: max-width 0.3s ease;
+        }
+
+        .header.scrolled img {
+            max-width: 120px;
         }
 
         .navbar {
+            flex-grow: 1;
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 20px;
         }
 
@@ -52,7 +67,11 @@
             text-decoration: none;
             font-size: 1rem;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, font-size 0.3s ease;
+        }
+
+        .header.scrolled .navbar a {
+            font-size: 0.9rem;
         }
 
         .navbar a:hover {
@@ -61,7 +80,7 @@
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 120px auto 0; /* Ajustado para evitar sobreposição com header fixo */
         }
 
         h1 {
@@ -173,8 +192,17 @@
             font-style: italic;
         }
 
+        footer {
+            background-color: var(--azul-neutro);
+            color: var(--bege-claro);
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
         /* Rodapé */
-        .footer {
+        /* .footer {
             background-color: #333;
             color: white;
             text-align: center;
@@ -182,7 +210,7 @@
             margin-top: 20px;
             box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
             font-family: 'KulachatHcRegular', Arial, sans-serif;
-        }
+        } */
 
         .footer a {
             color: #F4AF37;
@@ -197,7 +225,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #4B6587;
+            background-color: var(--azul-neutro);
             color: var(--bege-claro);
             width: 60px;
             height: 60px;
@@ -220,57 +248,56 @@
         }
 
         @media (max-width: 576px) {
+            .header {
+                padding: 10px 15px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header.scrolled {
+                padding: 6px 15px;
+            }
+
             .header img {
-                max-width: 120px;
+                max-width: 100px;
+            }
+
+            .header.scrolled img {
+                max-width: 80px;
             }
 
             .navbar {
+                justify-content: flex-start;
                 flex-direction: column;
                 gap: 10px;
+                width: 100%;
+                margin-top: 10px;
             }
 
             .navbar a {
                 font-size: 0.95rem;
             }
 
-            h1 {
-                font-size: 1.6rem;
+            .header.scrolled .navbar a {
+                font-size: 0.85rem;
             }
 
-            h2 {
-                font-size: 1.3rem;
+            .container {
+                margin-top: 180px; /* Ajuste para header maior em mobile */
             }
 
-            .property-card {
-                padding: 15px;
-            }
-
-            .carousel img {
-                height: 180px;
-            }
-
-            .form-section {
-                padding: 20px;
-            }
-
-            .form-control,
-            .form-select,
-            .btn-primary {
-                font-size: 0.95rem;
-            }
-
-            .whatsapp-btn {
-                width: 50px;
-                height: 50px;
-            }
-
-            .whatsapp-btn i {
-                font-size: 1.5rem;
-            }
+            h1 { font-size: 1.6rem; }
+            h2 { font-size: 1.3rem; }
+            .property-card { padding: 15px; }
+            .carousel img { height: 180px; }
+            .form-section { padding: 20px; }
+            .form-control, .form-select, .btn-primary { font-size: 0.95rem; }
+            .whatsapp-btn { width: 50px; height: 50px; }
+            .whatsapp-btn i { font-size: 1.5rem; }
         }
+
     </style>
 </head>
-
 <body>
     <header class="header">
         <img src="/images/logomarca.png" alt="Logo Instituto Valentis" class="">
@@ -287,7 +314,7 @@
         <h1>Imóveis em Ivatuba</h1>
         <div id="properties-list" class="row"></div>
         <div class="form-section">
-            <h2>Cadastrar Novo Imóvel</h2>
+            <h2>Cadastre seu Imóvel</h2>
             <form id="property-form">
                 <div class="row g-3">
                     <div class="col-12">
@@ -324,17 +351,26 @@
 
     <footer class="footer">
         <p>&copy; 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a>
-        </p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
     </footer>
 
-    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis%20no%20Instituto%20Valentis."
-        class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis%20no%20Instituto%20Valentis" class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Sticky header com redução ao rolar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Funcionalidade de imóveis
         const JSONBIN_API_KEY = '$2a$10$dKijF5oFCYh5pYskkUvbPO9WziVB5PTwj8H7KI2D3nbUhzp7Zivwu'; // Substitua pela Master Key do JSONBin
         const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/67ffa03c8960c979a58666af'; // Substitua pelo Bin ID
         const IMGBB_API_KEY = '9023917c56a250f28edf8bc7f1ba5632'; // Substitua pela chave ImgBB
@@ -479,5 +515,4 @@
         window.onload = loadProperties;
     </script>
 </body>
-
 </html>
