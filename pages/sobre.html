@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,53 @@
     </header>
     <title>Sobre o Instituto Valentis</title>
     <style>
+        /* Cabeçalho */
+        .header {
+            background-color: #FFFFFF;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Centraliza horizontalmente */
+            justify-content: center;
+            /* Centraliza verticalmente */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'KulachatSerifBold', Arial, sans-serif;
+        }
+
+        .header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        /* Menu de navegação */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .navbar a {
+            background-color: #004AAD;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+            font-family: 'KulachatHcBold', Arial, sans-serif;
+        }
+
+        .navbar a:hover {
+            background-color: #E89A20;
+            transform: scale(1.05);
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
@@ -23,6 +71,7 @@
             padding: 0;
             background-color: #f9f9f9;
         }
+
         .container {
             max-width: 800px;
             margin: 40px auto;
@@ -31,12 +80,14 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+
         h1 {
             text-align: center;
             color: #2c3e50;
             font-size: 2.5em;
             margin-bottom: 20px;
         }
+
         h2 {
             color: #34495e;
             font-size: 1.8em;
@@ -44,34 +95,43 @@
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
         }
-        p, ul {
+
+        p,
+        ul {
             font-size: 1.1em;
             margin-bottom: 20px;
         }
+
         ul {
             list-style-type: disc;
             padding-left: 20px;
         }
+
         li {
             margin-bottom: 10px;
         }
+
         strong {
             color: #2980b9;
         }
+
         @media (max-width: 600px) {
             .container {
                 margin: 20px;
                 padding: 15px;
             }
+
             h1 {
                 font-size: 2em;
             }
+
             h2 {
                 font-size: 1.5em;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Banner com a logo -->
     <!--div class="banner">
@@ -82,27 +142,48 @@
         <h1>Sobre o Instituto Valentis</h1>
 
         <h2>Quem Somos</h2>
-        <p>O <strong>Instituto Valentis</strong> é uma associação civil sem fins lucrativos, fundada em <strong>7 de fevereiro de 2024</strong>. O Instituto nasceu com o propósito de transformar vidas por meio de iniciativas que unem <strong>educação</strong>, <strong>fé cristã protestante</strong>, <strong>assistência social</strong> e <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
+        <p>O <strong>Instituto Valentis</strong> é uma associação civil sem fins lucrativos, fundada em <strong>7 de
+                fevereiro de 2024</strong>. O Instituto nasceu com o propósito de transformar vidas por meio de
+            iniciativas que unem <strong>educação</strong>, <strong>fé cristã protestante</strong>, <strong>assistência
+                social</strong> e <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a
+            imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com o compromisso de
+            servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
 
         <h2>Missão</h2>
-        <p>Nossa missão é <strong>promover o bem-estar e o crescimento integral das pessoas</strong>, oferecendo oportunidades de aprendizado, apoio espiritual, assistência social e incentivo à inovação. Por meio de ações como palestras, cultos cristãos, doações, atendimento psicológico e fonoaudiológico, e projetos de empreendedorismo, buscamos fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>, <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
+        <p>Nossa missão é <strong>promover o bem-estar e o crescimento integral das pessoas</strong>, oferecendo
+            oportunidades de aprendizado, apoio espiritual, assistência social e incentivo à inovação. Por meio de ações
+            como palestras, cultos cristãos, doações, atendimento psicológico e fonoaudiológico, e projetos de
+            empreendedorismo, buscamos fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>,
+            <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
 
         <h2>Visão</h2>
-        <p>Ser uma <strong>referência global em transformação social e espiritual</strong>, reconhecida por unir fé cristã, educação de qualidade e ações concretas que geram impacto duradouro. Almejamos expandir nossas iniciativas, criando filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha acesso a ferramentas para prosperar com <strong>dignidade</strong>, <strong>esperança</strong> e <strong>propósito</strong>.</p>
+        <p>Ser uma <strong>referência global em transformação social e espiritual</strong>, reconhecida por unir fé
+            cristã, educação de qualidade e ações concretas que geram impacto duradouro. Almejamos expandir nossas
+            iniciativas, criando filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha
+            acesso a ferramentas para prosperar com <strong>dignidade</strong>, <strong>esperança</strong> e
+            <strong>propósito</strong>.</p>
 
         <h2>Valores</h2>
         <ul>
-            <li><strong>Fé Cristã</strong>: Vivemos e compartilhamos os ensinamentos de Jesus Cristo, guiando nossas ações com amor e integridade.</li>
-            <li><strong>Solidariedade</strong>: Atuamos com empatia, priorizando os mais vulneráveis e promovendo a inclusão.</li>
-            <li><strong>Transparência</strong>: Gerimos recursos com responsabilidade, assegurando confiança e conformidade.</li>
-            <li><strong>Inovação</strong>: Buscamos soluções criativas para desafios sociais, educacionais e ambientais.</li>
-            <li><strong>Respeito</strong>: Valorizamos a diversidade, tratando a todos com dignidade, sem distinção.</li>
-            <li><strong>Compromisso</strong>: Dedicamo-nos incansavelmente aos nossos objetivos, com foco em resultados que transformam vidas.</li>
+            <li><strong>Fé Cristã</strong>: Vivemos e compartilhamos os ensinamentos de Jesus Cristo, guiando nossas
+                ações com amor e integridade.</li>
+            <li><strong>Solidariedade</strong>: Atuamos com empatia, priorizando os mais vulneráveis e promovendo a
+                inclusão.</li>
+            <li><strong>Transparência</strong>: Gerimos recursos com responsabilidade, assegurando confiança e
+                conformidade.</li>
+            <li><strong>Inovação</strong>: Buscamos soluções criativas para desafios sociais, educacionais e ambientais.
+            </li>
+            <li><strong>Respeito</strong>: Valorizamos a diversidade, tratando a todos com dignidade, sem distinção.
+            </li>
+            <li><strong>Compromisso</strong>: Dedicamo-nos incansavelmente aos nossos objetivos, com foco em resultados
+                que transformam vidas.</li>
         </ul>
     </div>
     <footer class="footer">
         <p>&copy; 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a>
+        </p>
     </footer>
 </body>
+
 </html>
