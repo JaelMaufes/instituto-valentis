@@ -156,33 +156,37 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const JSONBIN_API_KEY = '$2a$10$jLB8GrHbXG7GX5Vjdtw3UO6R0yOFTlgxXKmdtj1ey1X0L.u5F44Ly'; // Obtenha em jsonbin.io
-        const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/67ff8e968561e97a5000c79e'; // Crie um bin e insira o ID
-        const IMGBB_API_KEY = '001be9fb66c9bbb48b678d70dc7fdd55'; // Obtenha em imgbb.com
+        const JSONBIN_API_KEY = 'SUA_NOVA_CHAVE_JSONBIN'; // Substitua pela Master Key
+        const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/SEU_NOVO_BIN_ID'; // Substitua pelo Bin ID
+        const IMGBB_API_KEY = 'SUA_NOVA_CHAVE_IMGBB'; // Substitua pela nova chave ImgBB
 
         let properties = [];
 
-        // Carrega imóveis do JSONBin
         async function loadProperties() {
             try {
                 const response = await fetch(JSONBIN_URL, {
                     headers: { 'X-Master-Key': JSONBIN_API_KEY }
                 });
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
                 const data = await response.json();
                 properties = data.record || [];
                 console.log('Imóveis carregados:', properties);
                 displayProperties();
             } catch (error) {
                 console.error('Erro ao carregar imóveis:', error);
-                alert('Erro ao carregar imóveis. Verifique a conexão ou o painel administrativo.');
+                alert(`Erro ao carregar imóveis: ${error.message}. Verifique a conexão ou as credenciais.`);
                 properties = [];
                 displayProperties();
             }
         }
 
-        // Salva imóveis no JSONBin
         async function saveProperties() {
             try {
+                if (properties.length > 5) {
+                    properties = properties.slice(-5);
+                }
                 await fetch(JSONBIN_URL, {
                     method: 'PUT',
                     headers: {
@@ -194,11 +198,10 @@
                 console.log('Imóveis salvos:', properties);
             } catch (error) {
                 console.error('Erro ao salvar imóveis:', error);
-                alert('Erro ao salvar imóveis. Verifique a conexão.');
+                alert(`Erro ao salvar imóveis: ${error.message}.`);
             }
         }
 
-        // Exibe imóveis aprovados
         function displayProperties() {
             const propertiesList = document.getElementById('properties-list');
             propertiesList.innerHTML = '';
@@ -238,7 +241,7 @@
                         <div class="property-card">
                             ${photosHtml}
                             <h3 class="mt-3">${property.owner || 'Proprietário não informado'}</h3>
-                            <p><strong>Status:</strong> ${property.status ? property.status.charAt(0).toUpperCase() + property.status.slice(1) : 'Indefinido'}</p>
+                            <p><strong>Status:</strong> ${typeof property.status === 'string' && property.status ? property.status.charAt(0).toUpperCase() + property.status.slice(1) : 'Indefinido'}</p>
                             <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
                             <p><strong>Valor:</strong> R$ ${property.value ? parseFloat(property.value).toFixed(2) : '0.00'}</p>
                             <details>
@@ -262,7 +265,6 @@
             });
         }
 
-        // Abre carrossel em tela cheia
         function openFullscreenCarousel(propertyIndex, startIndex) {
             const approvedProperties = properties.filter(p => p.approvalStatus === 'approved');
             const property = approvedProperties[propertyIndex];
@@ -279,7 +281,6 @@
             new bootstrap.Modal(document.getElementById('fullscreenCarouselModal')).show();
         }
 
-        // Comprime imagens localmente antes do upload
         function compressImage(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -311,7 +312,6 @@
             });
         }
 
-        // Faz upload de imagens para o ImgBB
         async function uploadToImgBB(file) {
             try {
                 const formData = new FormData();
@@ -320,6 +320,9 @@
                     method: 'POST',
                     body: formData
                 });
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
                 const data = await response.json();
                 if (data.success) {
                     return data.data.url;
@@ -331,14 +334,12 @@
             }
         }
 
-        // Processa fotos
         async function handlePhotos(files) {
             const compressedFiles = await Promise.all([...files].slice(0, 15).map(file => compressImage(file)));
             const urls = await Promise.all(compressedFiles.map(file => uploadToImgBB(file)));
             return urls.filter(url => url !== null);
         }
 
-        // Obtém localização
         function getLocation() {
             return new Promise((resolve) => {
                 if (!navigator.geolocation) {
@@ -359,12 +360,10 @@
             });
         }
 
-        // Carrega imóveis ao iniciar
         window.onload = () => {
             loadProperties();
         };
 
-        // Manipula o formulário
         document.getElementById('property-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const feedback = document.getElementById('form-feedback');
@@ -409,7 +408,7 @@
 
                 properties.push(property);
                 if (properties.length > 5) {
-                    properties.shift();
+                    properties = properties.slice(-5);
                 }
 
                 await saveProperties();
@@ -423,14 +422,15 @@
                 setTimeout(() => feedback.style.display = 'none', 5000);
             } catch (error) {
                 console.error('Erro ao cadastrar imóvel:', error);
-                feedback.innerHTML = 'Erro ao cadastrar imóvel. Verifique a conexão ou o console.';
+                feedback.innerHTML = 'Erro ao cadastrar imóvel. Verifique a conexão ou os dados.';
                 feedback.className = 'alert alert-danger';
                 feedback.style.display = 'block';
+                document.getElementById('property-form').reset();
+                document.getElementById('garage-spaces').disabled = true;
                 setTimeout(() => feedback.style.display = 'none', 5000);
             }
         });
 
-        // Habilita/desabilita vagas na garagem
         document.getElementById('garage').addEventListener('change', (e) => {
             const garageSpaces = document.getElementById('garage-spaces');
             garageSpaces.disabled = e.target.value === 'nao';
