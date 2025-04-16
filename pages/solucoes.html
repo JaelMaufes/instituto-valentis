@@ -6,7 +6,7 @@
     <title>Imóveis | Instituto Valentis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" href="/images/favicon.png">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGBgYGBkZGRkZGSkZGTkZGRkZAQAOK4G/B8z8/gAAAAASUVORK5CYII=">
     <style>
         :root {
             --azul-neutro: #4B6587;
@@ -23,6 +23,38 @@
             padding: 20px;
             font-family: 'Arial', sans-serif;
             color: var(--texto-escuro);
+        }
+
+        .header {
+            background-color: var(--branco);
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: var(--azul-neutro);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--azul-suave);
         }
 
         .container {
@@ -152,7 +184,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #4B6587; /* Azul neutro para harmonizar */
+            background-color: #4B6587;
             color: var(--bege-claro);
             width: 60px;
             height: 60px;
@@ -175,6 +207,9 @@
         }
 
         @media (max-width: 576px) {
+            .header img { max-width: 120px; }
+            .navbar { flex-direction: column; gap: 10px; }
+            .navbar a { font-size: 0.95rem; }
             h1 { font-size: 1.6rem; }
             h2 { font-size: 1.3rem; }
             .property-card { padding: 15px; }
@@ -187,6 +222,19 @@
     </style>
 </head>
 <body>
+    <header class="header">
+        <img src="/images/logomarca.png" alt="Logo Instituto Valentis" class="">
+        <!-- h1 id="titulo-principal"></h1 -->
+        <nav class="navbar">
+            <a href="/index.html">Início</a>
+            <a href="/pages/sobre.html">Sobre</a>
+            <a href="/pages/solucoes.html">Soluções</a>
+            <a href="/pages/fundador.html">Fundador</a>
+            <a href="/pages/galeria.html">Galeria</a>
+            <a href="/pages/contato.html">Contato</a>
+        </nav>
+    </header>
+
     <div class="container">
         <h1>Imóveis em Ivatuba</h1>
         <div id="properties-list" class="row"></div>
@@ -231,7 +279,7 @@
         <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
     </footer>
 
-    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis%20no%20Instituto%20Valentis" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis%20no%20Instituto%20Valentis." class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
