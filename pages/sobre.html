@@ -1,208 +1,260 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <header class="header">
-        <img src="/images/logomarca.png" alt="Logo Instituto Valentis" class="">
-        <!-- h1 id="titulo-principal"></h1 -->
-        <nav class="navbar">
-            <a href="../index.html">Início</a>
-            <a href="/pages/sobre.html">Sobre</a>
-            <a href="/pages/solucoes.html">Soluções</a>
-            <a href="/pages/contato.html">Contato</a>
-        </nav>
-    </header>
-    <title>Sobre o Instituto Valentis</title>
+    <title>Sobre | Instituto Valentis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="/images/favicon.png">
     <style>
-        /* Cabeçalho */
+        :root {
+            --azul-neutro: #4B6587;
+            --azul-suave: #87CEEB;
+            --verde-suave: #28A745;
+            --amarelo-palido: #F7E8A4;
+            --bege-claro: #FDF6E3;
+            --branco: #FFFFFF;
+            --cinza-claro: #F8F9FA;
+            --texto-escuro: #333333;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--cinza-claro);
+            font-family: 'Roboto', Arial, sans-serif;
+            color: var(--texto-escuro);
+            line-height: 1.6;
+        }
+
         .header {
-            background-color: #FFFFFF;
-            color: white;
-            padding: 20px;
+            background-color: var(--branco);
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            /* Centraliza horizontalmente */
-            justify-content: center;
-            /* Centraliza verticalmente */
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-family: 'KulachatSerifBold', Arial, sans-serif;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: padding 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .header .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .header img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
+            max-width: 100px;
+            height: auto;
+            transition: max-width 0.3s ease;
         }
 
-        /* Menu de navegação */
+        .header.scrolled img { max-width: 80px; }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: var(--azul-neutro);
+            margin: 0;
+            font-weight: 500;
+            transition: font-size 0.3s ease;
+        }
+
+        .header.scrolled h1 { font-size: 1.2rem; }
+
         .navbar {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
+            align-items: center;
+            gap: 20px;
         }
 
         .navbar a {
-            background-color: #004AAD;
-            color: #FFFFFF;
+            color: var(--azul-neutro);
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s, transform 0.2s;
-            font-weight: bold;
-            font-family: 'KulachatHcBold', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
         }
 
-        .navbar a:hover {
-            background-color: #E89A20;
-            transform: scale(1.05);
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
+        .navbar a:hover,
+        .navbar a:focus {
+            color: var(--azul-suave);
+            text-decoration: underline;
         }
 
         .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 20px;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 20px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
-            color: #34495e;
-            font-size: 1.8em;
-            margin-top: 30px;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-
-        p,
-        ul {
-            font-size: 1.1em;
+            font-size: 1.8rem;
+            color: var(--azul-neutro);
+            text-align: center;
             margin-bottom: 20px;
+            font-weight: 500;
         }
 
-        ul {
-            list-style-type: disc;
+        .about-section {
+            background: var(--bege-claro);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .about-section h3 {
+            font-size: 1.4rem;
+            color: var(--azul-neutro);
+            margin-top: 20px;
+        }
+
+        .about-section p,
+        .about-section ul {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .about-section ul {
+            list-style: disc;
             padding-left: 20px;
         }
 
-        li {
-            margin-bottom: 10px;
+        .about-section strong {
+            color: var(--azul-neutro);
         }
 
-        strong {
-            color: #2980b9;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                margin: 20px;
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            h2 {
-                font-size: 1.5em;
-            }
-        }
-        /* Rodapé */
-        .footer {
-            background-color: #333;
-            color: white;
+        footer {
+            background-color: var(--azul-neutro);
+            color: var(--bege-claro);
             text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-            font-family: 'KulachatHcRegular', Arial, sans-serif;
+            padding: 15px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
         }
 
-        .footer a {
-            color: #F4AF37;
-            transition: color 0.3s;
+        footer a {
+            color: var(--bege-claro);
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .footer a:hover {
-            color: #E89A20;
+        footer a:hover { color: var(--amarelo-palido); }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--azul-neutro);
+            color: var(--bege-claro);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--amarelo-palido);
+            color: var(--azul-neutro);
+        }
+
+        .whatsapp-btn i { font-size: 1.8rem; }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 10px 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header img { max-width: 80px; }
+            .header h1 { font-size: 1.2rem; }
+            .navbar {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .navbar a { font-size: 0.9rem; }
+            .container { padding-top: 150px; }
+            h2 { font-size: 1.5rem; }
+            .about-section { padding: 20px; }
+            .whatsapp-btn { width: 50px; height: 50px; }
+            .whatsapp-btn i { font-size: 1.5rem; }
         }
     </style>
 </head>
-
 <body>
-    <!-- Banner com a logo -->
-    <!--div class="banner">
-        <img src="/images/banner-instituto.png" alt="Logo Instituto Valentis">
-    </div -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="/images/logomarca.png" alt="Logo Instituto Valentis">
+            <h1>Sobre</h1>
+        </div>
+        <nav class="navbar">
+            <a href="/index.html">Início</a>
+            <a href="/pages/sobre.html">Sobre</a>
+            <a href="/pages/solucoes.html">Soluções</a>
+            <a href="/pages/fundador.html">Fundador</a>
+            <a href="/pages/galeria.html">Galeria</a>
+            <a href="/pages/contato.html">Contato</a>
+        </nav>
+    </header>
 
     <div class="container">
-        <h1>Sobre o Instituto Valentis</h1>
-
-        <h2>Quem Somos</h2>
-        <p>O <strong>Instituto Valentis</strong> é uma associação civil sem fins lucrativos, fundada em <strong>7 de
-                fevereiro de 2024</strong>. O Instituto nasceu com o propósito de transformar vidas por meio de
-            iniciativas que unem <strong>educação</strong>, <strong>fé cristã protestante</strong>, <strong>assistência
-                social</strong> e <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a
-            imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com o compromisso de
-            servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
-
-        <h2>Missão</h2>
-        <p>Nossa missão é <strong>promover o bem-estar e o crescimento integral das pessoas</strong>, oferecendo
-            oportunidades de aprendizado, apoio espiritual, assistência social e incentivo à inovação. Por meio de ações
-            como palestras, cultos cristãos, doações, atendimento psicológico e fonoaudiológico, e projetos de
-            empreendedorismo, buscamos fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>,
-            <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
-
-        <h2>Visão</h2>
-        <p>Ser uma <strong>referência global em transformação social e espiritual</strong>, reconhecida por unir fé
-            cristã, educação de qualidade e ações concretas que geram impacto duradouro. Almejamos expandir nossas
-            iniciativas, criando filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha
-            acesso a ferramentas para prosperar com <strong>dignidade</strong>, <strong>esperança</strong> e
-            <strong>propósito</strong>.</p>
-
-        <h2>Valores</h2>
-        <ul>
-            <li><strong>Fé Cristã</strong>: Vivemos e compartilhamos os ensinamentos de Jesus Cristo, guiando nossas
-                ações com amor e integridade.</li>
-            <li><strong>Solidariedade</strong>: Atuamos com empatia, priorizando os mais vulneráveis e promovendo a
-                inclusão.</li>
-            <li><strong>Transparência</strong>: Gerimos recursos com responsabilidade, assegurando confiança e
-                conformidade.</li>
-            <li><strong>Inovação</strong>: Buscamos soluções criativas para desafios sociais, educacionais e ambientais.
-            </li>
-            <li><strong>Respeito</strong>: Valorizamos a diversidade, tratando a todos com dignidade, sem distinção.
-            </li>
-            <li><strong>Compromisso</strong>: Dedicamo-nos incansavelmente aos nossos objetivos, com foco em resultados
-                que transformam vidas.</li>
-        </ul>
+        <div class="about-section">
+            <h2>Sobre o Instituto Valentis</h2>
+            <h3>Quem Somos</h3>
+            <p>O <strong>Instituto Valentis</strong> é uma associação civil sem fins lucrativos, fundada em <strong>7 de fevereiro de 2024</strong>. O Instituto nasceu com o propósito de transformar vidas por meio de iniciativas que unem <strong>educação</strong>, <strong>fé cristã protestante</strong>, <strong>assistência social</strong> e <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
+            <h3>Missão</h3>
+            <p>Nossa missão é <strong>promover o bem-estar e o crescimento integral das pessoas</strong>, oferecendo oportunidades de aprendizado, apoio espiritual, assistência social e incentivo à inovação. Por meio de ações como palestras, cultos cristãos, doações, atendimento psicológico e fonoaudiológico, e projetos de empreendedorismo, buscamos fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>, <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
+            <h3>Visão</h3>
+            <p>Ser uma <strong>referência global em transformação social e espiritual</strong>, reconhecida por unir fé cristã, educação de qualidade e ações concretas que geram impacto duradouro. Almejamos expandir nossas iniciativas, criando filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha acesso a ferramentas para prosperar com <strong>dignidade</strong>, <strong>esperança</strong> e <strong>propósito</strong>.</p>
+            <h3>Valores</h3>
+            <ul>
+                <li><strong>Fé Cristã</strong>: Vivemos e compartilhamos os ensinamentos de Jesus Cristo, guiando nossas ações com amor e integridade.</li>
+                <li><strong>Solidariedade</strong>: Atuamos com empatia, priorizando os mais vulneráveis e promovendo a inclusão.</li>
+                <li><strong>Transparência</strong>: Gerimos recursos com responsabilidade, assegurando confiança e conformidade.</li>
+                <li><strong>Inovação</strong>: Buscamos soluções criativas para desafios sociais, educacionais e ambientais.</li>
+                <li><strong>Respeito</strong>: Valorizamos a diversidade, tratando a todos com dignidade, sem distinção.</li>
+                <li><strong>Compromisso</strong>: Dedicamo-nos incansavelmente aos nossos objetivos, com foco em resultados que transformam vidas.</li>
+            </ul>
+        </div>
     </div>
-    <footer class="footer">
-        <p>&copy; 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a>
-        </p>
-    </footer>
-</body>
 
+    <footer>
+        <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
+    </footer>
+
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20Instituto%20Valentis" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/script.js"></script>
+</body>
 </html>

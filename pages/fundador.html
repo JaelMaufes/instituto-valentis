@@ -1,23 +1,231 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instituto Valentis</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <script defer src="/js/script.js"></script>
+    <title>Fundador | Instituto Valentis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="/images/favicon.png">
+    <style>
+        :root {
+            --azul-neutro: #4B6587;
+            --azul-suave: #87CEEB;
+            --verde-suave: #28A745;
+            --amarelo-palido: #F7E8A4;
+            --bege-claro: #FDF6E3;
+            --branco: #FFFFFF;
+            --cinza-claro: #F8F9FA;
+            --texto-escuro: #333333;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--cinza-claro);
+            font-family: 'Roboto', Arial, sans-serif;
+            color: var(--texto-escuro);
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--branco);
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: padding 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .header .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header img {
+            max-width: 100px;
+            height: auto;
+            transition: max-width 0.3s ease;
+        }
+
+        .header.scrolled img { max-width: 80px; }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: var(--azul-neutro);
+            margin: 0;
+            font-weight: 500;
+            transition: font-size 0.3s ease;
+        }
+
+        .header.scrolled h1 { font-size: 1.2rem; }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: var(--azul-neutro);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover,
+        .navbar a:focus {
+            color: var(--azul-suave);
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--azul-neutro);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .founder-section {
+            background: var(--bege-claro);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .profile-image img {
+            max-width: 200px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .founder-section h3 {
+            font-size: 1.4rem;
+            color: var(--azul-neutro);
+            margin-top: 20px;
+        }
+
+        .founder-section ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .founder-section a {
+            color: var(--azul-neutro);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .founder-section a:hover {
+            color: var(--azul-suave);
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: var(--azul-neutro);
+            color: var(--bege-claro);
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--bege-claro);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover { color: var(--amarelo-palido); }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--azul-neutro);
+            color: var(--bege-claro);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--amarelo-palido);
+            color: var(--azul-neutro);
+        }
+
+        .whatsapp-btn i { font-size: 1.8rem; }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 10px 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header img { max-width: 80px; }
+            .header h1 { font-size: 1.2rem; }
+            .navbar {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .navbar a { font-size: 0.9rem; }
+            .container { padding-top: 150px; }
+            h2 { font-size: 1.5rem; }
+            .founder-section { padding: 20px; }
+            .profile-image img { max-width: 150px; }
+            .whatsapp-btn { width: 50px; height: 50px; }
+            .whatsapp-btn i { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Banner com a logo -->
-    <!--div class="banner">
-        <img src="/images/banner-instituto.png" alt="Logo Instituto Valentis">
-    </div -->
-    
     <header class="header">
-        <img src="/images/logomarca.png" alt="Logo Instituto Valentis" class="">
-        <!-- h1 id="titulo-principal"></h1 -->
+        <div class="logo-container">
+            <img src="/images/logomarca.png" alt="Logo Instituto Valentis">
+            <h1>Fundador</h1>
+        </div>
         <nav class="navbar">
-            <a href="../index.html">Início</a>
+            <a href="/index.html">Início</a>
             <a href="/pages/sobre.html">Sobre</a>
             <a href="/pages/solucoes.html">Soluções</a>
             <a href="/pages/fundador.html">Fundador</a>
@@ -26,56 +234,60 @@
         </nav>
     </header>
 
-    <main class="content">
-        <section class="founder-profile">
+    <div class="container">
+        <div class="founder-section">
+            <h2>Samuel Jafé Pereira Carvalho</h2>
             <div class="profile-image">
-                <img src="/images/fundador.png" alt="Foto de Samuel Jafé Pereira Carvalho">
-                        <p>Samuel Jafé Pereira Carvalho</p>
-                        <p>Nascido em 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
-                        <p>Profissão: Administrador e Pastor</p>
-                        <p>Idiomas: Inglês, Espanhol, Francês e Português</p>
-                        <p>Pessoa de vocação política. Atualmente, filiado ao Partido Republicanos.</p>
-                    </div>
-                    <div class="resume">
-                        <h2>Família</h2>
-                        <ul>
-                            <li>Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
-                            <li>Legendário. LGND #83532.</li>
-                        </ul>
-                        <h2>Carreira</h2>
-                        <ul>
-                            <li>Poliglota com experiência internacional;</li>
-                            <li>Administrador com visão para o desenvolvimento e gestão eficiente;</li>
-                            <li>Pastor comprometido com os valores morais e espirituais.</li>
-                            <li>Ex-CEO Valentis Business.</li>
-                        </ul>
-                        <h2>Trabalho Comunitário</h2>
-                        <ul>
-                            <li>Fundador do Instituto Valentis;</li>
-                            <li>Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.</li>
-                        </ul>
-                        <h2>Visão</h2>
-                        <ul>
-                            <li>Promover a SEGURANÇA e o BEM-ESTAR da comunidade. Fomentar a EDUCAÇÃO e a CULTURA. Apoiar o DESENVOLVIMENTO ECONÔMICO local.</li>
-                        </ul>
-                        <h2>Compromisso</h2>
-                        <ul>
-                            <li>TRANSPARÊNCIA na gestão pública. DIÁLOGO constante com a comunidade. INOVAÇÃO nas soluções dos desafios municipais.</li>
-                        </ul>
-                    </div>
-                    <div class="contact">
-                        <h2>Contato</h2>
-                        <ul>
-                            <li>E-mail: <a href="mailto:contato@ivalentis.com">samuel@ivalentis.com</a></li>
-                            <li>WhatsApp: (44) 99898-5343</li>
-                            <li><a href="https://www.linkedin.com/in/samueljpcarvalho/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                        </ul>
-                    </div>
-                </main>
+                <img src="/images/fundador.png" alt="Foto de Samuel Jafé Pereira Carvalho" onerror="this.src='/images/placeholder.png'">
+            </div>
+            <p><strong>Nascido em:</strong> 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
+            <p><strong>Profissão:</strong> Administrador e Pastor</p>
+            <p><strong>Idiomas:</strong> Inglês, Espanhol, Francês e Português</p>
+            <p><strong>Filiação:</strong> Partido Republicanos</p>
+            <h3>Família</h3>
+            <ul>
+                <li>Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
+                <li>Legendário. LGND #83532.</li>
+            </ul>
+            <h3>Carreira</h3>
+            <ul>
+                <li>Poliglota com experiência internacional.</li>
+                <li>Administrador com visão para o desenvolvimento e gestão eficiente.</li>
+                <li>Pastor comprometido com os valores morais e espirituais.</li>
+                <li>Ex-CEO Valentis Business.</li>
+            </ul>
+            <h3>Trabalho Comunitário</h3>
+            <ul>
+                <li>Fundador do Instituto Valentis.</li>
+                <li>Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.</li>
+            </ul>
+            <h3>Visão</h3>
+            <ul>
+                <li>Promover a segurança, bem-estar, educação, cultura e desenvolvimento econômico local.</li>
+            </ul>
+            <h3>Compromisso</h3>
+            <ul>
+                <li>Transparência, diálogo com a comunidade e inovação nas soluções municipais.</li>
+            </ul>
+            <h3>Contato</h3>
+            <ul>
+                <li>E-mail: <a href="mailto:samuel@ivalentis.com">samuel@ivalentis.com</a></li>
+                <li>WhatsApp: <a href="https://wa.me/5544998985343" target="_blank">(44) 99898-5343</a></li>
+                <li><a href="https://www.linkedin.com/in/samueljpcarvalho/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
 
-    <footer class="footer">
-        <p>&copy; 2025 Instituto Valentis - Todos os direitos reservados.</p>
+    <footer>
+        <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
         <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
     </footer>
+
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20Instituto%20Valentis" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
