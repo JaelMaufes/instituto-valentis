@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imóveis | Instituto Valentis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGBgYGBkZGRkZGSkZGTkZGRkZAQAOK4G/B8z8/gAAAAASUVORK5CYII=">
+    <link rel="icon"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGBgYGBkZGRkZGSkZGTkZGRkZAQAOK4G/B8z8/gAAAAASUVORK5CYII=">
     <style>
         :root {
             --azul-neutro: #4B6587;
@@ -171,13 +173,24 @@
             font-style: italic;
         }
 
-        footer {
-            background-color: var(--azul-neutro);
-            color: var(--bege-claro);
+        /* Rodapé */
+        .footer {
+            background-color: #333;
+            color: white;
             text-align: center;
-            padding: 15px 0;
-            margin-top: 40px;
-            font-size: 0.9rem;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'KulachatHcRegular', Arial, sans-serif;
+        }
+
+        .footer a {
+            color: #F4AF37;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #E89A20;
         }
 
         .whatsapp-btn {
@@ -207,20 +220,57 @@
         }
 
         @media (max-width: 576px) {
-            .header img { max-width: 120px; }
-            .navbar { flex-direction: column; gap: 10px; }
-            .navbar a { font-size: 0.95rem; }
-            h1 { font-size: 1.6rem; }
-            h2 { font-size: 1.3rem; }
-            .property-card { padding: 15px; }
-            .carousel img { height: 180px; }
-            .form-section { padding: 20px; }
-            .form-control, .form-select, .btn-primary { font-size: 0.95rem; }
-            .whatsapp-btn { width: 50px; height: 50px; }
-            .whatsapp-btn i { font-size: 1.5rem; }
+            .header img {
+                max-width: 120px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .navbar a {
+                font-size: 0.95rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .property-card {
+                padding: 15px;
+            }
+
+            .carousel img {
+                height: 180px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            .form-control,
+            .form-select,
+            .btn-primary {
+                font-size: 0.95rem;
+            }
+
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .whatsapp-btn i {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
+
 <body>
     <header class="header">
         <img src="/images/logomarca.png" alt="Logo Instituto Valentis" class="">
@@ -276,10 +326,12 @@
 
     <footer class="footer">
         <p>&copy; 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a>
+        </p>
     </footer>
 
-    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis%20no%20Instituto%20Valentis." class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis%20no%20Instituto%20Valentis."
+        class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -429,4 +481,5 @@
         window.onload = loadProperties;
     </script>
 </body>
+
 </html>
