@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imóveis | Instituto Valentis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGBgYGBkZGRkZGSkZGTkZGRkZAQAOK4G/B8z8/gAAAAASUVORK5CYII=">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="/images/favicon.png">
     <style>
         :root {
             --azul-neutro: #4B6587;
@@ -138,6 +139,41 @@
             font-style: italic;
         }
 
+        footer {
+            background-color: var(--azul-neutro);
+            color: var(--bege-claro);
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4B6587; /* Azul neutro para harmonizar */
+            color: var(--bege-claro);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--amarelo-palido);
+            color: var(--azul-neutro);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.8rem;
+        }
+
         @media (max-width: 576px) {
             h1 { font-size: 1.6rem; }
             h2 { font-size: 1.3rem; }
@@ -145,6 +181,8 @@
             .carousel img { height: 180px; }
             .form-section { padding: 20px; }
             .form-control, .form-select, .btn-primary { font-size: 0.95rem; }
+            .whatsapp-btn { width: 50px; height: 50px; }
+            .whatsapp-btn i { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -187,6 +225,15 @@
             <div id="form-feedback" class="alert" style="display: none;"></div>
         </div>
     </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Instituto Valentis - Todos os direitos reservados.</p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
+    </footer>
+
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis%20no%20Instituto%20Valentis" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
