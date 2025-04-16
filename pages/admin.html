@@ -3,325 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo - Gerenciar Imóveis</title>
+    <title>Painel Administrativo | Instituto Valentis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Favicon embutido para evitar erro 404 -->
     <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGBgYGBkZGRkZGSkZGTkZGRkZAQAOK4G/B8z8/gAAAAASUVORK5CYII=">
     <style>
-        body {
-            background-color: #f8f9fa;
-            padding: 15px;
-            font-family: 'Arial', sans-serif;
-        }
-        .admin-section {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 100%;
-        }
-        h1, h2, h3 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        h1 { font-size: 1.8rem; }
-        h2, h3 { font-size: 1.5rem; }
-        .property-list, .access-list, .cadastro-list {
-            margin-bottom: 20px;
-        }
-        .property-item, .access-item {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 10px;
-        }
-        .property-info {
-            font-size: 1rem;
-        }
-        .btn {
-            height: 45px;
-            font-size: 1rem;
-            border-radius: 8px;
-            margin: 5px 0;
-        }
-        .form-control {
-            height: 48px;
-            font-size: 1rem;
-        }
-        .modal-content {
-            border-radius: 12px;
-        }
-        .modal-body .form-control, .modal-body .form-select {
-            height: 48px;
-        }
-        .photos-preview img {
-            max-width: 100px;
-            height: auto;
-            margin: 5px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .fullscreen-carousel img {
-            max-height: 80vh;
-            width: auto;
-            margin: auto;
-            object-fit: contain;
-        }
-        .modal-fullscreen .modal-dialog {
-            max-width: 100%;
-            margin: 0;
-        }
-        .modal-fullscreen .modal-content {
-            border: none;
-            border-radius: 0;
-            background: rgba(0, 0, 0, 0.9);
-        }
+        body { background-color: #f8f9fa; padding: 15px; font-family: 'Arial', sans-serif; }
+        .container { max-width: 100%; }
+        h1 { font-size: 1.8rem; text-align: center; margin-bottom: 20px; }
+        .auth-section, .admin-section { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 20px; }
+        .form-control { height: 48px; font-size: 1rem; }
+        .btn-primary, .btn-danger, .btn-success { height: 50px; font-size: 1.1rem; border-radius: 8px; }
+        .property-card { border: none; border-radius: 12px; background: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 15px; margin-bottom: 20px; }
+        .carousel img { height: 200px; object-fit: cover; border-radius: 8px; }
+        .alert { margin-top: 15px; border-radius: 8px; }
+        .location-list li { margin-bottom: 10px; }
         @media (max-width: 576px) {
             h1 { font-size: 1.5rem; }
-            h2, h3 { font-size: 1.2rem; }
-            .property-info { font-size: 0.9rem; }
-            .btn { font-size: 0.9rem; height: 40px; }
-            .form-control { font-size: 0.9rem; }
-            .photos-preview img { max-width: 80px; }
-            .fullscreen-carousel img { max-height: 70vh; }
+            .property-card { padding: 10px; }
+            .carousel img { height: 150px; }
+            .btn-primary, .btn-danger, .btn-success { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
-    <div class="admin-section">
+    <div class="container">
         <h1>Painel Administrativo</h1>
-        <div id="auth-section">
-            <h2>Acessar Painel</h2>
-            <input type="password" id="admin-password" class="form-control mb-3" placeholder="Digite a senha">
-            <button class="btn btn-primary w-100" onclick="authenticate()">Entrar</button>
+        <div id="auth-section" class="auth-section">
+            <form id="auth-form">
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            </form>
+            <div id="auth-feedback" class="alert" style="display: none;"></div>
         </div>
-        <div id="admin-content" style="display: none;">
-            <h2>Gerenciar Imóveis</h2>
-            <h3>Imóveis Cadastrados</h3>
-            <div class="property-list" id="property-list"></div>
-            <div class="mb-3">
-                <label for="delete-index" class="form-label">Índice do Imóvel para Excluir</label>
-                <input type="number" id="delete-index" class="form-control" placeholder="Digite o índice">
-            </div>
-            <button class="btn btn-danger w-100 mb-3" onclick="deleteProperty()">Excluir Imóvel</button>
-            <button class="btn btn-warning w-100" onclick="clearStorage()">Limpar Todos os Dados</button>
-            <h3>Localizações de Cadastro</h3>
-            <div class="cadastro-list" id="cadastro-list"></div>
-            <h3>Acessos ao Site</h3>
-            <div class="access-list" id="access-list"></div>
-        </div>
-    </div>
-
-    <!-- Modal para Editar Status -->
-    <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editStatusModalLabel">Editar Status do Imóvel</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="edit-status-form">
-                        <div class="mb-3">
-                            <label for="edit-status" class="form-label">Novo Status</label>
-                            <select class="form-select" id="edit-status" required>
-                                <option value="disponivel">Disponível</option>
-                                <option value="alugado">Alugado</option>
-                                <option value="vendido">Vendido</option>
-                            </select>
-                        </div>
-                        <input type="hidden" id="edit-index">
-                        <button type="submit" class="btn btn-primary w-100">Salvar Alteração</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Carrossel em Tela Cheia -->
-    <div class="modal fade modal-fullscreen" id="fullscreenCarouselModal" tabindex="-1" aria-labelledby="fullscreenCarouselModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0">
-                    <div id="fullscreen-carousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner" id="fullscreen-carousel-inner"></div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#fullscreen-carousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#fullscreen-carousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div id="admin-section" class="admin-section" style="display: none;">
+            <button id="clear-data" class="btn btn-danger w-100 mb-3">Limpar Todos os Dados</button>
+            <h2>Imóveis Cadastrados</h2>
+            <div id="properties-list" class="row"></div>
+            <h2>Localizações de Acesso</h2>
+            <ul id="location-list" class="location-list"></ul>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const ADMIN_PASSWORD = 'admin123'; // Senha estática (mude para algo seguro)
+        const JSONBIN_API_KEY = '$2a$10$jLB8GrHbXG7GX5Vjdtw3UO6R0yOFTlgxXKmdtj1ey1X0L.u5F44Ly'; // Mesma chave do solucoes.html
+        const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/67fecacceb52f179214af0fd'; // Mesmo bin ID
+        const ADMIN_PASSWORD = 'admin123';
+        let properties = [];
+        let accessLocations = [];
 
-        // Autenticar administrador
-        function authenticate() {
-            const password = document.getElementById('admin-password').value;
-            if (password === ADMIN_PASSWORD) {
-                document.getElementById('auth-section').style.display = 'none';
-                document.getElementById('admin-content').style.display = 'block';
-                displayProperties();
-                displayAccesses();
-                displayCadastroLocations();
-            } else {
-                alert('Senha incorreta');
+        // Carrega dados do JSONBin
+        async function loadData() {
+            try {
+                const response = await fetch(JSONBIN_URL, {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                const data = await response.json();
+                properties = data.record || [];
+                accessLocations = properties
+                    .filter(p => p.latitude && p.longitude)
+                    .map(p => ({
+                        latitude: p.latitude,
+                        longitude: p.longitude,
+                        timestamp: p.date
+                    }));
+                console.log('Dados carregados:', properties, accessLocations);
+                if (document.getElementById('admin-section').style.display === 'block') {
+                    displayProperties();
+                    displayLocations();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                showFeedback('Erro ao carregar dados.', 'danger');
             }
         }
 
-        // Carrega imóveis e acessos do localStorage
-        let properties = JSON.parse(localStorage.getItem('properties')) || [];
-        let accessLocations = JSON.parse(localStorage.getItem('accessLocations')) || [];
+        // Salva dados no JSONBin
+        async function saveData() {
+            try {
+                await fetch(JSONBIN_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify(properties)
+                });
+                console.log('Dados salvos:', properties);
+            } catch (error) {
+                console.error('Erro ao salvar dados:', error);
+                showFeedback('Erro ao salvar dados.', 'danger');
+            }
+        }
 
-        // Exibe lista de imóveis
+        // Exibe feedback
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('auth-feedback');
+            feedback.innerHTML = message;
+            feedback.className = `alert alert-${type}`;
+            feedback.style.display = 'block';
+            setTimeout(() => feedback.style.display = 'none', 5000);
+        }
+
+        // Exibe imóveis
         function displayProperties() {
-            const propertyList = document.getElementById('property-list');
-            propertyList.innerHTML = '';
-            properties.forEach((property, index) => {
-                const statusText = property.approvalStatus === 'pending' ? 'Pendente' : 'Aprovado';
-                const locationText = property.latitude && property.longitude
-                    ? `Lat ${property.latitude.toFixed(4)}, Long ${property.longitude.toFixed(4)}`
-                    : 'Localização não fornecida';
-                const photosHtml = property.photos.length > 0
-                    ? `<div class="photos-preview">${property.photos.map((photo, i) => `
-                        <img src="${photo}" alt="Miniatura" loading="lazy" onclick="openFullscreenCarousel(${index}, ${i})">
-                    `).join('')}</div>`
-                    : '<p class="text-muted">Sem fotos</p>';
-
-                const item = document.createElement('div');
-                item.className = 'property-item';
-                item.innerHTML = `
-                    <div class="property-info">
-                        <span><strong>Índice ${index}</strong>: ${property.owner} - ${property.address} (${statusText})</span>
-                        <br>
-                        <span><strong>Localização do Cadastro:</strong> ${locationText}</span>
-                        <br>
-                        <span><strong>Fotos:</strong></span>
-                        ${photosHtml}
-                    </div>
-                    <div class="d-flex flex-column gap-2">
-                        ${property.approvalStatus === 'pending' ? `<button class="btn btn-success" onclick="approveProperty(${index})">Aprovar</button>` : ''}
-                        <button class="btn btn-primary" onclick="openEditStatusModal(${index})">Editar Status</button>
-                    </div>
-                `;
-                propertyList.appendChild(item);
-            });
-        }
-
-        // Exibe lista de acessos
-        function displayAccesses() {
-            const accessList = document.getElementById('access-list');
-            accessList.innerHTML = '';
-            accessLocations.forEach((access, index) => {
-                const item = document.createElement('div');
-                item.className = 'access-item';
-                const locationText = access.latitude && access.longitude
-                    ? `Lat ${access.latitude.toFixed(4)}, Long ${access.longitude.toFixed(4)}`
-                    : 'Localização não fornecida';
-                item.innerHTML = `
-                    <span><strong>Acesso ${index + 1}</strong>: ${locationText} (${access.timestamp})</span>
-                `;
-                accessList.appendChild(item);
-            });
-        }
-
-        // Exibe lista de localizações de cadastro
-        function displayCadastroLocations() {
-            const cadastroList = document.getElementById('cadastro-list');
-            cadastroList.innerHTML = '';
-            properties.forEach((property, index) => {
-                const item = document.createElement('div');
-                item.className = 'access-item';
-                const locationText = property.latitude && property.longitude
-                    ? `Lat ${property.latitude.toFixed(4)}, Long ${property.longitude.toFixed(4)}`
-                    : 'Localização não fornecida';
-                item.innerHTML = `
-                    <span><strong>Imóvel ${index}</strong>: ${locationText}</span>
-                `;
-                cadastroList.appendChild(item);
-            });
-        }
-
-        // Aprova imóvel
-        function approveProperty(index) {
-            properties[index].approvalStatus = 'approved';
-            localStorage.setItem('properties', JSON.stringify(properties));
-            displayProperties();
-            displayCadastroLocations();
-        }
-
-        // Abre o modal de edição de status
-        function openEditStatusModal(index) {
-            document.getElementById('edit-index').value = index;
-            document.getElementById('edit-status').value = properties[index].status;
-            new bootstrap.Modal(document.getElementById('editStatusModal')).show();
-        }
-
-        // Abre o carrossel em tela cheia
-        function openFullscreenCarousel(propertyIndex, startIndex) {
-            const property = properties[propertyIndex];
-            const carouselInner = document.getElementById('fullscreen-carousel-inner');
-            carouselInner.innerHTML = property.photos.map((photo, i) => `
-                <div class="carousel-item ${i === startIndex ? 'active' : ''}">
-                    <img src="${photo}" class="fullscreen-carousel" alt="Foto do imóvel">
-                </div>
-            `).join('');
-            new bootstrap.Modal(document.getElementById('fullscreenCarouselModal')).show();
-        }
-
-        // Manipula o formulário de edição de status
-        document.getElementById('edit-status-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const index = parseInt(document.getElementById('edit-index').value);
-            const newStatus = document.getElementById('edit-status').value;
-            properties[index].status = newStatus;
-            localStorage.setItem('properties', JSON.stringify(properties));
-            displayProperties();
-            bootstrap.Modal.getInstance(document.getElementById('editStatusModal')).hide();
-        });
-
-        // Exclui imóvel
-        function deleteProperty() {
-            const index = parseInt(document.getElementById('delete-index').value);
-            if (isNaN(index) || index < 0 || index >= properties.length) {
-                alert('Índice inválido');
+            const propertiesList = document.getElementById('properties-list');
+            propertiesList.innerHTML = '';
+            if (properties.length === 0) {
+                propertiesList.innerHTML = '<p class="text-muted">Nenhum imóvel cadastrado.</p>';
                 return;
             }
-            if (confirm('Tem certeza que deseja excluir este imóvel?')) {
-                properties.splice(index, 1);
-                localStorage.setItem('properties', JSON.stringify(properties));
-                displayProperties();
-                displayCadastroLocations();
-                document.getElementById('delete-index').value = '';
-            }
+            properties.forEach((property, index) => {
+                const photosHtml = property.photos && property.photos.length > 0
+                    ? `
+                        <div id="carousel-admin-${index}" class="carousel slide">
+                            <div class="carousel-inner">
+                                ${property.photos.map((photo, i) => `
+                                    <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                                        <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-admin-${index}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-admin-${index}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    `
+                    : '<p class="text-muted">Sem fotos disponíveis</p>';
+
+                const approveButton = property.approvalStatus !== 'approved'
+                    ? `<button class="btn btn-success w-100 mt-2 approve-btn" data-index="${index}">Aprovar</button>`
+                    : '';
+
+                const card = `
+                    <div class="col-12">
+                        <div class="property-card">
+                            ${photosHtml}
+                            <h3 class="mt-3">${property.owner || 'Proprietário não informado'}</h3>
+                            <p><strong>Status:</strong> ${property.approvalStatus === 'approved' ? 'Aprovado' : 'Pendente'}</p>
+                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
+                            <p><strong>Valor:</strong> R$ ${property.value ? parseFloat(property.value).toFixed(2) : '0.00'}</p>
+                            <details>
+                                <summary>Mais Detalhes</summary>
+                                <p><strong>Descrição:</strong> ${property.description || 'Sem descrição'}</p>
+                                <p><strong>Quartos:</strong> ${property.bedrooms || 0}</p>
+                                <p><strong>Suítes:</strong> ${property.suites || 0}</p>
+                                <p><strong>Salas:</strong> ${property.livingrooms || 0}</p>
+                                <p><strong>Cozinhas:</strong> ${property.kitchens || 0}</p>
+                                <p><strong>Banheiros:</strong> ${property.bathrooms || 0}</p>
+                                <p><strong>Garagem:</strong> ${property.garage === 'sim' ? `Sim (${property.garageSpaces || 0} vagas)` : 'Não'}</p>
+                                <p><strong>Contato:</strong> ${property.email || 'N/A'} | ${property.phone || 'N/A'}</p>
+                                <p><strong>Endereço:</strong> ${property.address || 'Não informado'}</p>
+                                <p><strong>Área:</strong> ${property.area || 0} m²</p>
+                                <p><strong>Data:</strong> ${property.date || 'N/A'}</p>
+                                <p><strong>Localização:</strong> ${property.latitude && property.longitude ? `Lat: ${property.latitude}, Lon: ${property.longitude}` : 'Não disponível'}</p>
+                            </details>
+                            ${approveButton}
+                        </div>
+                    </div>
+                `;
+                propertiesList.innerHTML += card;
+            });
+
+            document.querySelectorAll('.approve-btn').forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    const index = e.target.dataset.index;
+                    properties[index].approvalStatus = 'approved';
+                    await saveData();
+                    displayProperties();
+                    showFeedback('Imóvel aprovado com sucesso!', 'success');
+                });
+            });
         }
 
-        // Limpa todos os dados do localStorage
-        function clearStorage() {
-            if (confirm('Tem certeza que deseja limpar todos os dados? Isso removerá todos os imóveis e acessos.')) {
-                localStorage.removeItem('properties');
-                localStorage.removeItem('accessLocations');
+        // Exibe localizações
+        function displayLocations() {
+            const locationList = document.getElementById('location-list');
+            locationList.innerHTML = '';
+            if (accessLocations.length === 0) {
+                locationList.innerHTML = '<li class="text-muted">Nenhuma localização registrada.</li>';
+                return;
+            }
+            accessLocations.forEach(loc => {
+                locationList.innerHTML += `<li>Lat: ${loc.latitude}, Lon: ${loc.longitude}, Data: ${loc.timestamp}</li>`;
+            });
+        }
+
+        // Autenticação
+        document.getElementById('auth-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('auth-section').style.display = 'none';
+                document.getElementById('admin-section').style.display = 'block';
+                displayProperties();
+                displayLocations();
+            } else {
+                showFeedback('Senha incorreta.', 'danger');
+            }
+        });
+
+        // Limpa dados
+        document.getElementById('clear-data').addEventListener('click', async () => {
+            if (confirm('Tem certeza que deseja limpar todos os dados?')) {
                 properties = [];
                 accessLocations = [];
+                await saveData();
                 displayProperties();
-                displayAccesses();
-                displayCadastroLocations();
-                alert('Dados limpos com sucesso.');
+                displayLocations();
+                showFeedback('Todos os dados foram limpos.', 'success');
             }
-        }
+        });
+
+        // Carrega dados ao iniciar
+        loadData();
     </script>
 </body>
 </html>
