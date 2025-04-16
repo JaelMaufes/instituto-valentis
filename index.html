@@ -126,6 +126,11 @@
             width: 100%;
         }
 
+        .carousel a {
+            display: block;
+            cursor: pointer;
+        }
+
         footer {
             background-color: var(--azul-neutro);
             color: var(--bege-claro);
@@ -214,13 +219,19 @@
         <div id="carousel-home" class="carousel slide">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="/images/Home.png" class="d-block w-100" alt="Apresentação">
+                    <a href="/pages/galeria.html">
+                        <img src="/images/Home.png" class="d-block w-100" alt="Apresentação">
+                    </a>
                 </div>
                 <div class="carousel-item">
-                    <img src="/images/Services.png" class="d-block w-100" alt="Ações">
+                    <a href="/pages/sobre.html">
+                        <img src="/images/Services.png" class="d-block w-100" alt="Ações">
+                    </a>
                 </div>
                 <div class="carousel-item">
-                    <img src="/images/Updates.png" class="d-block w-100" alt="Novidades">
+                    <a href="https://www.instagram.com/institutovalentis" target="_blank" rel="noopener noreferrer">
+                        <img src="/images/Updates.png" class="d-block w-100" alt="Novidades">
+                    </a>
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel-home" data-bs-slide="prev">
