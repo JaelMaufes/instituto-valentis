@@ -177,13 +177,17 @@
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 15px;
+            width: 100%;
+            max-width: 100%;
         }
 
         .carousel img {
-            height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
             width: 100%;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            aspect-ratio: 16/9;
         }
 
         .carousel a {
@@ -277,7 +281,9 @@
 
             .container { padding-top: 150px; }
             h2 { font-size: 1.5rem; }
-            .carousel img { height: 200px; }
+            .carousel img {
+                aspect-ratio: 4/3;
+            }
             .whatsapp-btn { width: 50px; height: 50px; }
             .whatsapp-btn i { font-size: 1.5rem; }
         }
@@ -308,6 +314,7 @@
     </header>
 
     <div class="container">
+        <p></p>
         <h2>Bem-vindo ao Instituto Valentis</h2>
         <p>Transformando vidas através da educação, inovação e assistência social.</p>
         <div id="carousel-home" class="carousel slide">
