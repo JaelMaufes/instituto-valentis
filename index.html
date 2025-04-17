@@ -76,21 +76,81 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 10px;
         }
 
-        .navbar a {
+        .navbar a, .navbar .dropdown-toggle {
             color: var(--azul-neutro);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 400;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 8px 15px;
+            background-color: var(--cinza-claro);
+            position: relative;
+        }
+
+        .navbar a:not(:last-child)::after,
+        .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 20px;
+            background-color: var(--azul-neutro);
+            opacity: 0.7;
         }
 
         .navbar a:hover,
-        .navbar a:focus {
+        .navbar a:focus,
+        .navbar .dropdown-toggle:hover,
+        .navbar .dropdown-toggle:focus {
             color: var(--azul-suave);
-            text-decoration: underline;
+            background-color: var(--bege-claro);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle::after {
+            display: none !important;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            background-color: var(--branco);
+            border: 1px solid var(--azul-neutro);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            color: var(--azul-neutro);
+            font-size: 0.95rem;
+            padding: 8px 20px;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background-color: var(--cinza-claro);
+            color: var(--azul-suave);
         }
 
         .container {
@@ -188,7 +248,33 @@
                 margin-top: 10px;
             }
 
-            .navbar a { font-size: 0.9rem; }
+            .navbar a, .navbar .dropdown-toggle {
+                font-size: 0.9rem;
+                padding: 6px 10px;
+                background-color: transparent;
+            }
+
+            .navbar a::after,
+            .navbar .dropdown-toggle::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                display: none !important;
+                position: static;
+                width: 100%;
+                border: none;
+                box-shadow: none;
+            }
+
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+
+            .dropdown {
+                position: static;
+            }
+
             .container { padding-top: 150px; }
             h2 { font-size: 1.5rem; }
             .carousel img { height: 200px; }
@@ -206,7 +292,15 @@
         <nav class="navbar">
             <a href="/index.html">Início</a>
             <a href="/pages/sobre.html">Sobre</a>
-            <a href="/pages/solucoes.html">Soluções</a>
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#">Soluções</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/pages/solucoes.html">Visão Geral</a></li>
+                    <li><a class="dropdown-item" href="/pages/projeto-educacao.html">Educação para Todos</a></li>
+                    <li><a class="dropdown-item" href="/pages/projeto-sustentabilidade.html">Sustentabilidade Comunitária</a></li>
+                    <li><a class="dropdown-item" href="/pages/projeto-imigrantes.html">Apoio a Imigrantes</a></li>
+                </ul>
+            </div>
             <a href="/pages/fundador.html">Fundador</a>
             <a href="/pages/galeria.html">Galeria</a>
             <a href="/pages/contato.html">Contato</a>
