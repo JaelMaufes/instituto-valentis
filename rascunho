@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Valentis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="/images/favicon.png">
+    <style>
+        :root {
+            --azul-neutro: #4B6587;
+            --azul-suave: #87CEEB;
+            --verde-suave: #28A745;
+            --amarelo-palido: #F7E8A4;
+            --bege-claro: #FDF6E3;
+            --branco: #FFFFFF;
+            --cinza-claro: #F8F9FA;
+            --texto-escuro: #333333;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--cinza-claro);
+            font-family: 'Roboto', Arial, sans-serif;
+            color: var(--texto-escuro);
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--branco);
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: padding 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .header .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header img {
+            max-width: 100px;
+            height: auto;
+            transition: max-width 0.3s ease;
+        }
+
+        .header.scrolled img { max-width: 80px; }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: var(--azul-neutro);
+            margin: 0;
+            font-weight: 500;
+            transition: font-size 0.3s ease;
+        }
+
+        .header.scrolled h1 { font-size: 1.2rem; }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar a, .navbar .dropdown-toggle {
+            color: var(--azul-neutro);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 8px 15px;
+            background-color: var(--cinza-claro);
+            position: relative;
+        }
+
+        .navbar a:not(:last-child)::after,
+        .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 20px;
+            background-color: var(--azul-neutro);
+            opacity: 0.7;
+        }
+
+        .navbar a:hover,
+        .navbar a:focus,
+        .navbar .dropdown-toggle:hover,
+        .navbar .dropdown-toggle:focus {
+            color: var(--azul-suave);
+            background-color: var(--bege-claro);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle::after {
+            display: none !important;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            background-color: var(--branco);
+            border: 1px solid var(--azul-neutro);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            color: var(--azul-neutro);
+            font-size: 0.95rem;
+            padding: 8px 20px;
+            text-decoration: none;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background-color: var(--cinza-claro);
+            color: var(--azul-suave);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            padding: 60px 20px;
+            border-bottom: 1px solid var(--cinza-claro);
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            color: var(--azul-neutro);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        section p {
+            font-size: 1rem;
+            color: var(--texto-escuro);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .carousel {
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            aspect-ratio: 16/9;
+        }
+
+        .carousel a {
+            display: block;
+            cursor: pointer;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--branco);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: var(--azul-neutro);
+            color: var(--bege-claro);
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--bege-claro);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover { color: var(--amarelo-palido); }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--azul-neutro);
+            color: var(--bege-claro);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--amarelo-palido);
+            color: var(--azul-neutro);
+        }
+
+        .whatsapp-btn i { font-size: 1.8rem; }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 10px 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header img { max-width: 80px; }
+            .header h1 { font-size: 1.2rem; }
+            .navbar {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .navbar a, .navbar .dropdown-toggle {
+                font-size: 0.9rem;
+                padding: 6px 10px;
+                background-color: transparent;
+            }
+
+            .navbar a::after,
+            .navbar .dropdown-toggle::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                display: none !important;
+                position: static;
+                width: 100%;
+                border: none;
+                box-shadow: none;
+            }
+
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+
+            .dropdown {
+                position: static;
+            }
+
+            .container { padding-top: 150px; }
+            section { padding: 40px 15px; }
+            section h2 { font-size: 1.5rem; }
+            .carousel img {
+                aspect-ratio: 4/3;
+            }
+            .whatsapp-btn { width: 50px; height: 50px; }
+            .whatsapp-btn i { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="/images/logomarca.png" alt="Logo Instituto Valentis">
+            <h1>Instituto Valentis</h1>
+        </div>
+        <nav class="navbar">
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre</a>
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#">Projetos</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/pages/solucoes.html">Visão Geral</a></li>
+                    <li><a class="dropdown-item" href="#educacao">Educação para Todos</a></li>
+                    <li><a class="dropdown-item" href="#sustentabilidade">Sustentabilidade Comunitária</a></li>
+                    <li><a class="dropdown-item" href="#imigrantes">Apoio a Imigrantes</a></li>
+                </ul>
+            </div>
+            <a href="#fundador">Fundador</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Início -->
+        <section id="inicio">
+            <h2>Bem-vindo ao Instituto Valentis</h2>
+            <p>Transformando vidas através da educação, inovação e assistência social.</p>
+            <div id="carousel-home" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <a href="#galeria">
+                            <img src="/images/Home.png" class="d-block w-100" alt="Apresentação">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="#sobre">
+                            <img src="/images/Services.png" class="d-block w-100" alt="Ações">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="https://www.instagram.com/institutovalentis" target="_blank" rel="noopener noreferrer">
+                            <img src="/images/Updates.png" class="d-block w-100" alt="Novidades">
+                        </a>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-home" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-home" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Sobre -->
+        <section id="sobre">
+            <h2>Sobre Nós</h2>
+            <p>O Instituto Valentis é uma organização dedicada a promover a inclusão social, educação e sustentabilidade. Nossa missão é transformar vidas por meio de projetos inovadores e parcerias estratégicas.</p>
+        </section>
+
+        <!-- Fundador -->
+        <section id="fundador">
+            <h2>Nosso Fundador</h2>
+            <p>João Silva, fundador do Instituto Valentis, é um visionário comprometido com a transformação social. Com mais de 20 anos de experiência em iniciativas comunitárias, ele lidera nossa missão com paixão e dedicação.</p>
+        </section>
+
+        <!-- Galeria -->
+        <section id="galeria">
+            <h2>Galeria</h2>
+            <div class="gallery-grid">
+                <img src="/images/galeria1.jpg" alt="Evento 1">
+                <img src="/images/galeria2.jpg" alt="Evento 2">
+                <img src="/images/galeria3.jpg" alt="Evento 3">
+                <img src="/images/galeria4.jpg" alt="Evento 4">
+            </div>
+        </section>
+
+        <!-- Projetos -->
+        <section id="projetos">
+            <h2>Nossos Projetos</h2>
+            <div id="educacao">
+                <h3>Educação para Todos</h3>
+                <p>Oferecemos acesso à educação de qualidade para comunidades carentes, com programas de alfabetização, cursos profissionalizantes e bolsas de estudo.</p>
+            </div>
+            <div id="sustentabilidade">
+                <h3>Sustentabilidade Comunitária</h3>
+                <p>Promovemos práticas sustentáveis, como agricultura urbana, reciclagem e educação ambiental, para fortalecer comunidades locais.</p>
+            </div>
+            <div id="imigrantes">
+                <h3>Apoio a Imigrantes</h3>
+                <p>Fornecemos suporte a imigrantes com assistência legal, cursos de idiomas e integração cultural para promover a inclusão social.</p>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato">
+            <h2>Entre em Contato</h2>
+            <div class="form-container">
+                <form action="/submit-contact" method="POST">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mensagem" class="form-label">Mensagem</label>
+                        <textarea class="form-control" id="mensagem" name="mensagem" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Admin (Opcional, se restrita) -->
+        <section id="admin">
+            <h2>Área Administrativa</h2>
+            <p>Área restrita para administradores. Entre em contato para acesso.</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
+    </footer>
+
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20Instituto%20Valentis" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>
