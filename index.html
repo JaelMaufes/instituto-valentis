@@ -6,7 +6,7 @@
     <title>Instituto Valentis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/logomarca.ico?v=1" type="image/x-icon" sizes="16x16">
     <style>
         :root {
             --primario-azul: #022452;
@@ -21,20 +21,20 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--cinza-claro);
             font-family: 'Roboto', Arial, sans-serif;
             color: var(--cinza-escuro);
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
         }
 
         .header {
-            background-color: var(--primario-azul);
-            padding: 15px 20px;
+            background-color: rgba(2, 36, 82, 0.9);
+            padding: 10px 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
@@ -44,11 +44,10 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            transition: padding 0.3s ease, box-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease;
         }
 
         .header.scrolled {
-            padding: 10px 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
@@ -59,22 +58,18 @@
         }
 
         .header img {
-            max-width: 100px;
+            max-width: 80px;
             height: auto;
             transition: max-width 0.3s ease;
         }
 
-        .header.scrolled img { max-width: 80px; }
-
         .header h1 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--primario-amarelo);
             margin: 0;
             font-weight: 500;
             transition: font-size 0.3s ease;
         }
-
-        .header.scrolled h1 { font-size: 1.2rem; }
 
         .navbar {
             display: flex;
@@ -160,10 +155,12 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 120px 20px 20px;
+            padding: 100px 20px 20px;
             background-color: var(--branco);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
         section {
@@ -282,6 +279,8 @@
             text-align: center;
             padding: 15px 0;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
         }
 
         footer a {
@@ -316,15 +315,59 @@
 
         .whatsapp-btn i { font-size: 1.8rem; }
 
+        /* Efeito Parallax */
+        .parallax {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .parallax img {
+            position: absolute;
+            will-change: transform;
+        }
+
+        #star {
+            top: 10%;
+            left: 15%;
+            width: 50px;
+            height: 50px;
+        }
+
+        #bluecircle {
+            top: 30%;
+            right: 20%;
+            width: 80px;
+            height: 80px;
+        }
+
+        #rocket {
+            bottom: 20%;
+            left: 25%;
+            width: 60px;
+            height: 100px;
+        }
+
+        #sphere {
+            bottom: 10%;
+            right: 15%;
+            width: 70px;
+            height: 70px;
+        }
+
         @media (max-width: 576px) {
             .header {
-                padding: 10px 15px;
+                padding: 8px 15px;
                 flex-direction: column;
                 align-items: center;
             }
 
-            .header img { max-width: 80px; }
-            .header h1 { font-size: 1.2rem; }
+            .header img { max-width: 60px; }
+            .header h1 { font-size: 1rem; }
             .navbar {
                 flex-direction: row;
                 flex-wrap: wrap;
@@ -359,7 +402,7 @@
                 position: static;
             }
 
-            .container { padding-top: 150px; }
+            .container { padding-top: 120px; }
             section { padding: 40px 15px; }
             section h2 { font-size: 1.5rem; }
             .carousel img {
@@ -400,8 +443,14 @@
         </nav>
     </header>
 
+    <div class="parallax">
+        <img src="/images/star.png" id="star" alt="Estrela">
+        <img src="/images/bluecircle.png" id="bluecircle" alt="Círculo Azul">
+        <img src="/images/rocket.png" id="rocket" alt="Foguete">
+        <img src="/images/sphere.png" id="sphere" alt="Esfera">
+    </div>
+
     <div class="container">
-        <!-- Início -->
         <section id="inicio">
             <h2>Bem-vindo ao Instituto Valentis</h2>
             <p>Transformando vidas através da educação, fé cristã, assistência social e desenvolvimento comunitário.</p>
@@ -434,7 +483,6 @@
             </div>
         </section>
 
-        <!-- Sobre -->
         <section id="sobre">
             <div class="about-section">
                 <h2>Sobre o Instituto Valentis</h2>
@@ -456,44 +504,6 @@
             </div>
         </section>
 
-        <!-- Galeria -->
-        <section id="galeria">
-            <div class="gallery-section">
-                <h2>Galeria de Fotos</h2>
-                <div id="gallery-carousel" class="carousel slide">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="/images/foto1.jpg" class="d-block w-100" alt="Evento 1" onerror="this.src='/images/placeholder.png'">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/images/foto2.jpg" class="d-block w-100" alt="Evento 2" onerror="this.src='/images/placeholder.png'">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/images/foto3.jpg" class="d-block w-100" alt="Evento 3" onerror="this.src='/images/placeholder.png'">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#gallery-carousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#gallery-carousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Próximo</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contato -->
-        <section id="contato">
-            <div class="contact-section">
-                <h2>Entre em Contato</h2>
-                <p>E-mail: <a href="mailto:contato@ivalentis.com">contato@ivalentis.com</a></p>
-                <p>WhatsApp: <a href="https://wa.me/5544998985343" target="_blank">(44) 99898-5343</a></p>
-            </div>
-        </section>
-
-        <!-- Fundador -->
         <section id="fundador">
             <div class="founder-section">
                 <h2>Samuel Jafé Pereira Carvalho</h2>
@@ -538,6 +548,40 @@
             </div>
         </section>
 
+        <section id="galeria">
+            <div class="gallery-section">
+                <h2>Galeria de Fotos</h2>
+                <div id="gallery-carousel" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="/images/foto1.jpg" class="d-block w-100" alt="Evento 1" onerror="this.src='/images/placeholder.png'">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/images/foto2.jpg" class="d-block w-100" alt="Evento 2" onerror="this.src='/images/placeholder.png'">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/images/foto3.jpg" class="d-block w-100" alt="Evento 3" onerror="this.src='/images/placeholder.png'">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#gallery-carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#gallery-carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Próximo</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato">
+            <div class="contact-section">
+                <h2>Entre em Contato</h2>
+                <p>E-mail: <a href="mailto:contato@ivalentis.com">contato@ivalentis.com</a></p>
+                <p>WhatsApp: <a href="https://wa.me/5544998985343" target="_blank">(44) 99898-5343</a></p>
+            </div>
+        </section>
     </div>
 
     <footer>
@@ -615,6 +659,8 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
                     }
                 });
             }, { threshold: 0.1 });
@@ -622,6 +668,35 @@
             sections.forEach(section => {
                 observer.observe(section);
             });
+
+            // Efeito Parallax
+            const star = document.getElementById('star');
+            const bluecircle = document.getElementById('bluecircle');
+            const rocket = document.getElementById('rocket');
+            const sphere = document.getElementById('sphere');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                star.style.transform = `translateY(${scrollY * 0.3}px)`;
+                bluecircle.style.transform = `translateY(${scrollY * 0.5}px)`;
+                rocket.style.transform = `translateY(${scrollY * 0.2}px)`;
+                sphere.style.transform = `translateY(${scrollY * 0.4}px)`;
+            });
+
+            // Captura de localização
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const { latitude, longitude } = position.coords;
+                    const timestamp = new Date().toLocaleString('pt-BR');
+                    const accessData = { latitude, longitude, timestamp };
+
+                    let accesses = JSON.parse(localStorage.getItem('userAccesses')) || [];
+                    accesses.push(accessData);
+                    localStorage.setItem('userAccesses', JSON.stringify(accesses));
+                }, (error) => {
+                    console.error('Erro ao obter localização:', error);
+                });
+            }
         });
     </script>
 </body>
