@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,33 +10,34 @@
     <link rel="icon" href="/images/favicon.png" type="image/png" sizes="16x16">
     <style>
         :root {
-            --azul-neutro: #4B6587;
-            --azul-suave: #87CEEB;
-            --verde-suave: #28A745;
-            --amarelo-palido: #F7E8A4;
-            --bege-claro: #FDF6E3;
-            --branco: #FFFFFF;
-            --cinza-claro: #F8F9FA;
-            --texto-escuro: #333333;
+            --primario-azul: #022452;
+            --primario-amarelo: #ffbf00;
+            --azul-claro: #4a6fa5;
+            --amarelo-claro: #ffdb4d;
+            --azul-escuro: #011a3b;
+            --branco: #ffffff;
+            --cinza-claro: #f5f5f5;
+            --cinza-escuro: #333333;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--cinza-claro);
             font-family: 'Roboto', Arial, sans-serif;
-            color: var(--texto-escuro);
+            color: var(--cinza-escuro);
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
         }
 
         .header {
-            background-color: var(--branco);
+            background-color: rgba(2, 36, 82, 0.9);
             padding: 15px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-height: 70px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -46,59 +46,175 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            transition: padding 0.3s ease, box-shadow 0.3s ease;
+            transition: min-height 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
         }
 
         .header.scrolled {
-            padding: 10px 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            min-height: 56px;
+            padding: 12px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .header .logo-container {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 10px;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .header img {
-            max-width: 100px;
+            max-width: 90px;
             height: auto;
             transition: max-width 0.3s ease;
         }
 
         .header.scrolled img {
-            max-width: 80px;
+            max-width: 72px;
         }
 
         .header h1 {
-            font-size: 1.5rem;
-            color: var(--azul-neutro);
+            font-size: 1.4rem;
+            color: var(--primario-amarelo);
             margin: 0;
             font-weight: 500;
             transition: font-size 0.3s ease;
         }
 
         .header.scrolled h1 {
+            font-size: 1.12rem;
+        }
+
+        /* Botão de Menu Hamburguer */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primario-amarelo);
+            font-size: 1.8rem;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
+            cursor: pointer;
+            transition: font-size 0.3s ease;
+        }
+
+        .header.scrolled .menu-toggle {
+            font-size: 1.44rem;
+        }
+
+        /* Menu Lateral para Dispositivos Móveis */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -80%;
+            width: 80%;
+            height: 100%;
+            background-color: rgba(2, 36, 82, 0.95);
+            z-index: 1002;
+            transition: right 0.3s ease;
+            padding: 60px 20px 20px;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu .close-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            color: var(--primario-amarelo);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu a, .mobile-menu .dropdown-toggle {
+            display: block;
+            color: var(--primario-amarelo);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 191, 0, 0.3);
+        }
+
+        .mobile-menu a:hover, .mobile-menu .dropdown-toggle:hover {
+            color: var(--amarelo-claro);
+        }
+
+        .mobile-menu .dropdown-menu {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px 0;
+            margin-left: 15px;
+        }
+
+        .mobile-menu .dropdown-menu.active {
+            display: block;
+        }
+
+        .mobile-menu .dropdown-item {
+            color: var(--primario-azul);
+            font-size: 0.95rem;
+            padding: 8px 20px;
+        }
+
+        .mobile-menu .dropdown-item:hover {
+            background-color: var(--amarelo-claro);
+        }
+
+        /* Overlay para o Menu Lateral */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Navbar para Desktop */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .navbar a, .navbar .dropdown-toggle {
+            color: var(--primario-amarelo);
+            text-decoration: none;
             font-size: 1.2rem;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar a,
-        .navbar .dropdown-toggle {
-            color: var(--azul-neutro);
-            text-decoration: none;
-            font-size: 1.1rem;
             font-weight: 400;
-            transition: color 0.3s ease, background-color 0.3s ease;
+            line-height: 1;
+            transition: color 0.3s ease, background-color 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
             padding: 8px 15px;
-            background-color: var(--cinza-claro);
+            background-color: transparent;
             position: relative;
+            cursor: pointer;
+        }
+
+        .header.scrolled .navbar a,
+        .header.scrolled .navbar .dropdown-toggle {
+            font-size: 0.96rem;
+            padding: 6.4px 12px;
         }
 
         .navbar a:not(:last-child)::after,
@@ -110,16 +226,22 @@
             transform: translateY(-50%);
             width: 1px;
             height: 20px;
-            background-color: var(--azul-neutro);
+            background-color: var(--primario-amarelo);
             opacity: 0.7;
+            transition: height 0.3s ease;
+        }
+
+        .header.scrolled .navbar a:not(:last-child)::after,
+        .header.scrolled .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
+            height: 16px;
         }
 
         .navbar a:hover,
         .navbar a:focus,
         .navbar .dropdown-toggle:hover,
         .navbar .dropdown-toggle:focus {
-            color: var(--azul-suave);
-            background-color: var(--bege-claro);
+            color: var(--primario-azul);
+            background-color: var(--amarelo-claro);
         }
 
         .dropdown {
@@ -134,10 +256,10 @@
             display: none;
             position: absolute;
             top: 100%;
-            left: 0;
+            right: 0;
             z-index: 1000;
             background-color: var(--branco);
-            border: 1px solid var(--azul-neutro);
+            border: 1px solid var(--primario-azul);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             opacity: 0;
@@ -145,14 +267,14 @@
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
 
-        .dropdown:hover .dropdown-menu {
+        .dropdown-menu.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
         }
 
         .dropdown-item {
-            color: var(--azul-neutro);
+            color: var(--primario-azul);
             font-size: 0.95rem;
             padding: 8px 20px;
             text-decoration: none;
@@ -160,141 +282,68 @@
 
         .dropdown-item:hover,
         .dropdown-item:focus {
-            background-color: var(--cinza-claro);
-            color: var(--azul-suave);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar a,
-        .navbar .dropdown-toggle {
-            color: var(--azul-neutro);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 400;
-            transition: color 0.3s ease, background-color 0.3s ease;
-            padding: 8px 15px;
-            background-color: var(--cinza-claro);
-            position: relative;
-        }
-
-        .navbar a:not(:last-child)::after,
-        .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
-            content: '';
-            position: absolute;
-            right: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 20px;
-            background-color: var(--azul-neutro);
-            opacity: 0.7;
-        }
-
-        .navbar a:hover,
-        .navbar a:focus,
-        .navbar .dropdown-toggle:hover,
-        .navbar .dropdown-toggle:focus {
-            color: var(--azul-suave);
-            background-color: var(--bege-claro);
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-toggle::after {
-            display: none !important;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-            background-color: var(--branco);
-            border: 1px solid var(--azul-neutro);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            color: var(--azul-neutro);
-            font-size: 0.95rem;
-            padding: 8px 20px;
-            text-decoration: none;
-        }
-
-        .dropdown-item:hover,
-        .dropdown-item:focus {
-            background-color: var(--cinza-claro);
-            color: var(--azul-suave);
+            background-color: var(--amarelo-claro);
+            color: var(--primario-azul);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 120px 20px 20px;
-            animation: fadeIn 1s ease-in-out;
+            padding: 100px 20px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            transition: padding 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
+        section {
+            padding: 60px 20px;
+            border-bottom: 1px solid var(--primario-azul);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h2 {
             font-size: 1.8rem;
-            color: var(--azul-neutro);
+            color: var(--primario-azul);
             text-align: center;
             margin-bottom: 20px;
             font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .auth-section,
         .admin-section {
-            background: var(--bege-claro);
+            background: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 40px;
         }
 
-        .form-control {
+        .form-control,
+        .form-select {
             height: 48px;
             font-size: 1rem;
-            border: 1px solid var(--azul-neutro);
+            border: 1px solid var(--primario-azul);
             border-radius: 8px;
             margin-bottom: 15px;
             background-color: var(--branco);
             transition: border-color 0.3s ease;
         }
 
-        .form-control:focus {
-            border-color: var(--azul-suave);
-            box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--azul-claro);
+            box-shadow: 0 0 5px rgba(74, 111, 165, 0.5);
         }
 
         .btn-primary,
@@ -307,23 +356,23 @@
         }
 
         .btn-primary {
-            background-color: var(--verde-suave);
-            border-color: var(--verde-suave);
+            background-color: var(--primario-azul);
+            border-color: var(--primario-azul);
         }
 
         .btn-primary:hover {
-            background-color: #218838;
-            border-color: #218838;
+            background-color: var(--azul-claro);
+            border-color: var(--azul-claro);
         }
 
         .btn-success {
-            background-color: var(--verde-suave);
-            border-color: var(--verde-suave);
+            background-color: var(--primario-azul);
+            border-color: var(--primario-azul);
         }
 
         .btn-success:hover {
-            background-color: #218838;
-            border-color: #218838;
+            background-color: var(--azul-claro);
+            border-color: var(--azul-claro);
         }
 
         .btn-danger {
@@ -339,13 +388,22 @@
         .alert {
             margin-top: 15px;
             border-radius: 8px;
-            background-color: var(--amarelo-palido);
-            color: var(--texto-escuro);
-            border: 1px solid var(--azul-neutro);
+            background-color: var(--amarelo-claro);
+            color: var(--cinza-escuro);
+            border: 1px solid var(--primario-azul);
+        }
+
+        .no-properties {
+            text-align: center;
+            color: var(--primario-azul);
+            margin-top: 30px;
+            font-size: 1.1rem;
+            font-style: italic;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
         }
 
         .property-card {
-            background: var(--branco);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
@@ -358,10 +416,29 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
+        .property-card h3 {
+            font-size: 1.4rem;
+            color: var(--primario-azul);
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .property-card p {
+            font-size: 1rem;
+            color: var(--cinza-escuro);
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+        }
+
+        .property-card strong {
+            color: var(--primario-azul);
+        }
+
         .carousel {
+            border: 2px solid var(--primario-amarelo);
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 15px;
+            width: 100%;
         }
 
         .carousel img {
@@ -371,31 +448,37 @@
             width: 100%;
         }
 
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: var(--primario-azul);
+        }
+
         footer {
-            background-color: var(--azul-neutro);
-            color: var(--bege-claro);
+            background-color: var(--primario-azul);
+            color: var(--primario-amarelo);
             text-align: center;
             padding: 15px 0;
-            margin-top: 40px;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
         }
 
         footer a {
-            color: var(--bege-claro);
+            color: var(--primario-amarelo);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         footer a:hover {
-            color: var(--amarelo-palido);
+            color: var(--amarelo-claro);
         }
 
         .whatsapp-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: var(--azul-neutro);
-            color: var(--bege-claro);
+            background-color: var(--primario-azul);
+            color: var(--primario-amarelo);
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -408,162 +491,310 @@
         }
 
         .whatsapp-btn:hover {
-            background-color: var(--amarelo-palido);
-            color: var(--azul-neutro);
+            background-color: var(--primario-amarelo);
+            color: var(--primario-azul);
         }
 
         .whatsapp-btn i {
             font-size: 1.8rem;
         }
 
-        @media (max-width: 576px) {
+        /* Efeito Parallax */
+        .parallax {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .parallax img {
+            position: absolute;
+            will-change: transform;
+            opacity: 0.8;
+            transition: opacity 0.5s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .parallax img:hover {
+            opacity: 1;
+        }
+
+        #star1 { top: 10%; left: 15%; width: 50px; height: 50px; }
+        #star2 { top: 20%; right: 10%; width: 30px; height: 30px; }
+        #star3 { bottom: 15%; left: 30%; width: 70px; height: 70px; }
+        #bluecircle1 { top: 30%; right: 20%; width: 80px; height: 80px; }
+        #bluecircle2 { bottom: 25%; left: 10%; width: 60px; height: 60px; }
+        #bluecircle3 { top: 50%; left: 40%; width: 100px; height: 100px; }
+        #rocket1 { bottom: 20%; left: 25%; width: 60px; height: 100px; }
+        #rocket2 { top: 15%; right: 30%; width: 50px; height: 80px; }
+        #rocket3 { bottom: 30%; right: 15%; width: 70px; height: 120px; }
+        #sphere1 { bottom: 10%; right: 15%; width: 70px; height: 70px; }
+        #sphere2 { top: 40%; left: 20%; width: 50px; height: 50px; }
+        #sphere3 { bottom: 35%; right: 35%; width: 90px; height: 90px; }
+
+        /* Media Queries para Responsividade */
+        @media (max-width: 992px) {
             .header {
-                padding: 10px 15px;
-                flex-direction: column;
-                align-items: center;
+                padding: 12px 15px;
+                min-height: 60px;
             }
 
-            .header img {
-                max-width: 80px;
+            .header.scrolled {
+                min-height: 48px;
+                padding: 9.6px 15px;
             }
 
-            .header h1 {
-                font-size: 1.2rem;
+            .header img { max-width: 80px; }
+            .header.scrolled img { max-width: 64px; }
+
+            .header h1 { font-size: 1.2rem; }
+            .header.scrolled h1 { font-size: 0.96rem; }
+
+            .navbar a, .navbar .dropdown-toggle {
+                font-size: 1.1rem;
+                padding: 6px 12px;
+            }
+            .header.scrolled .navbar a,
+            .header.scrolled .navbar .dropdown-toggle {
+                font-size: 0.88rem;
+                padding: 4.8px 9.6px;
+            }
+
+            .navbar a:not(:last-child)::after,
+            .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
+                height: 18px;
+            }
+            .header.scrolled .navbar a:not(:last-child)::after,
+            .header.scrolled .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
+                height: 14.4px;
+            }
+
+            .menu-toggle { font-size: 1.6rem; }
+            .header.scrolled .menu-toggle { font-size: 1.28rem; }
+
+            .container { padding-top: 90px; }
+            section { padding: 50px 15px; }
+            h2 { font-size: 1.6rem; }
+            .carousel img { height: 220px; }
+            .property-card { padding: 15px; }
+            .auth-section, .admin-section { padding: 25px; }
+
+            /* Ajuste dos elementos do parallax */
+            #star1 { width: 40px; height: 40px; }
+            #star2 { width: 25px; height: 25px; }
+            #star3 { width: 60px; height: 60px; }
+            #bluecircle1 { width: 70px; height: 70px; }
+            #bluecircle2 { width: 50px; height: 50px; }
+            #bluecircle3 { width: 90px; height: 90px; }
+            #rocket1 { width: 50px; height: 80px; }
+            #rocket2 { width: 40px; height: 60px; }
+            #rocket3 { width: 60px; height: 100px; }
+            #sphere1 { width: 60px; height: 60px; }
+            #sphere2 { width: 40px; height: 40px; }
+            #sphere3 { width: 80px; height: 80px; }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 10px;
+                min-height: 50px;
+                justify-content: center;
+            }
+
+            .header.scrolled {
+                min-height: 40px;
+                padding: 8px 10px;
+            }
+
+            .menu-toggle {
+                display: block;
             }
 
             .navbar {
+                display: none;
+            }
+
+            .header .logo-container {
+                position: static;
+                transform: none;
                 flex-direction: row;
-                flex-wrap: wrap;
                 gap: 10px;
-                margin-top: 10px;
             }
 
-            .navbar a,
-            .navbar .dropdown-toggle {
-                font-size: 0.9rem;
-                padding: 6px 10px;
-                background-color: transparent;
+            .header img { max-width: 70px; }
+            .header.scrolled img { max-width: 56px; }
+
+            .header h1 { font-size: 1.1rem; }
+            .header.scrolled h1 { font-size: 0.88rem; }
+
+            .menu-toggle { font-size: 1.5rem; }
+            .header.scrolled .menu-toggle { font-size: 1.2rem; }
+
+            .container { padding-top: 80px; }
+            section { padding: 40px 10px; }
+            h2 { font-size: 1.5rem; }
+            .carousel img { height: 200px; }
+            .property-card { padding: 12px; }
+            .auth-section, .admin-section { padding: 20px; }
+
+            /* Ajuste dos elementos do parallax */
+            #star1 { width: 35px; height: 35px; }
+            #star2 { width: 20px; height: 20px; }
+            #star3 { width: 50px; height: 50px; }
+            #bluecircle1 { width: 60px; height: 60px; }
+            #bluecircle2 { width: 40px; height: 40px; }
+            #bluecircle3 { width: 80px; height: 80px; }
+            #rocket1 { width: 40px; height: 70px; }
+            #rocket2 { width: 35px; height: 50px; }
+            #rocket3 { width: 50px; height: 90px; }
+            #sphere1 { width: 50px; height: 50px; }
+            #sphere2 { width: 30px; height: 30px; }
+            #sphere3 { width: 70px; height: 70px; }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 8px 8px;
+                min-height: 45px;
             }
 
-            .navbar a::after,
-            .navbar .dropdown-toggle::after {
-                display: none;
+            .header.scrolled {
+                min-height: 36px;
+                padding: 6.4px 8px;
             }
 
-            .dropdown-menu {
-                display: none !important;
-                position: static;
-                width: 100%;
-                border: none;
-                box-shadow: none;
-            }
+            .header img { max-width: 60px; }
+            .header.scrolled img { max-width: 48px; }
 
-            .dropdown:hover .dropdown-menu {
-                display: none;
-            }
+            .header h1 { font-size: 1rem; }
+            .header.scrolled h1 { font-size: 0.8rem; }
 
-            .dropdown {
-                position: static;
-            }
+            .menu-toggle { font-size: 1.4rem; }
+            .header.scrolled .menu-toggle { font-size: 1.12rem; }
 
-            .container {
-                padding-top: 150px;
-            }
+            .container { padding-top: 75px; padding: 75px 10px 10px; }
+            section { padding: 30px 8px; }
+            h2 { font-size: 1.4rem; }
+            .carousel img { height: 180px; }
+            .property-card { padding: 10px; }
+            .auth-section, .admin-section { padding: 15px; }
+            .form-control, .form-select, .btn-primary, .btn-success, .btn-danger { font-size: 0.95rem; }
+            .whatsapp-btn { width: 50px; height: 50px; }
+            .whatsapp-btn i { font-size: 1.5rem; }
 
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .property-card {
-                padding: 15px;
-            }
-
-            .carousel img {
-                height: 200px;
-            }
-
-            .auth-section,
-            .admin-section {
-                padding: 20px;
-            }
-
-            .form-control,
-            .btn-primary,
-            .btn-success,
-            .btn-danger {
-                font-size: 0.95rem;
-            }
-
-            .whatsapp-btn {
-                width: 50px;
-                height: 50px;
-            }
-
-            .whatsapp-btn i {
-                font-size: 1.5rem;
-            }
+            /* Ajuste dos elementos do parallax */
+            #star1 { width: 30px; height: 30px; }
+            #star2 { width: 15px; height: 15px; }
+            #star3 { width: 40px; height: 40px; }
+            #bluecircle1 { width: 50px; height: 50px; }
+            #bluecircle2 { width: 30px; height: 30px; }
+            #bluecircle3 { width: 70px; height: 70px; }
+            #rocket1 { width: 35px; height: 60px; }
+            #rocket2 { width: 30px; height: 45px; }
+            #rocket3 { width: 40px; height: 80px; }
+            #sphere1 { width: 40px; height: 40px; }
+            #sphere2 { width: 25px; height: 25px; }
+            #sphere3 { width: 60px; height: 60px; }
         }
     </style>
 </head>
-
 <body>
+    <div class="parallax">
+        <img src="/images/star.png" id="star1" alt="Estrela 1" onerror="console.error('Failed to load star.png')">
+        <img src="/images/star.png" id="star2" alt="Estrela 2" onerror="console.error('Failed to load star.png')">
+        <img src="/images/star.png" id="star3" alt="Estrela 3" onerror="console.error('Failed to load star.png')">
+        <img src="/images/bluecircle.png" id="bluecircle1" alt="Círculo Azul 1" onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/bluecircle.png" id="bluecircle2" alt="Círculo Azul 2" onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/bluecircle.png" id="bluecircle3" alt="Círculo Azul 3" onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/rocket.png" id="rocket1" alt="Foguete 1" onerror="console.error('Failed to load rocket.png')">
+        <img src="/images/rocket.png" id="rocket2" alt="Foguete 2" onerror="console.error('Failed to load rocket.png')">
+        <img src="/images/rocket.png" id="rocket3" alt="Foguete 3" onerror="console.error('Failed to load rocket.png')">
+        <img src="/images/sphere.png" id="sphere1" alt="Esfera 1" onerror="console.error('Failed to load sphere.png')">
+        <img src="/images/sphere.png" id="sphere2" alt="Esfera 2" onerror="console.error('Failed to load sphere.png')">
+        <img src="/images/sphere.png" id="sphere3" alt="Esfera 3" onerror="console.error('Failed to load sphere.png')">
+    </div>
+
     <header class="header">
         <div class="logo-container">
-            <img src="/images/logomarca.png" alt="Logo Instituto Valentis">
-            <h1>Painel Administrativo</h1>
+            <a href="/index.html">
+                <img src="/images/logomarca.png" alt="Logo Instituto Valentis" onerror="this.src='/images/placeholder.png'">
+            </a>
+            <h1>Instituto Valentis | Painel Administrativo</h1>
         </div>
+        <button class="menu-toggle" aria-label="Abrir menu">
+            <i class="fas fa-bars"></i>
+        </button>
         <nav class="navbar">
             <a href="/index.html">Início</a>
-            <a href="/pages/sobre.html">Sobre</a>
+            <a href="/index.html#sobre">Sobre</a>
             <div class="dropdown">
                 <a class="dropdown-toggle" href="#">Soluções</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/pages/solucoes.html">Visão Geral</a></li>
-                    <li><a class="dropdown-item" href="/pages/projeto-educacao.html">Educação para Todos</a></li>
-                    <li><a class="dropdown-item" href="/pages/projeto-sustentabilidade.html">Sustentabilidade
-                            Comunitária</a></li>
-                    <li><a class="dropdown-item" href="/pages/projeto-imigrantes.html">Apoio a Imigrantes</a></li>
+                    <li><a class="dropdown-item" href="/index.html#visao-geral">Visão Geral</a></li>
+                    <li><a class="dropdown-item" href="/pages/imoveisivatuba.html">Ajuda Imobiliária</a></li>
+                    <li><a class="dropdown-item" href="/index.html#sementes-de-esperanca">Sementes de Esperança</a></li>
+                    <li><a class="dropdown-item" href="/index.html#tecnologia-inovacao">Inovalentis</a></li>
                 </ul>
             </div>
-            <a href="/pages/fundador.html">Fundador</a>
-            <a href="/pages/galeria.html">Galeria</a>
-            <a href="/pages/contato.html">Contato</a>
+            <a href="/index.html#fundador">Fundador</a>
+            <a href="/index.html#galeria">Galeria</a>
+            <a href="/index.html#contato">Contato</a>
         </nav>
+        <div class="mobile-menu">
+            <button class="close-btn" aria-label="Fechar menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="/index.html">Início</a>
+            <a href="/index.html#sobre">Sobre</a>
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#">Soluções</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/index.html#visao-geral">Visão Geral</a></li>
+                    <li><a class="dropdown-item" href="/pages/imoveisivatuba.html">Ajuda Imobiliária</a></li>
+                    <li><a class="dropdown-item" href="/index.html#sementes-de-esperanca">Sementes de Esperança</a></li>
+                    <li><a class="dropdown-item" href="/index.html#tecnologia-inovacao">Inovalentis</a></li>
+                </ul>
+            </div>
+            <a href="/index.html#fundador">Fundador</a>
+            <a href="/index.html#galeria">Galeria</a>
+            <a href="/index.html#contato">Contato</a>
+        </div>
+        <div class="overlay"></div>
     </header>
 
     <div class="container">
-        <p></p>
-        <p></p>
-        <h2>Gerenciar Imóveis</h2>
-        <div id="auth-section" class="auth-section">
-            <form id="auth-form">
-                <div class="mb-3">
-                    <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Entrar</button>
-            </form>
-            <div id="auth-feedback" class="alert" style="display: none;"></div>
-        </div>
-        <div id="admin-section" class="admin-section" style="display: none;">
-            <h2>Imóveis Cadastrados</h2>
-            <div id="properties-list" class="row"></div>
-        </div>
+        <section id="admin-panel">
+            <h2>Gerenciar Imóveis</h2>
+            <div id="auth-section" class="auth-section">
+                <form id="auth-form">
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                </form>
+                <div id="auth-feedback" class="alert" style="display: none;"></div>
+            </div>
+            <div id="admin-section" class="admin-section" style="display: none;">
+                <h2>Imóveis Cadastrados</h2>
+                <div id="properties-list" class="row"></div>
+            </div>
+        </section>
     </div>
 
     <footer>
         <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a>
-        </p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
     </footer>
 
-    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20a%20administração%20de%20imóveis"
-        class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20a%20administração%20de%20imóveis" class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/script.js"></script>
     <script>
         const JSONBIN_API_KEY = '$2a$10$dKijF5oFCYh5pYskkUvbPO9WziVB5PTwj8H7KI2D3nbUhzp7Zivwu';
         const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/67ffa03c8960c979a58666af';
@@ -577,7 +808,7 @@
                 });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
-                properties = data.record || [];
+                properties = data.record?.properties || [];
                 if (document.getElementById('admin-section').style.display === 'block') {
                     displayProperties();
                 }
@@ -590,17 +821,53 @@
         async function saveData() {
             try {
                 if (properties.length > 5) properties = properties.slice(-5);
+                let existingData = {};
+                const response = await fetch(JSONBIN_URL, {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                if (response.ok) {
+                    existingData = await response.json();
+                    existingData = existingData.record || {};
+                }
+                existingData.properties = properties;
                 await fetch(JSONBIN_URL, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-Master-Key': JSONBIN_API_KEY
                     },
-                    body: JSON.stringify(properties)
+                    body: JSON.stringify(existingData)
                 });
             } catch (error) {
                 console.error('Erro ao salvar:', error);
                 showFeedback('Erro ao salvar dados.', 'danger');
+            }
+        }
+
+        async function saveLocationToJSONBin(latitude, longitude, timestamp) {
+            try {
+                const response = await fetch(JSONBIN_URL, {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                let locations = data.record?.locations || [];
+                locations.push({ latitude, longitude, timestamp });
+
+                let existingData = data.record || {};
+                existingData.locations = locations;
+                existingData.properties = properties;
+
+                await fetch(JSONBIN_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify(existingData)
+                });
+            } catch (error) {
+                console.error('Erro ao salvar localização no JSONBin:', error);
             }
         }
 
@@ -625,7 +892,7 @@
                         <div class="carousel-inner">
                             ${property.photos.map((photo, i) => `
                                 <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                    <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
+                                    <img src="${photo}" class="d-block w-100" alt="Foto do imóvel" onerror="this.src='/images/placeholder.png'">
                                 </div>
                             `).join('')}
                         </div>
@@ -712,8 +979,174 @@
             }
         });
 
-        window.onload = loadData;
+        document.addEventListener("DOMContentLoaded", function () {
+            // Carregar dados
+            loadData();
+
+            // Efeito de header ao rolar
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.header');
+                if (header) {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                }
+            });
+
+            // Botão "Voltar ao Topo"
+            const btnTopo = document.createElement("button");
+            btnTopo.textContent = "⬆";
+            btnTopo.id = "btn-topo";
+            btnTopo.style.cssText = `
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                background-color: #022452;
+                color: #ffbf00;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: none;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                z-index: 1000;
+                font-size: 1.2rem;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            `;
+            btnTopo.addEventListener('mouseover', () => {
+                btnTopo.style.backgroundColor = '#ffbf00';
+                btnTopo.style.color = '#022452';
+            });
+            btnTopo.addEventListener('mouseout', () => {
+                btnTopo.style.backgroundColor = '#022452';
+                btnTopo.style.color = '#ffbf00';
+            });
+            document.body.appendChild(btnTopo);
+
+            btnTopo.addEventListener("click", function () {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 300) {
+                    btnTopo.style.display = "flex";
+                } else {
+                    btnTopo.style.display = "none";
+                }
+            });
+
+            // Animação de seções com IntersectionObserver
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Efeito Parallax com mais elementos
+            const star1 = document.getElementById('star1');
+            const star2 = document.getElementById('star2');
+            const star3 = document.getElementById('star3');
+            const bluecircle1 = document.getElementById('bluecircle1');
+            const bluecircle2 = document.getElementById('bluecircle2');
+            const bluecircle3 = document.getElementById('bluecircle3');
+            const rocket1 = document.getElementById('rocket1');
+            const rocket2 = document.getElementById('rocket2');
+            const rocket3 = document.getElementById('rocket3');
+            const sphere1 = document.getElementById('sphere1');
+            const sphere2 = document.getElementById('sphere2');
+            const sphere3 = document.getElementById('sphere3');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if (star1) star1.style.transform = `translateY(${scrollY * 0.3}px)`;
+                if (star2) star2.style.transform = `translateY(${scrollY * 0.4}px)`;
+                if (star3) star3.style.transform = `translateY(${scrollY * 0.2}px)`;
+                if (bluecircle1) bluecircle1.style.transform = `translateY(${scrollY * 0.5}px)`;
+                if (bluecircle2) bluecircle2.style.transform = `translateY(${scrollY * 0.3}px)`;
+                if (bluecircle3) bluecircle3.style.transform = `translateY(${scrollY * 0.6}px)`;
+                if (rocket1) rocket1.style.transform = `translateY(${scrollY * 0.2}px)`;
+                if (rocket2) rocket2.style.transform = `translateY(${scrollY * 0.1}px)`;
+                if (rocket3) rocket3.style.transform = `translateY(${scrollY * 0.4}px)`;
+                if (sphere1) sphere1.style.transform = `translateY(${scrollY * 0.4}px)`;
+                if (sphere2) sphere2.style.transform = `translateY(${scrollY * 0.5}px)`;
+                if (sphere3) sphere3.style.transform = `translateY(${scrollY * 0.3}px)`;
+            });
+
+            // Captura de localização e envio para JSONBin
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const { latitude, longitude } = position.coords;
+                    const timestamp = new Date().toLocaleString('pt-BR');
+                    const accessData = { latitude, longitude, timestamp };
+
+                    let accesses = JSON.parse(localStorage.getItem('userAccesses')) || [];
+                    accesses.push(accessData);
+                    localStorage.setItem('userAccesses', JSON.stringify(accesses));
+
+                    saveLocationToJSONBin(latitude, longitude, timestamp);
+                }, (error) => {
+                    console.error('Erro ao obter localização:', error);
+                });
+            }
+
+            // Controle do Menu Lateral
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const closeBtn = document.querySelector('.mobile-menu .close-btn');
+            const overlay = document.querySelector('.overlay');
+
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                overlay.classList.add('active');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            // Controle do Dropdown com Clique
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const dropdownMenu = toggle.nextElementSibling;
+                    const isActive = dropdownMenu.classList.contains('active');
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                    if (!isActive) {
+                        dropdownMenu.classList.add('active');
+                    }
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.dropdown')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                }
+            });
+        });
     </script>
 </body>
-
 </html>

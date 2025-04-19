@@ -35,7 +35,8 @@
 
         .header {
             background-color: rgba(2, 36, 82, 0.9);
-            padding: 10px 20px;
+            padding: 15px 20px;
+            min-height: 70px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
@@ -45,49 +46,175 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            transition: box-shadow 0.3s ease, padding 0.3s ease;
+            transition: min-height 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
         }
 
         .header.scrolled {
+            min-height: 56px;
+            padding: 12px 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .header .logo-container {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 10px;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .header img {
-            max-width: 80px;
+            max-width: 90px;
             height: auto;
             transition: max-width 0.3s ease;
         }
 
+        .header.scrolled img {
+            max-width: 72px;
+        }
+
         .header h1 {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color: var(--primario-amarelo);
             margin: 0;
             font-weight: 500;
             transition: font-size 0.3s ease;
         }
 
+        .header.scrolled h1 {
+            font-size: 1.12rem;
+        }
+
+        /* Botão de Menu Hamburguer */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primario-amarelo);
+            font-size: 1.8rem;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
+            cursor: pointer;
+            transition: font-size 0.3s ease;
+        }
+
+        .header.scrolled .menu-toggle {
+            font-size: 1.44rem;
+        }
+
+        /* Menu Lateral para Dispositivos Móveis */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -80%;
+            width: 80%;
+            height: 100%;
+            background-color: rgba(2, 36, 82, 0.95);
+            z-index: 1002;
+            transition: right 0.3s ease;
+            padding: 60px 20px 20px;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu .close-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            color: var(--primario-amarelo);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu a, .mobile-menu .dropdown-toggle {
+            display: block;
+            color: var(--primario-amarelo);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 191, 0, 0.3);
+        }
+
+        .mobile-menu a:hover, .mobile-menu .dropdown-toggle:hover {
+            color: var(--amarelo-claro);
+        }
+
+        .mobile-menu .dropdown-menu {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px 0;
+            margin-left: 15px;
+        }
+
+        .mobile-menu .dropdown-menu.active {
+            display: block;
+        }
+
+        .mobile-menu .dropdown-item {
+            color: var(--primario-azul);
+            font-size: 0.95rem;
+            padding: 8px 20px;
+        }
+
+        .mobile-menu .dropdown-item:hover {
+            background-color: var(--amarelo-claro);
+        }
+
+        /* Overlay para o Menu Lateral */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Navbar para Desktop */
         .navbar {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .navbar a, .navbar .dropdown-toggle {
             color: var(--primario-amarelo);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 400;
-            transition: color 0.3s ease, background-color 0.3s ease;
+            line-height: 1;
+            transition: color 0.3s ease, background-color 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
             padding: 8px 15px;
             background-color: transparent;
             position: relative;
+            cursor: pointer;
+        }
+
+        .header.scrolled .navbar a,
+        .header.scrolled .navbar .dropdown-toggle {
+            font-size: 0.96rem;
+            padding: 6.4px 12px;
         }
 
         .navbar a:not(:last-child)::after,
@@ -101,6 +228,12 @@
             height: 20px;
             background-color: var(--primario-amarelo);
             opacity: 0.7;
+            transition: height 0.3s ease;
+        }
+
+        .header.scrolled .navbar a:not(:last-child)::after,
+        .header.scrolled .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
+            height: 16px;
         }
 
         .navbar a:hover,
@@ -123,7 +256,7 @@
             display: none;
             position: absolute;
             top: 100%;
-            left: 0;
+            right: 0;
             z-index: 1000;
             background-color: var(--branco);
             border: 1px solid var(--primario-azul);
@@ -134,7 +267,7 @@
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
 
-        .dropdown:hover .dropdown-menu {
+        .dropdown-menu.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
@@ -299,6 +432,48 @@
             background-color: var(--primario-azul);
         }
 
+        .about-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-box h3 {
+            font-size: 1.4rem;
+            color: var(--primario-azul);
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-box ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .about-box strong {
+            color: var(--primario-azul);
+        }
+
+        .contact-section {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-section a {
+            color: var(--primario-azul);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-section a:hover {
+            color: var(--primario-amarelo);
+            text-decoration: underline;
+        }
+
         footer {
             background-color: var(--primario-azul);
             color: var(--primario-amarelo);
@@ -384,17 +559,44 @@
         /* Media Queries para Responsividade */
         @media (max-width: 992px) {
             .header {
-                padding: 8px 15px;
+                padding: 12px 15px;
+                min-height: 60px;
             }
 
-            .header img { max-width: 70px; }
-            .header h1 { font-size: 1.1rem; }
+            .header.scrolled {
+                min-height: 48px;
+                padding: 9.6px 15px;
+            }
+
+            .header img { max-width: 80px; }
+            .header.scrolled img { max-width: 64px; }
+
+            .header h1 { font-size: 1.2rem; }
+            .header.scrolled h1 { font-size: 0.96rem; }
+
             .navbar a, .navbar .dropdown-toggle {
-                font-size: 1rem;
+                font-size: 1.1rem;
                 padding: 6px 12px;
             }
+            .header.scrolled .navbar a,
+            .header.scrolled .navbar .dropdown-toggle {
+                font-size: 0.88rem;
+                padding: 4.8px 9.6px;
+            }
 
-            .container { padding-top: 110px; }
+            .navbar a:not(:last-child)::after,
+            .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
+                height: 18px;
+            }
+            .header.scrolled .navbar a:not(:last-child)::after,
+            .header.scrolled .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
+                height: 14.4px;
+            }
+
+            .menu-toggle { font-size: 1.6rem; }
+            .header.scrolled .menu-toggle { font-size: 1.28rem; }
+
+            .container { padding-top: 90px; }
             section { padding: 50px 15px; }
             h2 { font-size: 1.6rem; }
             .carousel img { height: 220px; }
@@ -418,34 +620,41 @@
 
         @media (max-width: 768px) {
             .header {
-                flex-direction: column;
+                padding: 10px 10px;
+                min-height: 50px;
+                justify-content: center;
+            }
+
+            .header.scrolled {
+                min-height: 40px;
                 padding: 8px 10px;
             }
 
-            .header .logo-container {
-                flex-direction: column;
-                text-align: center;
+            .menu-toggle {
+                display: block;
             }
 
-            .header img { max-width: 60px; }
-            .header h1 { font-size: 1rem; }
             .navbar {
-                flex-direction: column;
-                gap: 8px;
-                margin-top: 10px;
-            }
-
-            .navbar a, .navbar .dropdown-toggle {
-                font-size: 0.95rem;
-                padding: 6px 10px;
-            }
-
-            .navbar a::after,
-            .navbar .dropdown-toggle::after {
                 display: none;
             }
 
-            .container { padding-top: 140px; }
+            .header .logo-container {
+                position: static;
+                transform: none;
+                flex-direction: row;
+                gap: 10px;
+            }
+
+            .header img { max-width: 70px; }
+            .header.scrolled img { max-width: 56px; }
+
+            .header h1 { font-size: 1.1rem; }
+            .header.scrolled h1 { font-size: 0.88rem; }
+
+            .menu-toggle { font-size: 1.5rem; }
+            .header.scrolled .menu-toggle { font-size: 1.2rem; }
+
+            .container { padding-top: 80px; }
             section { padding: 40px 10px; }
             h2 { font-size: 1.5rem; }
             .carousel img { height: 200px; }
@@ -469,38 +678,25 @@
 
         @media (max-width: 576px) {
             .header {
-                padding: 6px 8px;
+                padding: 8px 8px;
+                min-height: 45px;
             }
 
-            .header img { max-width: 50px; }
-            .header h1 { font-size: 0.9rem; }
-            .navbar {
-                flex-direction: column;
-                gap: 6px;
+            .header.scrolled {
+                min-height: 36px;
+                padding: 6.4px 8px;
             }
 
-            .navbar a, .navbar .dropdown-toggle {
-                font-size: 0.9rem;
-                padding: 5px 8px;
-            }
+            .header img { max-width: 60px; }
+            .header.scrolled img { max-width: 48px; }
 
-            .dropdown-menu {
-                display: none !important;
-                position: static;
-                width: 100%;
-                border: none;
-                box-shadow: none;
-            }
+            .header h1 { font-size: 1rem; }
+            .header.scrolled h1 { font-size: 0.8rem; }
 
-            .dropdown:hover .dropdown-menu {
-                display: none;
-            }
+            .menu-toggle { font-size: 1.4rem; }
+            .header.scrolled .menu-toggle { font-size: 1.12rem; }
 
-            .dropdown {
-                position: static;
-            }
-
-            .container { padding-top: 160px; padding: 160px 10px 10px; }
+            .container { padding-top: 75px; padding: 75px 10px 10px; }
             section { padding: 30px 8px; }
             h2 { font-size: 1.4rem; }
             .carousel img { height: 180px; }
@@ -549,16 +745,30 @@
             </a>
             <h1>Instituto Valentis | Consulte Imóveis em Ivatuba</h1>
         </div>
+        <button class="menu-toggle" aria-label="Abrir menu">
+            <i class="fas fa-bars"></i>
+        </button>
         <nav class="navbar">
-            <a href="/pages/imoveisivatuba.html">Início</a>
+            <a href="/index.html">Início</a>
+            <a href="#form">Publicar</a>
             <a href="#sobre">Sobre</a>
-            <a href="#properties">Publicar</a>
-            <a href="#contato">Contato</a>
+            <a href="#contato">Ajuda</a>
         </nav>
+        <div class="mobile-menu">
+            <button class="close-btn" aria-label="Fechar menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="/index.html">Início</a>
+            <a href="#form">Publicar</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#contato">Ajuda</a>
+        </div>
+        <div class="overlay"></div>
     </header>
 
     <div class="container">
         <section id="properties">
+            <h2>Imóveis Disponíveis</h2>
             <div id="properties-list" class="row"></div>
         </section>
         <section id="form">
@@ -655,7 +865,6 @@
                 <p>WhatsApp: <a href="https://wa.me/5544998985343" target="_blank">(44) 99898-5343</a></p>
             </div>
         </section>
-
     </div>
 
     <footer>
@@ -681,7 +890,7 @@
                 });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
-                properties = data.record || [];
+                properties = data.record?.properties || [];
                 displayProperties();
             } catch (error) {
                 console.error('Erro ao carregar:', error);
@@ -692,17 +901,53 @@
         async function saveProperties() {
             try {
                 if (properties.length > 5) properties = properties.slice(-5);
+                let existingData = {};
+                const response = await fetch(JSONBIN_URL, {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                if (response.ok) {
+                    existingData = await response.json();
+                    existingData = existingData.record || {};
+                }
+                existingData.properties = properties;
                 await fetch(JSONBIN_URL, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-Master-Key': JSONBIN_API_KEY
                     },
-                    body: JSON.stringify(properties)
+                    body: JSON.stringify(existingData)
                 });
             } catch (error) {
                 console.error('Erro ao salvar:', error);
                 showFeedback('Erro ao salvar imóvel.', 'danger');
+            }
+        }
+
+        async function saveLocationToJSONBin(latitude, longitude, timestamp) {
+            try {
+                const response = await fetch(JSONBIN_URL, {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                let locations = data.record?.locations || [];
+                locations.push({ latitude, longitude, timestamp });
+
+                let existingData = data.record || {};
+                existingData.locations = locations;
+                existingData.properties = properties;
+
+                await fetch(JSONBIN_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify(existingData)
+                });
+            } catch (error) {
+                console.error('Erro ao salvar localização no JSONBin:', error);
             }
         }
 
@@ -749,7 +994,7 @@
                             ${photosHtml}
                             <h3>${property.owner || 'Anônimo'}</h3>
                             <p><strong>Status:</strong> ${property.status || 'Indefinido'}</p>
-                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p-report>
+                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
                             <p><strong>Valor:</strong> R$ ${parseFloat(property.value || 0).toFixed(2)}</p>
                             <p><strong>Descrição:</strong> ${property.description || 'N/A'}</p>
                         </div>
@@ -814,6 +1059,34 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Carregar propriedades
             loadProperties();
+
+            // Função para salvar localização no JSONBin
+            async function saveLocationToJSONBin(latitude, longitude, timestamp) {
+                try {
+                    const response = await fetch(JSONBIN_URL, {
+                        headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                    });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const data = await response.json();
+                    let locations = data.record?.locations || [];
+                    locations.push({ latitude, longitude, timestamp });
+
+                    let existingData = data.record || {};
+                    existingData.locations = locations;
+                    existingData.properties = properties;
+
+                    await fetch(JSONBIN_URL, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Master-Key': JSONBIN_API_KEY
+                        },
+                        body: JSON.stringify(existingData)
+                    });
+                } catch (error) {
+                    console.error('Erro ao salvar localização no JSONBin:', error);
+                }
+            }
 
             // Efeito de header ao rolar
             window.addEventListener('scroll', () => {
@@ -918,7 +1191,7 @@
                 if (sphere3) sphere3.style.transform = `translateY(${scrollY * 0.3}px)`;
             });
 
-            // Captura de localização
+            // Captura de localização e envio para JSONBin
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
                     const { latitude, longitude } = position.coords;
@@ -928,10 +1201,56 @@
                     let accesses = JSON.parse(localStorage.getItem('userAccesses')) || [];
                     accesses.push(accessData);
                     localStorage.setItem('userAccesses', JSON.stringify(accesses));
+
+                    saveLocationToJSONBin(latitude, longitude, timestamp);
                 }, (error) => {
                     console.error('Erro ao obter localização:', error);
                 });
             }
+
+            // Controle do Menu Lateral
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const closeBtn = document.querySelector('.mobile-menu .close-btn');
+            const overlay = document.querySelector('.overlay');
+
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                overlay.classList.add('active');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            // Controle do Dropdown com Clique
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const dropdownMenu = toggle.nextElementSibling;
+                    const isActive = dropdownMenu.classList.contains('active');
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                    if (!isActive) {
+                        dropdownMenu.classList.add('active');
+                    }
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.dropdown')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                }
+            });
         });
     </script>
 </body>
