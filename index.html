@@ -157,7 +157,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 100px 20px 20px;
-            background-color: var(--branco);
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -183,6 +183,7 @@
             text-align: center;
             margin-bottom: 20px;
             font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         section p {
@@ -191,6 +192,7 @@
             text-align: center;
             max-width: 800px;
             margin: 0 auto 15px;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
         }
 
         .carousel {
@@ -221,32 +223,37 @@
             background-color: var(--primario-azul);
         }
 
-        .about-section,
+        .about-box,
         .founder-section,
         .gallery-section,
-        .contact-section {
-            background: var(--branco);
+        .contact-section,
+        .solutions-box {
+            background: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .about-section h3,
-        .founder-section h3 {
+        .about-box h3,
+        .founder-section h3,
+        .solutions-box h3 {
             font-size: 1.4rem;
             color: var(--primario-azul);
             margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
-        .about-section ul,
-        .founder-section ul {
+        .about-box ul,
+        .founder-section ul,
+        .solutions-box ul {
             list-style: disc;
             padding-left: 20px;
             margin-bottom: 20px;
         }
 
-        .about-section strong,
-        .founder-section strong {
+        .about-box strong,
+        .founder-section strong,
+        .solutions-box strong {
             color: var(--primario-azul);
         }
 
@@ -421,18 +428,26 @@
     </style>
 </head>
 <body>
+    <div class="parallax">
+        <img src="/images/star.png" id="star" alt="Estrela" onerror="console.error('Failed to load star.png')">
+        <img src="/images/bluecircle.png" id="bluecircle" alt="Círculo Azul" onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/rocket.png" id="rocket" alt="Foguete" onerror="console.error('Failed to load rocket.png')">
+        <img src="/images/sphere.png" id="sphere" alt="Esfera" onerror="console.error('Failed to load sphere.png')">
+    </div>
+
     <header class="header">
         <div class="logo-container">
-            <img src="/images/logomarca.png" alt="Logo Instituto Valentis">
+            <img src="/images/logomarca.png" alt="Logo Instituto Valentis" onerror="this.src='/images/placeholder.png'">
             <h1>Instituto Valentis</h1>
         </div>
         <nav class="navbar">
             <a href="#inicio">Início</a>
             <a href="#sobre">Sobre</a>
+            Missouri: false
             <div class="dropdown">
                 <a class="dropdown-toggle" href="#">Soluções</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/pages/solucoes.html">Visão Geral</a></li>
+                    <li><a class="dropdown-item" href="#visao-geral">Visão Geral</a></li>
                     <li><a class="dropdown-item" href="/pages/imoveisivatuba.html">Ajuda Imobiliária</a></li>
                     <li><a class="dropdown-item" href="#sementes-de-esperanca">Sementes de Esperança</a></li>
                     <li><a class="dropdown-item" href="#tecnologia-inovacao">Inovalentis</a></li>
@@ -444,13 +459,6 @@
         </nav>
     </header>
 
-    <div class="parallax">
-        <img src="/images/star.png" id="star" alt="Estrela">
-        <img src="/images/bluecircle.png" id="bluecircle" alt="Círculo Azul">
-        <img src="/images/rocket.png" id="rocket" alt="Foguete">
-        <img src="/images/sphere.png" id="sphere" alt="Esfera">
-    </div>
-
     <div class="container">
         <section id="inicio">
             <h2>Bem-vindo ao Instituto Valentis</h2>
@@ -459,17 +467,17 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <a href="#galeria">
-                            <img src="/images/Home.png" class="d-block w-100" alt="Apresentação">
+                            <img src="/images/Home.png" class="d-block w-100" alt="Apresentação" onerror="this.src='/images/placeholder.png'">
                         </a>
                     </div>
                     <div class="carousel-item">
                         <a href="#sobre">
-                            <img src="/images/Services.png" class="d-block w-100" alt="Ações">
+                            <img src="/images/Services.png" class="d-block w-100" alt="Ações" onerror="this.src='/images/placeholder.png'">
                         </a>
                     </div>
                     <div class="carousel-item">
                         <a href="https://www.instagram.com/institutovalentis" target="_blank" rel="noopener noreferrer">
-                            <img src="/images/Updates.png" class="d-block w-100" alt="Novidades">
+                            <img src="/images/Updates.png" class="d-block w-100" alt="Novidades" onerror="this.src='/images/placeholder.png'">
                         </a>
                     </div>
                 </div>
@@ -484,24 +492,76 @@
             </div>
         </section>
 
-        <section id="sobre">
-            <div class="about-section">
-                <h2>Sobre o Instituto Valentis</h2>
-                <h3>Quem Somos</h3>
-                <p>O <strong>Instituto Valentis</strong> é uma associação civil sem fins lucrativos, fundada em <strong>7 de fevereiro de 2024</strong>. O Instituto nasceu com o propósito de transformar vidas por meio de iniciativas que unem <strong>educação</strong>, <strong>fé cristã protestante</strong>, <strong>assistência social</strong> e <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
-                <h3>Missão</h3>
-                <p>Nossa missão é <strong>promover o bem-estar e o crescimento integral das pessoas</strong>, oferecendo oportunidades de aprendizado, apoio espiritual, assistência social e incentivo à inovação. Por meio de ações como palestras, cultos cristãos, doações, atendimento psicológico e fonoaudiológico, e projetos de empreendedorismo, buscamos fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>, <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
-                <h3>Visão</h3>
-                <p>Ser uma <strong>referência global em transformação social e espiritual</strong>, reconhecida por unir fé cristã, educação de qualidade e ações concretas que geram impacto duradouro. Almejamos expandir nossas iniciativas, criando filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha acesso a ferramentas para prosperar com <strong>dignidade</strong>, <strong>esperança</strong> e <strong>propósito</strong>.</p>
-                <h3>Valores</h3>
-                <ul>
-                    <li><strong>Fé Cristã</strong>: Vivemos e compartilhamos os ensinamentos de Jesus Cristo, guiando nossas ações com amor e integridade.</li>
-                    <li><strong>Solidariedade</strong>: Atuamos com empatia, priorizando os mais vulneráveis e promovendo a inclusão.</li>
-                    <li><strong>Transparência</strong>: Gerimos recursos com responsabilidade, assegurando confiança e conformidade.</li>
-                    <li><strong>Inovação</strong>: Buscamos soluções criativas para desafios sociais, educacionais e ambientais.</li>
-                    <li><strong>Respeito</strong>: Valorizamos a diversidade, tratando a todos com dignidade, sem distinção.</li>
-                    <li><strong>Compromisso</strong>: Dedicamo-nos incansavelmente aos nossos objetivos, com foco em resultados que transformam vidas.</li>
-                </ul>
+        <section id="sobre" class="py-5">
+            <h2 class="text-center mb-4">Sobre o Instituto Valentis</h2>
+            <div class="mb-4">
+                <div class="card about-box">
+                    <div class="card-body">
+                        <h3 class="card-title">Quem Somos</h3>
+                        <p class="card-text">O <strong>Instituto Valentis</strong> é uma associação civil sem fins lucrativos, fundada em <strong>7 de fevereiro de 2024</strong>. O Instituto nasceu com o propósito de transformar vidas por meio de iniciativas que unem <strong>educação</strong>, <strong>fé cristã protestante</strong>, <strong>assistência social</strong> e <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="card about-box">
+                    <div class="card-body">
+                        <h3 class="card-title">Missão</h3>
+                        <p class="card-text">Nossa missão é <strong>promover o bem-estar e o crescimento integral das pessoas</strong>, oferecendo oportunidades de aprendizado, apoio espiritual, assistência social e incentivo à inovação. Por meio de ações como palestras, cultos cristãos, doações, atendimento psicológico e fonoaudiológico, e projetos de empreendedorismo, buscamos fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>, <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="card about-box">
+                    <div class="card-body">
+                        <h3 class="card-title">Visão</h3>
+                        <p class="card-text">Ser uma <strong>referência global em transformação social e espiritual</strong>, reconhecida por unir fé cristã, educação de qualidade e ações concretas que geram impacto duradouro. Almejamos expandir nossas iniciativas, criando filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha acesso a ferramentas para prosperar com <strong>dignidade</strong>, <strong>esperança</strong> e <strong>propósito</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="card about-box">
+                    <div class="card-body">
+                        <h3 class="card-title">Valores</h3>
+                        <ul class="list-unstyled">
+                            <li><strong>Fé Cristã</strong>: Vivemos e compartilhamos os ensinamentos de Jesus Cristo, guiando nossas ações com amor e integridade.</li>
+                            <li><strong>Solidariedade</strong>: Atuamos com empatia, priorizando os mais vulneráveis e promovendo a inclusão.</li>
+                            <li><strong>Transparência</strong>: Gerimos recursos com responsabilidade, assegurando confiança e conformidade.</li>
+                            <li><strong>Inovação</strong>: Buscamos soluções criativas para desafios sociais, educacionais e ambientais.</li>
+                            <li><strong>Respeito</strong>: Valorizamos a diversidade, tratando a todos com dignidade, sem distinção.</li>
+                            <li><strong>Compromisso</strong>: Dedicamo-nos incansavelmente aos nossos objetivos, com foco em resultados que transformam vidas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solucoes" class="py-5">
+            <h2 class="text-center mb-4">Soluções</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" id="visao-geral">
+                    <div class="card solutions-box h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Visão Geral</h3>
+                            <p class="card-text">O Instituto Valentis oferece uma gama de soluções inovadoras para promover o desenvolvimento comunitário, incluindo programas de educação, assistência social e projetos de sustentabilidade.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" id="sementes-de-esperanca">
+                    <div class="card solutions-box h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Sementes de Esperança</h3>
+                            <p class="card-text">Um projeto dedicado a fornecer apoio espiritual e emocional, promovendo a esperança e a resiliência em comunidades vulneráveis através de cultos, palestras e atendimentos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" id="tecnologia-inovacao">
+                    <div class="card solutions-box h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">Inovalentis</h3>
+                            <p class="card-text">Iniciativa focada em inovação tecnológica, oferecendo soluções digitais e programas de capacitação para impulsionar o empreendedorismo e a inclusão digital.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -539,51 +599,51 @@
                 <p>WhatsApp: <a href="https://wa.me/5544998985343" target="_blank">(44) 99898-5343</a></p>
             </div>
         </section>
-    </div>
 
-    <section id="fundador">
-        <div class="founder-section">
-            <h2>Samuel Jafé Pereira Carvalho</h2>
-            <div class="profile-image">
-                <img src="/images/fundador.png" alt="Foto de Samuel Jafé Pereira Carvalho" onerror="this.src='/images/placeholder.png'">
+        <section id="fundador">
+            <div class="founder-section">
+                <h2>Samuel Jafé Pereira Carvalho</h2>
+                <div class="profile-image">
+                    <img src="/images/fundador.png" alt="Foto de Samuel Jafé Pereira Carvalho" onerror="this.src='/images/placeholder.png'">
+                </div>
+                <p><strong>Nascido em:</strong> 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
+                <p><strong>Profissão:</strong> Administrador e Pastor</p>
+                <p><strong>Idiomas:</strong> Inglês, Espanhol, Francês e Português</p>
+                <p><strong>Filiação:</strong> Partido Republicanos</p>
+                <h3>Família</h3>
+                <ul>
+                    <li>Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
+                    <li>Legendário #83532.</li>
+                </ul>
+                <h3>Carreira</h3>
+                <ul>
+                    <li>Poliglota com experiência internacional.</li>
+                    <li>Administrador com visão para o desenvolvimento e gestão eficiente.</li>
+                    <li>Pastor comprometido com os valores morais e espirituais.</li>
+                    <li>CEO Valentis Business.</li>
+                </ul>
+                <h3>Trabalho Comunitário</h3>
+                <ul>
+                    <li>Fundador do Instituto Valentis.</li>
+                    <li>Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.</li>
+                </ul>
+                <h3>Visão</h3>
+                <ul>
+                    <li>Promover a segurança, bem-estar, educação, cultura e desenvolvimento econômico local.</li>
+                </ul>
+                <h3>Compromisso</h3>
+                <ul>
+                    <li>Transparência, diálogo com a comunidade e inovação nas soluções municipais.</li>
+                </ul>
+                <h3>Contato</h3>
+                <ul>
+                    <li>E-mail: <a href="mailto:samuel@ivalentis.com">samuel@ivalentis.com</a></li>
+                    <li>WhatsApp: <a href="https://wa.me/5544998985343" target="_blank">(44) 99898-5343</a></li>
+                    <li><a href="https://www.linkedin.com/in/samueljpcarvalho/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                </ul>
             </div>
-            <p><strong>Nascido em:</strong> 30 de maio de 1993, Petrópolis, Rio de Janeiro</p>
-            <p><strong>Profissão:</strong> Administrador e Pastor</p>
-            <p><strong>Idiomas:</strong> Inglês, Espanhol, Francês e Português</p>
-            <p><strong>Filiação:</strong> Partido Republicanos</p>
-            <h3>Família</h3>
-            <ul>
-                <li>Casado, pai de dois filhos, dedicado à família e aos valores familiares.</li>
-                <li>Legendário #83532.</li>
-            </ul>
-            <h3>Carreira</h3>
-            <ul>
-                <li>Poliglota com experiência internacional.</li>
-                <li>Administrador com visão para o desenvolvimento e gestão eficiente.</li>
-                <li>Pastor comprometido com os valores morais e espirituais.</li>
-                <li>CEO Valentis Business.</li>
-            </ul>
-            <h3>Trabalho Comunitário</h3>
-            <ul>
-                <li>Fundador do Instituto Valentis.</li>
-                <li>Presidente do Conselho Comunitário de Segurança (CONSEG) em Ivatuba, Paraná - gestão 2024-2025.</li>
-            </ul>
-            <h3>Visão</h3>
-            <ul>
-                <li>Promover a segurança, bem-estar, educação, cultura e desenvolvimento econômico local.</li>
-            </ul>
-            <h3>Compromisso</h3>
-            <ul>
-                <li>Transparência, diálogo com a comunidade e inovação nas soluções municipais.</li>
-            </ul>
-            <h3>Contato</h3>
-            <ul>
-                <li>E-mail: <a href="mailto:samuel@ivalentis.com">samuel@ivalentis.com</a></li>
-                <li>WhatsApp: <a href="https://wa.me/5544998985343" target="_blank">(44) 99898-5343</a></li>
-                <li><a href="https://www.linkedin.com/in/samueljpcarvalho/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            </ul>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <footer>
         <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
@@ -678,10 +738,10 @@
 
             window.addEventListener('scroll', () => {
                 const scrollY = window.scrollY;
-                star.style.transform = `translateY(${scrollY * 0.3}px)`;
-                bluecircle.style.transform = `translateY(${scrollY * 0.5}px)`;
-                rocket.style.transform = `translateY(${scrollY * 0.2}px)`;
-                sphere.style.transform = `translateY(${scrollY * 0.4}px)`;
+                if (star) star.style.transform = `translateY(${scrollY * 0.3}px)`;
+                if (bluecircle) bluecircle.style.transform = `translateY(${scrollY * 0.5}px)`;
+                if (rocket) rocket.style.transform = `translateY(${scrollY * 0.2}px)`;
+                if (sphere) sphere.style.transform = `translateY(${scrollY * 0.4}px)`;
             });
 
             // Captura de localização
