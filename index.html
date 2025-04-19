@@ -311,7 +311,7 @@
             transform: translateY(0);
         }
 
-        section h2 {
+        h2 {
             font-size: 1.8rem;
             color: var(--primario-azul);
             text-align: center;
@@ -320,99 +320,68 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
-        section p {
-            font-size: 1rem;
-            color: var(--cinza-escuro);
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 15px;
-            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
-        }
-
-        .carousel {
-            border: 2px solid var(--primario-amarelo);
-            border-radius: 8px;
-            overflow: hidden;
+        p {
+            font-size: 1.1rem;
             margin-bottom: 15px;
-            width: 100%;
-            max-width: 100%;
+            text-align: justify;
         }
 
-        .carousel img {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-            aspect-ratio: 16/9;
-        }
-
-        .carousel a {
-            display: block;
-            cursor: pointer;
-        }
-
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
+        .btn-primary {
             background-color: var(--primario-azul);
+            color: var(--primario-amarelo);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
         }
 
-        .about-box,
-        .founder-section,
-        .gallery-section,
-        .contact-section,
-        .solutions-box {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-box h3,
-        .founder-section h3,
-        .solutions-box h3 {
-            font-size: 1.4rem;
-            color: var(--primario-azul);
-            margin-top: 20px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        .about-box ul,
-        .founder-section ul,
-        .solutions-box ul {
-            list-style: disc;
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-
-        .about-box strong,
-        .founder-section strong,
-        .solutions-box strong {
+        .btn-primary:hover {
+            background-color: var(--primario-amarelo);
             color: var(--primario-azul);
         }
 
-        .founder-section .profile-image img {
-            max-width: 200px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: block;
-            border: 2px solid var(--primario-amarelo);
-        }
-
-        .gallery-section .carousel img {
+        .carousel-item img {
+            width: 100%;
             height: 400px;
             object-fit: cover;
+            border-radius: 8px;
         }
 
-        .contact-section a {
+        .card {
+            border: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
             color: var(--primario-azul);
-            text-decoration: none;
+            font-size: 1.2rem;
             font-weight: 500;
         }
 
-        .contact-section a:hover {
-            color: var(--primario-amarelo);
-            text-decoration: underline;
+        .card-text {
+            color: var(--cinza-escuro);
+            font-size: 0.95rem;
         }
 
         footer {
@@ -431,7 +400,9 @@
             transition: color 0.3s ease;
         }
 
-        footer a:hover { color: var(--amarelo-claro); }
+        footer a:hover {
+            color: var(--amarelo-claro);
+        }
 
         .whatsapp-btn {
             position: fixed;
@@ -455,7 +426,9 @@
             color: var(--primario-azul);
         }
 
-        .whatsapp-btn i { font-size: 1.8rem; }
+        .whatsapp-btn i {
+            font-size: 1.8rem;
+        }
 
         /* Efeito Parallax */
         .parallax {
@@ -505,8 +478,12 @@
                 padding: 9.6px 15px;
             }
 
-            .header img { max-width: 80px; }
-            .header.scrolled img { max-width: 64px; }
+            .header img {
+                max-height: 36px;
+            }
+            .header.scrolled img {
+                max-height: 28.8px;
+            }
 
             .header h1 { font-size: 1.2rem; }
             .header.scrolled h1 { font-size: 0.96rem; }
@@ -535,9 +512,9 @@
 
             .container { padding-top: 90px; }
             section { padding: 50px 15px; }
-            section h2 { font-size: 1.6rem; }
-            .gallery-section .carousel img { height: 300px; }
-            .founder-section .profile-image img { max-width: 180px; }
+            h2 { font-size: 1.6rem; }
+            .carousel-item img { height: 350px; }
+            .card img { height: 180px; }
 
             /* Ajuste dos elementos do parallax */
             #star1 { width: 40px; height: 40px; }
@@ -558,7 +535,7 @@
             .header {
                 padding: 10px 10px;
                 min-height: 50px;
-                justify-content: center;
+                justify-content: flex-end;
             }
 
             .header.scrolled {
@@ -575,14 +552,20 @@
             }
 
             .header .logo-container {
-                position: static;
-                transform: none;
+                position: absolute;
+                right: 60px;
+                top: 50%;
+                transform: translateY(-50%);
                 flex-direction: row;
                 gap: 10px;
             }
 
-            .header img { max-width: 70px; }
-            .header.scrolled img { max-width: 56px; }
+            .header img {
+                max-height: 30px;
+            }
+            .header.scrolled img {
+                max-height: 24px;
+            }
 
             .header h1 { font-size: 1.1rem; }
             .header.scrolled h1 { font-size: 0.88rem; }
@@ -592,9 +575,10 @@
 
             .container { padding-top: 80px; }
             section { padding: 40px 10px; }
-            section h2 { font-size: 1.5rem; }
-            .gallery-section .carousel img { height: 250px; }
-            .founder-section .profile-image img { max-width: 160px; }
+            h2 { font-size: 1.5rem; }
+            p { font-size: 1rem; }
+            .carousel-item img { height: 300px; }
+            .card img { height: 160px; }
 
             /* Ajuste dos elementos do parallax */
             #star1 { width: 35px; height: 35px; }
@@ -622,8 +606,12 @@
                 padding: 6.4px 8px;
             }
 
-            .header img { max-width: 60px; }
-            .header.scrolled img { max-width: 48px; }
+            .header img {
+                max-height: 29px;
+            }
+            .header.scrolled img {
+                max-height: 23.2px;
+            }
 
             .header h1 { font-size: 1rem; }
             .header.scrolled h1 { font-size: 0.8rem; }
@@ -633,11 +621,10 @@
 
             .container { padding-top: 75px; padding: 75px 10px 10px; }
             section { padding: 30px 8px; }
-            section h2 { font-size: 1.4rem; }
-            section p { font-size: 0.95rem; }
-            .carousel img { aspect-ratio: 4/3; }
-            .gallery-section .carousel img { height: 200px; }
-            .founder-section .profile-image img { max-width: 140px; }
+            h2 { font-size: 1.4rem; }
+            p { font-size: 0.95rem; }
+            .carousel-item img { height: 250px; }
+            .card img { height: 140px; }
             .whatsapp-btn { width: 50px; height: 50px; }
             .whatsapp-btn i { font-size: 1.5rem; }
 
