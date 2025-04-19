@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,33 +10,33 @@
     <link rel="icon" href="/images/favicon.png" type="image/png" sizes="16x16">
     <style>
         :root {
-            --azul-neutro: #4B6587;
-            --azul-suave: #87CEEB;
-            --verde-suave: #28A745;
-            --amarelo-palido: #F7E8A4;
-            --bege-claro: #FDF6E3;
-            --branco: #FFFFFF;
-            --cinza-claro: #F8F9FA;
-            --texto-escuro: #333333;
+            --primario-azul: #022452;
+            --primario-amarelo: #ffbf00;
+            --azul-claro: #4a6fa5;
+            --amarelo-claro: #ffdb4d;
+            --azul-escuro: #011a3b;
+            --branco: #ffffff;
+            --cinza-claro: #f5f5f5;
+            --cinza-escuro: #333333;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--cinza-claro);
             font-family: 'Roboto', Arial, sans-serif;
-            color: var(--texto-escuro);
+            color: var(--cinza-escuro);
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
         }
 
         .header {
-            background-color: var(--branco);
-            padding: 15px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: rgba(2, 36, 82, 0.9);
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -46,12 +45,11 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            transition: padding 0.3s ease, box-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease, padding 0.3s ease;
         }
 
         .header.scrolled {
-            padding: 10px 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .header .logo-container {
@@ -61,25 +59,17 @@
         }
 
         .header img {
-            max-width: 100px;
+            max-width: 80px;
             height: auto;
             transition: max-width 0.3s ease;
         }
 
-        .header.scrolled img {
-            max-width: 80px;
-        }
-
         .header h1 {
-            font-size: 1.5rem;
-            color: var(--azul-neutro);
+            font-size: 1.2rem;
+            color: var(--primario-amarelo);
             margin: 0;
             font-weight: 500;
             transition: font-size 0.3s ease;
-        }
-
-        .header.scrolled h1 {
-            font-size: 1.2rem;
         }
 
         .navbar {
@@ -89,15 +79,14 @@
             gap: 10px;
         }
 
-        .navbar a,
-        .navbar .dropdown-toggle {
-            color: var(--azul-neutro);
+        .navbar a, .navbar .dropdown-toggle {
+            color: var(--primario-amarelo);
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 400;
             transition: color 0.3s ease, background-color 0.3s ease;
             padding: 8px 15px;
-            background-color: var(--cinza-claro);
+            background-color: transparent;
             position: relative;
         }
 
@@ -110,7 +99,7 @@
             transform: translateY(-50%);
             width: 1px;
             height: 20px;
-            background-color: var(--azul-neutro);
+            background-color: var(--primario-amarelo);
             opacity: 0.7;
         }
 
@@ -118,8 +107,8 @@
         .navbar a:focus,
         .navbar .dropdown-toggle:hover,
         .navbar .dropdown-toggle:focus {
-            color: var(--azul-suave);
-            background-color: var(--bege-claro);
+            color: var(--primario-azul);
+            background-color: var(--amarelo-claro);
         }
 
         .dropdown {
@@ -137,7 +126,7 @@
             left: 0;
             z-index: 1000;
             background-color: var(--branco);
-            border: 1px solid var(--azul-neutro);
+            border: 1px solid var(--primario-azul);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             opacity: 0;
@@ -152,7 +141,7 @@
         }
 
         .dropdown-item {
-            color: var(--azul-neutro);
+            color: var(--primario-azul);
             font-size: 0.95rem;
             padding: 8px 20px;
             text-decoration: none;
@@ -160,39 +149,46 @@
 
         .dropdown-item:hover,
         .dropdown-item:focus {
-            background-color: var(--cinza-claro);
-            color: var(--azul-suave);
+            background-color: var(--amarelo-claro);
+            color: var(--primario-azul);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 120px 20px 20px;
-            animation: fadeIn 1s ease-in-out;
+            padding: 100px 20px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            transition: padding 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
+        section {
+            padding: 60px 20px;
+            border-bottom: 1px solid var(--primario-azul);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h2 {
             font-size: 1.8rem;
-            color: var(--azul-neutro);
+            color: var(--primario-azul);
             text-align: center;
             margin-bottom: 20px;
             font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .form-section {
-            background: var(--bege-claro);
+            background: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -203,7 +199,7 @@
         .form-select {
             height: 48px;
             font-size: 1rem;
-            border: 1px solid var(--azul-neutro);
+            border: 1px solid var(--primario-azul);
             border-radius: 8px;
             margin-bottom: 15px;
             background-color: var(--branco);
@@ -212,8 +208,8 @@
 
         .form-control:focus,
         .form-select:focus {
-            border-color: var(--azul-suave);
-            box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
+            border-color: var(--azul-claro);
+            box-shadow: 0 0 5px rgba(74, 111, 165, 0.5);
         }
 
         textarea.form-control {
@@ -222,8 +218,8 @@
         }
 
         .btn-primary {
-            background-color: var(--verde-suave);
-            border-color: var(--verde-suave);
+            background-color: var(--primario-azul);
+            border-color: var(--primario-azul);
             height: 50px;
             font-size: 1.1rem;
             border-radius: 8px;
@@ -231,28 +227,29 @@
         }
 
         .btn-primary:hover {
-            background-color: #218838;
-            border-color: #218838;
+            background-color: var(--azul-claro);
+            border-color: var(--azul-claro);
         }
 
         .alert {
             margin-top: 15px;
             border-radius: 8px;
-            background-color: var(--amarelo-palido);
-            color: var(--texto-escuro);
-            border: 1px solid var(--azul-neutro);
+            background-color: var(--amarelo-claro);
+            color: var(--cinza-escuro);
+            border: 1px solid var(--primario-azul);
         }
 
         .no-properties {
             text-align: center;
-            color: var(--azul-neutro);
+            color: var(--primario-azul);
             margin-top: 30px;
             font-size: 1.1rem;
             font-style: italic;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
         }
 
         .property-card {
-            background: var(--branco);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
@@ -265,10 +262,29 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
+        .property-card h3 {
+            font-size: 1.4rem;
+            color: var(--primario-azul);
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .property-card p {
+            font-size: 1rem;
+            color: var(--cinza-escuro);
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+        }
+
+        .property-card strong {
+            color: var(--primario-azul);
+        }
+
         .carousel {
+            border: 2px solid var(--primario-amarelo);
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 15px;
+            width: 100%;
         }
 
         .carousel img {
@@ -278,31 +294,37 @@
             width: 100%;
         }
 
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: var(--primario-azul);
+        }
+
         footer {
-            background-color: var(--azul-neutro);
-            color: var(--bege-claro);
+            background-color: var(--primario-azul);
+            color: var(--primario-amarelo);
             text-align: center;
             padding: 15px 0;
-            margin-top: 40px;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
         }
 
         footer a {
-            color: var(--bege-claro);
+            color: var(--primario-amarelo);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         footer a:hover {
-            color: var(--amarelo-palido);
+            color: var(--amarelo-claro);
         }
 
         .whatsapp-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: var(--azul-neutro);
-            color: var(--bege-claro);
+            background-color: var(--primario-azul);
+            color: var(--primario-amarelo);
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -315,46 +337,151 @@
         }
 
         .whatsapp-btn:hover {
-            background-color: var(--amarelo-palido);
-            color: var(--azul-neutro);
+            background-color: var(--primario-amarelo);
+            color: var(--primario-azul);
         }
 
         .whatsapp-btn i {
             font-size: 1.8rem;
         }
 
-        @media (max-width: 576px) {
+        /* Efeito Parallax */
+        .parallax {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .parallax img {
+            position: absolute;
+            will-change: transform;
+            opacity: 0.8;
+            transition: opacity 0.5s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .parallax img:hover {
+            opacity: 1;
+        }
+
+        #star1 { top: 10%; left: 15%; width: 50px; height: 50px; }
+        #star2 { top: 20%; right: 10%; width: 30px; height: 30px; }
+        #star3 { bottom: 15%; left: 30%; width: 70px; height: 70px; }
+        #bluecircle1 { top: 30%; right: 20%; width: 80px; height: 80px; }
+        #bluecircle2 { bottom: 25%; left: 10%; width: 60px; height: 60px; }
+        #bluecircle3 { top: 50%; left: 40%; width: 100px; height: 100px; }
+        #rocket1 { bottom: 20%; left: 25%; width: 60px; height: 100px; }
+        #rocket2 { top: 15%; right: 30%; width: 50px; height: 80px; }
+        #rocket3 { bottom: 30%; right: 15%; width: 70px; height: 120px; }
+        #sphere1 { bottom: 10%; right: 15%; width: 70px; height: 70px; }
+        #sphere2 { top: 40%; left: 20%; width: 50px; height: 50px; }
+        #sphere3 { bottom: 35%; right: 35%; width: 90px; height: 90px; }
+
+        /* Media Queries para Responsividade */
+        @media (max-width: 992px) {
             .header {
-                padding: 10px 15px;
+                padding: 8px 15px;
+            }
+
+            .header img { max-width: 70px; }
+            .header h1 { font-size: 1.1rem; }
+            .navbar a, .navbar .dropdown-toggle {
+                font-size: 1rem;
+                padding: 6px 12px;
+            }
+
+            .container { padding-top: 110px; }
+            section { padding: 50px 15px; }
+            h2 { font-size: 1.6rem; }
+            .carousel img { height: 220px; }
+            .property-card { padding: 15px; }
+            .form-section { padding: 25px; }
+
+            /* Ajuste dos elementos do parallax */
+            #star1 { width: 40px; height: 40px; }
+            #star2 { width: 25px; height: 25px; }
+            #star3 { width: 60px; height: 60px; }
+            #bluecircle1 { width: 70px; height: 70px; }
+            #bluecircle2 { width: 50px; height: 50px; }
+            #bluecircle3 { width: 90px; height: 90px; }
+            #rocket1 { width: 50px; height: 80px; }
+            #rocket2 { width: 40px; height: 60px; }
+            #rocket3 { width: 60px; height: 100px; }
+            #sphere1 { width: 60px; height: 60px; }
+            #sphere2 { width: 40px; height: 40px; }
+            #sphere3 { width: 80px; height: 80px; }
+        }
+
+        @media (max-width: 768px) {
+            .header {
                 flex-direction: column;
-                align-items: center;
+                padding: 8px 10px;
             }
 
-            .header img {
-                max-width: 80px;
+            .header .logo-container {
+                flex-direction: column;
+                text-align: center;
             }
 
-            .header h1 {
-                font-size: 1.2rem;
-            }
-
+            .header img { max-width: 60px; }
+            .header h1 { font-size: 1rem; }
             .navbar {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 10px;
+                flex-direction: column;
+                gap: 8px;
                 margin-top: 10px;
             }
 
-            .navbar a,
-            .navbar .dropdown-toggle {
-                font-size: 0.9rem;
+            .navbar a, .navbar .dropdown-toggle {
+                font-size: 0.95rem;
                 padding: 6px 10px;
-                background-color: transparent;
             }
 
             .navbar a::after,
             .navbar .dropdown-toggle::after {
                 display: none;
+            }
+
+            .container { padding-top: 140px; }
+            section { padding: 40px 10px; }
+            h2 { font-size: 1.5rem; }
+            .carousel img { height: 200px; }
+            .property-card { padding: 12px; }
+            .form-section { padding: 20px; }
+
+            /* Ajuste dos elementos do parallax */
+            #star1 { width: 35px; height: 35px; }
+            #star2 { width: 20px; height: 20px; }
+            #star3 { width: 50px; height: 50px; }
+            #bluecircle1 { width: 60px; height: 60px; }
+            #bluecircle2 { width: 40px; height: 40px; }
+            #bluecircle3 { width: 80px; height: 80px; }
+            #rocket1 { width: 40px; height: 70px; }
+            #rocket2 { width: 35px; height: 50px; }
+            #rocket3 { width: 50px; height: 90px; }
+            #sphere1 { width: 50px; height: 50px; }
+            #sphere2 { width: 30px; height: 30px; }
+            #sphere3 { width: 70px; height: 70px; }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 6px 8px;
+            }
+
+            .header img { max-width: 50px; }
+            .header h1 { font-size: 0.9rem; }
+            .navbar {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .navbar a, .navbar .dropdown-toggle {
+                font-size: 0.9rem;
+                padding: 5px 8px;
             }
 
             .dropdown-menu {
@@ -373,48 +500,51 @@
                 position: static;
             }
 
-            .container {
-                padding-top: 150px;
-            }
+            .container { padding-top: 160px; padding: 160px 10px 10px; }
+            section { padding: 30px 8px; }
+            h2 { font-size: 1.4rem; }
+            .carousel img { height: 180px; }
+            .property-card { padding: 10px; }
+            .form-section { padding: 15px; }
+            .form-control, .form-select, .btn-primary { font-size: 0.95rem; }
+            .whatsapp-btn { width: 50px; height: 50px; }
+            .whatsapp-btn i { font-size: 1.5rem; }
 
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .property-card {
-                padding: 15px;
-            }
-
-            .carousel img {
-                height: 200px;
-            }
-
-            .form-section {
-                padding: 20px;
-            }
-
-            .form-control,
-            .form-select,
-            .btn-primary {
-                font-size: 0.95rem;
-            }
-
-            .whatsapp-btn {
-                width: 50px;
-                height: 50px;
-            }
-
-            .whatsapp-btn i {
-                font-size: 1.5rem;
-            }
+            /* Ajuste dos elementos do parallax */
+            #star1 { width: 30px; height: 30px; }
+            #star2 { width: 15px; height: 15px; }
+            #star3 { width: 40px; height: 40px; }
+            #bluecircle1 { width: 50px; height: 50px; }
+            #bluecircle2 { width: 30px; height: 30px; }
+            #bluecircle3 { width: 70px; height: 70px; }
+            #rocket1 { width: 35px; height: 60px; }
+            #rocket2 { width: 30px; height: 45px; }
+            #rocket3 { width: 40px; height: 80px; }
+            #sphere1 { width: 40px; height: 40px; }
+            #sphere2 { width: 25px; height: 25px; }
+            #sphere3 { width: 60px; height: 60px; }
         }
     </style>
 </head>
-
 <body>
+    <div class="parallax">
+        <img src="/images/star.png" id="star1" alt="Estrela 1" onerror="console.error('Failed to load star.png')">
+        <img src="/images/star.png" id="star2" alt="Estrela 2" onerror="console.error('Failed to load star.png')">
+        <img src="/images/star.png" id="star3" alt="Estrela 3" onerror="console.error('Failed to load star.png')">
+        <img src="/images/bluecircle.png" id="bluecircle1" alt="Círculo Azul 1" onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/bluecircle.png" id="bluecircle2" alt="Círculo Azul 2" onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/bluecircle.png" id="bluecircle3" alt="Círculo Azul 3" onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/rocket.png" id="rocket1" alt="Foguete 1" onerror="console.error('Failed to load rocket.png')">
+        <img src="/images/rocket.png" id="rocket2" alt="Foguete 2" onerror="console.error('Failed to load rocket.png')">
+        <img src="/images/rocket.png" id="rocket3" alt="Foguete 3" onerror="console.error('Failed to load rocket.png')">
+        <img src="/images/sphere.png" id="sphere1" alt="Esfera 1" onerror="console.error('Failed to load sphere.png')">
+        <img src="/images/sphere.png" id="sphere2" alt="Esfera 2" onerror="console.error('Failed to load sphere.png')">
+        <img src="/images/sphere.png" id="sphere3" alt="Esfera 3" onerror="console.error('Failed to load sphere.png')">
+    </div>
+
     <header class="header">
         <div class="logo-container">
-            <img src="/images/logomarca.png" alt="Logo Instituto Valentis">
+            <img src="/images/logomarca.png" alt="Logo Instituto Valentis" onerror="this.src='/images/placeholder.png'">
             <h1>Instituto Valentis | Consulte Imóveis em Ivatuba</h1>
         </div>
         <nav class="navbar">
@@ -425,8 +555,7 @@
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/pages/solucoes.html">Visão Geral</a></li>
                     <li><a class="dropdown-item" href="/pages/projeto-educacao.html">Educação para Todos</a></li>
-                    <li><a class="dropdown-item" href="/pages/projeto-sustentabilidade.html">Sustentabilidade
-                            Comunitária</a></li>
+                    <li><a class="dropdown-item" href="/pages/projeto-sustentabilidade.html">Sustentabilidade Comunitária</a></li>
                     <li><a class="dropdown-item" href="/pages/projeto-imigrantes.html">Apoio a Imigrantes</a></li>
                 </ul>
             </div>
@@ -437,68 +566,64 @@
     </header>
 
     <div class="container">
-        <div id="properties-list" class="row"></div>
-        <div class="form-section">
-            <h2>Cadastre seu Imóvel</h2>
-            <form id="property-form">
-                <div class="row g-3">
-                    <div class="col-12">
-                        <label for="owner" class="form-label">Nome do Imóvel <i>(Ex.: Casa para Alugar | Bairro
-                                Residencial Esperança)</i></label>
-                        <input type="text" class="form-control" id="owner" placeholder="Digite o nome do imóvel"
-                            required>
+        <section id="properties">
+            <div id="properties-list" class="row"></div>
+        </section>
+        <section id="form">
+            <div class="form-section">
+                <h2>Cadastre seu Imóvel</h2>
+                <form id="property-form">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="owner" class="form-label">Nome do Imóvel <i>(Ex.: Casa para Alugar | Bairro Residencial Esperança)</i></label>
+                            <input type="text" class="form-control" id="owner" placeholder="Digite o nome do imóvel" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="type" class="form-label">Tipo</label>
+                            <select class="form-select" id="type" required>
+                                <option value="">Selecione o tipo</option>
+                                <option value="locacao">Locação</option>
+                                <option value="venda">Venda</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="value" class="form-label">Valor (R$)</label>
+                            <input type="number" class="form-control" id="value" step="0.01" placeholder="Digite o valor" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="description" class="form-label">Descrição <i>(Ex.: Quantidade de quartos, outros detalhes do imóvel, telefone para contato, etc)</i></label>
+                            <textarea class="form-control" id="description" placeholder="Descreva o imóvel" required></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label for="photos" class="form-label">Fotos (máx. 15)</label>
+                            <input type="file" class="form-control" id="photos" accept="image/*" multiple>
+                        </div>
+                        <div class="col-12">
+                            <label>
+                                <input type="checkbox" id="consent" required>
+                                Concordo com a <a href="/pages/politica.html" target="_blank">Política de Privacidade</a>.
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+                        </div>
                     </div>
-                    <div class="col-12">
-                        <label for="type" class="form-label">Tipo</label>
-                        <select class="form-select" id="type" required>
-                            <option value="">Selecione o tipo</option>
-                            <option value="locacao">Locação</option>
-                            <option value="venda">Venda</option>
-                        </select>
-                    </div>
-                    <div class="col-12">
-                        <label for="value" class="form-label">Valor (R$)</label>
-                        <input type="number" class="form-control" id="value" step="0.01" placeholder="Digite o valor"
-                            required>
-                    </div>
-                    <div class="col-12">
-                        <label for="description" class="form-label">Descrição <i>(Ex.: Quantidade de quartos, outros
-                                detalhes do imóvel, telefone para contato, etc)</i></label>
-                        <textarea class="form-control" id="description" placeholder="Descreva o imóvel"
-                            required></textarea>
-                    </div>
-                    <div class="col-12">
-                        <label for="photos" class="form-label">Fotos (máx. 15)</label>
-                        <input type="file" class="form-control" id="photos" accept="image/*" multiple>
-                    </div>
-                    <div class="col-12">
-                        <label>
-                            <input type="checkbox" id="consent" required>
-                            Concordo com a <a href="/pages/politica.html" target="_blank">Política de Privacidade</a>.
-                        </label>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
-                    </div>
-                </div>
-            </form>
-            <div id="form-feedback" class="alert" style="display: none;"></div>
-        </div>
+                </form>
+                <div id="form-feedback" class="alert" style="display: none;"></div>
+            </div>
+        </section>
     </div>
 
     <footer>
         <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a>
-        </p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
     </footer>
 
-    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis"
-        class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis" class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/script.js"></script>
     <script>
         const JSONBIN_API_KEY = '$2a$10$dKijF5oFCYh5pYskkUvbPO9WziVB5PTwj8H7KI2D3nbUhzp7Zivwu';
         const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/67ffa03c8960c979a58666af';
@@ -559,7 +684,7 @@
                         <div class="carousel-inner">
                             ${property.photos.map((photo, i) => `
                                 <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                    <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
+                                    <img src="${photo}" class="d-block w-100" alt="Foto do imóvel" onerror="this.src='/images/placeholder.png'">
                                 </div>
                             `).join('')}
                         </div>
@@ -580,7 +705,7 @@
                             ${photosHtml}
                             <h3>${property.owner || 'Anônimo'}</h3>
                             <p><strong>Status:</strong> ${property.status || 'Indefinido'}</p>
-                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
+                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p-report>
                             <p><strong>Valor:</strong> R$ ${parseFloat(property.value || 0).toFixed(2)}</p>
                             <p><strong>Descrição:</strong> ${property.description || 'N/A'}</p>
                         </div>
@@ -642,8 +767,128 @@
             }
         });
 
-        window.onload = loadProperties;
+        document.addEventListener("DOMContentLoaded", function () {
+            // Carregar propriedades
+            loadProperties();
+
+            // Efeito de header ao rolar
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.header');
+                if (header) {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                }
+            });
+
+            // Botão "Voltar ao Topo"
+            const btnTopo = document.createElement("button");
+            btnTopo.textContent = "⬆";
+            btnTopo.id = "btn-topo";
+            btnTopo.style.cssText = `
+                position: fixed;
+                bottom: 90px;
+                right: 20px;
+                background-color: #022452;
+                color: #ffbf00;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: none;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                z-index: 1000;
+                font-size: 1.2rem;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            `;
+            btnTopo.addEventListener('mouseover', () => {
+                btnTopo.style.backgroundColor = '#ffbf00';
+                btnTopo.style.color = '#022452';
+            });
+            btnTopo.addEventListener('mouseout', () => {
+                btnTopo.style.backgroundColor = '#022452';
+                btnTopo.style.color = '#ffbf00';
+            });
+            document.body.appendChild(btnTopo);
+
+            btnTopo.addEventListener("click", function () {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 300) {
+                    btnTopo.style.display = "flex";
+                } else {
+                    btnTopo.style.display = "none";
+                }
+            });
+
+            // Animação de seções com IntersectionObserver
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Efeito Parallax com mais elementos
+            const star1 = document.getElementById('star1');
+            const star2 = document.getElementById('star2');
+            const star3 = document.getElementById('star3');
+            const bluecircle1 = document.getElementById('bluecircle1');
+            const bluecircle2 = document.getElementById('bluecircle2');
+            const bluecircle3 = document.getElementById('bluecircle3');
+            const rocket1 = document.getElementById('rocket1');
+            const rocket2 = document.getElementById('rocket2');
+            const rocket3 = document.getElementById('rocket3');
+            const sphere1 = document.getElementById('sphere1');
+            const sphere2 = document.getElementById('sphere2');
+            const sphere3 = document.getElementById('sphere3');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if (star1) star1.style.transform = `translateY(${scrollY * 0.3}px)`;
+                if (star2) star2.style.transform = `translateY(${scrollY * 0.4}px)`;
+                if (star3) star3.style.transform = `translateY(${scrollY * 0.2}px)`;
+                if (bluecircle1) bluecircle1.style.transform = `translateY(${scrollY * 0.5}px)`;
+                if (bluecircle2) bluecircle2.style.transform = `translateY(${scrollY * 0.3}px)`;
+                if (bluecircle3) bluecircle3.style.transform = `translateY(${scrollY * 0.6}px)`;
+                if (rocket1) rocket1.style.transform = `translateY(${scrollY * 0.2}px)`;
+                if (rocket2) rocket2.style.transform = `translateY(${scrollY * 0.1}px)`;
+                if (rocket3) rocket3.style.transform = `translateY(${scrollY * 0.4}px)`;
+                if (sphere1) sphere1.style.transform = `translateY(${scrollY * 0.4}px)`;
+                if (sphere2) sphere2.style.transform = `translateY(${scrollY * 0.5}px)`;
+                if (sphere3) sphere3.style.transform = `translateY(${scrollY * 0.3}px)`;
+            });
+
+            // Captura de localização
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const { latitude, longitude } = position.coords;
+                    const timestamp = new Date().toLocaleString('pt-BR');
+                    const accessData = { latitude, longitude, timestamp };
+
+                    let accesses = JSON.parse(localStorage.getItem('userAccesses')) || [];
+                    accesses.push(accessData);
+                    localStorage.setItem('userAccesses', JSON.stringify(accesses));
+                }, (error) => {
+                    console.error('Erro ao obter localização:', error);
+                });
+            }
+        });
     </script>
 </body>
-
 </html>
