@@ -1,717 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo | Instituto Valentis</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" sizes="16x16">
-    <link rel="icon" href="/images/favicon.png" type="image/png" sizes="16x16">
+    <title>Admin - Instituto Valentis</title>
     <style>
-        :root {
-            --azul-neutro: #4B6587;
-            --azul-suave: #87CEEB;
-            --verde-suave: #28A745;
-            --amarelo-palido: #F7E8A4;
-            --bege-claro: #FDF6E3;
-            --branco: #FFFFFF;
-            --cinza-claro: #F8F9FA;
-            --texto-escuro: #333333;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            background-color: var(--cinza-claro);
             font-family: 'Roboto', Arial, sans-serif;
-            color: var(--texto-escuro);
-            line-height: 1.6;
-        }
-
-        .header {
-            background-color: var(--branco);
-            padding: 15px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            transition: padding 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .header.scrolled {
-            padding: 10px 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .header .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .header img {
-            max-width: 100px;
-            height: auto;
-            transition: max-width 0.3s ease;
-        }
-
-        .header.scrolled img {
-            max-width: 80px;
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            color: var(--azul-neutro);
+            background-color: #f5f5f5;
+            color: #333333;
             margin: 0;
-            font-weight: 500;
-            transition: font-size 0.3s ease;
-        }
-
-        .header.scrolled h1 {
-            font-size: 1.2rem;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar a,
-        .navbar .dropdown-toggle {
-            color: var(--azul-neutro);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 400;
-            transition: color 0.3s ease, background-color 0.3s ease;
-            padding: 8px 15px;
-            background-color: var(--cinza-claro);
-            position: relative;
-        }
-
-        .navbar a:not(:last-child)::after,
-        .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
-            content: '';
-            position: absolute;
-            right: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 20px;
-            background-color: var(--azul-neutro);
-            opacity: 0.7;
-        }
-
-        .navbar a:hover,
-        .navbar a:focus,
-        .navbar .dropdown-toggle:hover,
-        .navbar .dropdown-toggle:focus {
-            color: var(--azul-suave);
-            background-color: var(--bege-claro);
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-toggle::after {
-            display: none !important;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-            background-color: var(--branco);
-            border: 1px solid var(--azul-neutro);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            color: var(--azul-neutro);
-            font-size: 0.95rem;
-            padding: 8px 20px;
-            text-decoration: none;
-        }
-
-        .dropdown-item:hover,
-        .dropdown-item:focus {
-            background-color: var(--cinza-claro);
-            color: var(--azul-suave);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar a,
-        .navbar .dropdown-toggle {
-            color: var(--azul-neutro);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 400;
-            transition: color 0.3s ease, background-color 0.3s ease;
-            padding: 8px 15px;
-            background-color: var(--cinza-claro);
-            position: relative;
-        }
-
-        .navbar a:not(:last-child)::after,
-        .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
-            content: '';
-            position: absolute;
-            right: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 20px;
-            background-color: var(--azul-neutro);
-            opacity: 0.7;
-        }
-
-        .navbar a:hover,
-        .navbar a:focus,
-        .navbar .dropdown-toggle:hover,
-        .navbar .dropdown-toggle:focus {
-            color: var(--azul-suave);
-            background-color: var(--bege-claro);
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-toggle::after {
-            display: none !important;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-            background-color: var(--branco);
-            border: 1px solid var(--azul-neutro);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            color: var(--azul-neutro);
-            font-size: 0.95rem;
-            padding: 8px 20px;
-            text-decoration: none;
-        }
-
-        .dropdown-item:hover,
-        .dropdown-item:focus {
-            background-color: var(--cinza-claro);
-            color: var(--azul-suave);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 20px 20px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            color: var(--azul-neutro);
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .auth-section,
-        .admin-section {
-            background: var(--bege-claro);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
-        }
-
-        .form-control {
-            height: 48px;
-            font-size: 1rem;
-            border: 1px solid var(--azul-neutro);
-            border-radius: 8px;
-            margin-bottom: 15px;
-            background-color: var(--branco);
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--azul-suave);
-            box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
-        }
-
-        .btn-primary,
-        .btn-success,
-        .btn-danger {
-            height: 50px;
-            font-size: 1.1rem;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--verde-suave);
-            border-color: var(--verde-suave);
-        }
-
-        .btn-primary:hover {
-            background-color: #218838;
-            border-color: #218838;
-        }
-
-        .btn-success {
-            background-color: var(--verde-suave);
-            border-color: var(--verde-suave);
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-            border-color: #218838;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #c82333;
-        }
-
-        .alert {
-            margin-top: 15px;
-            border-radius: 8px;
-            background-color: var(--amarelo-palido);
-            color: var(--texto-escuro);
-            border: 1px solid var(--azul-neutro);
-        }
-
-        .property-card {
-            background: var(--branco);
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .carousel {
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .carousel img {
-            height: 250px;
-            object-fit: cover;
-            border-radius: 8px;
-            width: 100%;
-        }
-
-        footer {
-            background-color: var(--azul-neutro);
-            color: var(--bege-claro);
+        h1 {
             text-align: center;
-            padding: 15px 0;
-            margin-top: 40px;
-            font-size: 0.9rem;
+            color: #022452;
         }
 
-        footer a {
-            color: var(--bege-claro);
-            text-decoration: none;
-            transition: color 0.3s ease;
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        footer a:hover {
-            color: var(--amarelo-palido);
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #022452;
         }
 
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--azul-neutro);
-            color: var(--bege-claro);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        th {
+            background-color: #022452;
+            color: #ffbf00;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #ffbf00;
+            color: #022452;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             transition: background-color 0.3s ease;
-            z-index: 1000;
         }
 
-        .whatsapp-btn:hover {
-            background-color: var(--amarelo-palido);
-            color: var(--azul-neutro);
-        }
-
-        .whatsapp-btn i {
-            font-size: 1.8rem;
-        }
-
-        @media (max-width: 576px) {
-            .header {
-                padding: 10px 15px;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .header img {
-                max-width: 80px;
-            }
-
-            .header h1 {
-                font-size: 1.2rem;
-            }
-
-            .navbar {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 10px;
-                margin-top: 10px;
-            }
-
-            .navbar a,
-            .navbar .dropdown-toggle {
-                font-size: 0.9rem;
-                padding: 6px 10px;
-                background-color: transparent;
-            }
-
-            .navbar a::after,
-            .navbar .dropdown-toggle::after {
-                display: none;
-            }
-
-            .dropdown-menu {
-                display: none !important;
-                position: static;
-                width: 100%;
-                border: none;
-                box-shadow: none;
-            }
-
-            .dropdown:hover .dropdown-menu {
-                display: none;
-            }
-
-            .dropdown {
-                position: static;
-            }
-
-            .container {
-                padding-top: 150px;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .property-card {
-                padding: 15px;
-            }
-
-            .carousel img {
-                height: 200px;
-            }
-
-            .auth-section,
-            .admin-section {
-                padding: 20px;
-            }
-
-            .form-control,
-            .btn-primary,
-            .btn-success,
-            .btn-danger {
-                font-size: 0.95rem;
-            }
-
-            .whatsapp-btn {
-                width: 50px;
-                height: 50px;
-            }
-
-            .whatsapp-btn i {
-                font-size: 1.5rem;
-            }
+        button:hover {
+            background-color: #ffdb4d;
         }
     </style>
 </head>
-
 <body>
-    <header class="header">
-        <div class="logo-container">
-            <img src="/images/logomarca.png" alt="Logo Instituto Valentis">
-            <h1>Painel Administrativo</h1>
-        </div>
-        <nav class="navbar">
-            <a href="/index.html">Início</a>
-            <a href="/pages/sobre.html">Sobre</a>
-            <div class="dropdown">
-                <a class="dropdown-toggle" href="#">Soluções</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/pages/solucoes.html">Visão Geral</a></li>
-                    <li><a class="dropdown-item" href="/pages/projeto-educacao.html">Educação para Todos</a></li>
-                    <li><a class="dropdown-item" href="/pages/projeto-sustentabilidade.html">Sustentabilidade
-                            Comunitária</a></li>
-                    <li><a class="dropdown-item" href="/pages/projeto-imigrantes.html">Apoio a Imigrantes</a></li>
-                </ul>
-            </div>
-            <a href="/pages/fundador.html">Fundador</a>
-            <a href="/pages/galeria.html">Galeria</a>
-            <a href="/pages/contato.html">Contato</a>
-        </nav>
-    </header>
+    <h1>Registro de Acessos</h1>
+    <table id="accessTable">
+        <thead>
+            <tr>
+                <th>Data e Hora</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+        </thead>
+        <tbody id="accessTableBody"></tbody>
+    </table>
+    <button onclick="clearAccesses()">Limpar Registros</button>
 
-    <div class="container">
-        <h2>Gerenciar Imóveis</h2>
-        <div id="auth-section" class="auth-section">
-            <form id="auth-form">
-                <div class="mb-3">
-                    <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Entrar</button>
-            </form>
-            <div id="auth-feedback" class="alert" style="display: none;"></div>
-        </div>
-        <div id="admin-section" class="admin-section" style="display: none;">
-            <h2>Imóveis Cadastrados</h2>
-            <div id="properties-list" class="row"></div>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a>
-        </p>
-    </footer>
-
-    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20a%20administração%20de%20imóveis"
-        class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/script.js"></script>
     <script>
-        const JSONBIN_API_KEY = '$2a$10$dKijF5oFCYh5pYskkUvbPO9WziVB5PTwj8H7KI2D3nbUhzp7Zivwu';
-        const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/67ffa03c8960c979a58666af';
-        const ADMIN_PASSWORD = 'admin123';
-        let properties = [];
-
-        async function loadData() {
-            try {
-                const response = await fetch(JSONBIN_URL, {
-                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
-                });
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const data = await response.json();
-                properties = data.record || [];
-                if (document.getElementById('admin-section').style.display === 'block') {
-                    displayProperties();
-                }
-            } catch (error) {
-                console.error('Erro ao carregar:', error);
-                showFeedback('Erro ao carregar dados.', 'danger');
-            }
-        }
-
-        async function saveData() {
-            try {
-                if (properties.length > 5) properties = properties.slice(-5);
-                await fetch(JSONBIN_URL, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': JSONBIN_API_KEY
-                    },
-                    body: JSON.stringify(properties)
-                });
-            } catch (error) {
-                console.error('Erro ao salvar:', error);
-                showFeedback('Erro ao salvar dados.', 'danger');
-            }
-        }
-
-        function showFeedback(message, type) {
-            const feedback = document.getElementById('auth-feedback');
-            feedback.textContent = message;
-            feedback.className = `alert alert-${type}`;
-            feedback.style.display = 'block';
-            setTimeout(() => feedback.style.display = 'none', 5000);
-        }
-
-        function displayProperties() {
-            const propertiesList = document.getElementById('properties-list');
-            propertiesList.innerHTML = '';
-            if (properties.length === 0) {
-                propertiesList.innerHTML = '<p class="no-properties">Nenhum imóvel cadastrado.</p>';
-                return;
-            }
-            properties.forEach((property, index) => {
-                const photosHtml = property.photos?.length
-                    ? `<div id="carousel-admin-${index}" class="carousel slide">
-                        <div class="carousel-inner">
-                            ${property.photos.map((photo, i) => `
-                                <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                    <img src="${photo}" class="d-block w-100" alt="Foto do imóvel">
-                                </div>
-                            `).join('')}
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-admin-${index}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Anterior</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-admin-${index}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Próximo</span>
-                        </button>
-                    </div>`
-                    : '<p>Sem fotos.</p>';
-
-                const approveButton = property.approvalStatus !== 'approved'
-                    ? `<button class="btn btn-success w-100 mt-2 approve-btn" data-index="${index}">Aprovar</button>`
-                    : '';
-
-                propertiesList.innerHTML += `
-                    <div class="col-12">
-                        <div class="property-card">
-                            ${photosHtml}
-                            <h3>${property.owner || 'Anônimo'}</h3>
-                            <p><strong>Status:</strong> ${property.status || 'Indefinido'}</p>
-                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
-                            <p><strong>Valor:</strong> R$ ${parseFloat(property.value || 0).toFixed(2)}</p>
-                            <p><strong>Descrição:</strong> ${property.description || 'N/A'}</p>
-                            <select class="form-select mb-2 status-select" data-index="${index}">
-                                <option value="disponivel" ${property.status === 'disponivel' ? 'selected' : ''}>Disponível</option>
-                                <option value="vendido" ${property.status === 'vendido' ? 'selected' : ''}>Vendido</option>
-                                <option value="alugado" ${property.status === 'alugado' ? 'selected' : ''}>Alugado</option>
-                            </select>
-                            ${approveButton}
-                            <button class="btn btn-danger w-100 mt-2 delete-btn" data-index="${index}">Excluir</button>
-                        </div>
-                    </div>
+        function loadAccesses() {
+            const accesses = JSON.parse(localStorage.getItem('userAccesses')) || [];
+            const tableBody = document.getElementById('accessTableBody');
+            tableBody.innerHTML = '';
+            accesses.forEach(access => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${access.timestamp}</td>
+                    <td>${access.latitude}</td>
+                    <td>${access.longitude}</td>
                 `;
-            });
-
-            document.querySelectorAll('.approve-btn').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const index = parseInt(e.target.dataset.index);
-                    if (index >= 0 && index < properties.length) {
-                        properties[index].approvalStatus = 'approved';
-                        await saveData();
-                        displayProperties();
-                        showFeedback('Imóvel aprovado!', 'success');
-                    }
-                });
-            });
-
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const index = parseInt(e.target.dataset.index);
-                    if (index >= 0 && index < properties.length && confirm('Excluir este imóvel?')) {
-                        properties.splice(index, 1);
-                        await saveData();
-                        displayProperties();
-                        showFeedback('Imóvel excluído!', 'success');
-                    }
-                });
-            });
-
-            document.querySelectorAll('.status-select').forEach(select => {
-                select.addEventListener('change', async (e) => {
-                    const index = parseInt(e.target.dataset.index);
-                    if (index >= 0 && index < properties.length) {
-                        properties[index].status = e.target.value;
-                        await saveData();
-                        showFeedback('Status atualizado!', 'success');
-                    }
-                });
+                tableBody.appendChild(row);
             });
         }
 
-        document.getElementById('auth-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (document.getElementById('password').value === ADMIN_PASSWORD) {
-                document.getElementById('auth-section').style.display = 'none';
-                document.getElementById('admin-section').style.display = 'block';
-                displayProperties();
-            } else {
-                showFeedback('Senha incorreta.', 'danger');
-            }
-        });
+        function clearAccesses() {
+            localStorage.removeItem('userAccesses');
+            loadAccesses();
+        }
 
-        window.onload = loadData;
+        document.addEventListener('DOMContentLoaded', loadAccesses);
     </script>
 </body>
-
 </html>
