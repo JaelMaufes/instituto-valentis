@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,9 +21,15 @@
             --cinza-escuro: #333333;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             background-color: var(--cinza-claro);
@@ -136,7 +143,8 @@
             cursor: pointer;
         }
 
-        .mobile-menu a, .mobile-menu .dropdown-toggle {
+        .mobile-menu a,
+        .mobile-menu .dropdown-toggle {
             display: block;
             color: var(--primario-amarelo);
             text-decoration: none;
@@ -145,7 +153,8 @@
             border-bottom: 1px solid rgba(255, 191, 0, 0.3);
         }
 
-        .mobile-menu a:hover, .mobile-menu .dropdown-toggle:hover {
+        .mobile-menu a:hover,
+        .mobile-menu .dropdown-toggle:hover {
             color: var(--amarelo-claro);
         }
 
@@ -198,7 +207,8 @@
             transform: translateY(-50%);
         }
 
-        .navbar a, .navbar .dropdown-toggle {
+        .navbar a,
+        .navbar .dropdown-toggle {
             color: var(--primario-amarelo);
             text-decoration: none;
             font-size: 1.2rem;
@@ -543,18 +553,89 @@
             opacity: 1;
         }
 
-        #star1 { top: 10%; left: 15%; width: 50px; height: 50px; }
-        #star2 { top: 20%; right: 10%; width: 30px; height: 30px; }
-        #star3 { bottom: 15%; left: 30%; width: 70px; height: 70px; }
-        #bluecircle1 { top: 30%; right: 20%; width: 80px; height: 80px; }
-        #bluecircle2 { bottom: 25%; left: 10%; width: 60px; height: 60px; }
-        #bluecircle3 { top: 50%; left: 40%; width: 100px; height: 100px; }
-        #rocket1 { bottom: 20%; left: 25%; width: 60px; height: 100px; }
-        #rocket2 { top: 15%; right: 30%; width: 50px; height: 80px; }
-        #rocket3 { bottom: 30%; right: 15%; width: 70px; height: 120px; }
-        #sphere1 { bottom: 10%; right: 15%; width: 70px; height: 70px; }
-        #sphere2 { top: 40%; left: 20%; width: 50px; height: 50px; }
-        #sphere3 { bottom: 35%; right: 35%; width: 90px; height: 90px; }
+        #star1 {
+            top: 10%;
+            left: 15%;
+            width: 50px;
+            height: 50px;
+        }
+
+        #star2 {
+            top: 20%;
+            right: 10%;
+            width: 30px;
+            height: 30px;
+        }
+
+        #star3 {
+            bottom: 15%;
+            left: 30%;
+            width: 70px;
+            height: 70px;
+        }
+
+        #bluecircle1 {
+            top: 30%;
+            right: 20%;
+            width: 80px;
+            height: 80px;
+        }
+
+        #bluecircle2 {
+            bottom: 25%;
+            left: 10%;
+            width: 60px;
+            height: 60px;
+        }
+
+        #bluecircle3 {
+            top: 50%;
+            left: 40%;
+            width: 100px;
+            height: 100px;
+        }
+
+        #rocket1 {
+            bottom: 20%;
+            left: 25%;
+            width: 60px;
+            height: 100px;
+        }
+
+        #rocket2 {
+            top: 15%;
+            right: 30%;
+            width: 50px;
+            height: 80px;
+        }
+
+        #rocket3 {
+            bottom: 30%;
+            right: 15%;
+            width: 70px;
+            height: 120px;
+        }
+
+        #sphere1 {
+            bottom: 10%;
+            right: 15%;
+            width: 70px;
+            height: 70px;
+        }
+
+        #sphere2 {
+            top: 40%;
+            left: 20%;
+            width: 50px;
+            height: 50px;
+        }
+
+        #sphere3 {
+            bottom: 35%;
+            right: 35%;
+            width: 90px;
+            height: 90px;
+        }
 
         /* Media Queries para Responsividade */
         @media (max-width: 992px) {
@@ -568,16 +649,28 @@
                 padding: 9.6px 15px;
             }
 
-            .header img { max-width: 80px; }
-            .header.scrolled img { max-width: 64px; }
+            .header img {
+                max-width: 80px;
+            }
 
-            .header h1 { font-size: 1.2rem; }
-            .header.scrolled h1 { font-size: 0.96rem; }
+            .header.scrolled img {
+                max-width: 64px;
+            }
 
-            .navbar a, .navbar .dropdown-toggle {
+            .header h1 {
+                font-size: 1.2rem;
+            }
+
+            .header.scrolled h1 {
+                font-size: 0.96rem;
+            }
+
+            .navbar a,
+            .navbar .dropdown-toggle {
                 font-size: 1.1rem;
                 padding: 6px 12px;
             }
+
             .header.scrolled .navbar a,
             .header.scrolled .navbar .dropdown-toggle {
                 font-size: 0.88rem;
@@ -588,34 +681,104 @@
             .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
                 height: 18px;
             }
+
             .header.scrolled .navbar a:not(:last-child)::after,
             .header.scrolled .navbar .dropdown:not(:last-child) .dropdown-toggle::after {
                 height: 14.4px;
             }
 
-            .menu-toggle { font-size: 1.6rem; }
-            .header.scrolled .menu-toggle { font-size: 1.28rem; }
+            .menu-toggle {
+                font-size: 1.6rem;
+            }
 
-            .container { padding-top: 90px; }
-            section { padding: 50px 15px; }
-            h2 { font-size: 1.6rem; }
-            .carousel img { height: 220px; }
-            .property-card { padding: 15px; }
-            .form-section { padding: 25px; }
+            .header.scrolled .menu-toggle {
+                font-size: 1.28rem;
+            }
+
+            .container {
+                padding-top: 90px;
+            }
+
+            section {
+                padding: 50px 15px;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .carousel img {
+                height: 220px;
+            }
+
+            .property-card {
+                padding: 15px;
+            }
+
+            .form-section {
+                padding: 25px;
+            }
 
             /* Ajuste dos elementos do parallax */
-            #star1 { width: 40px; height: 40px; }
-            #star2 { width: 25px; height: 25px; }
-            #star3 { width: 60px; height: 60px; }
-            #bluecircle1 { width: 70px; height: 70px; }
-            #bluecircle2 { width: 50px; height: 50px; }
-            #bluecircle3 { width: 90px; height: 90px; }
-            #rocket1 { width: 50px; height: 80px; }
-            #rocket2 { width: 40px; height: 60px; }
-            #rocket3 { width: 60px; height: 100px; }
-            #sphere1 { width: 60px; height: 60px; }
-            #sphere2 { width: 40px; height: 40px; }
-            #sphere3 { width: 80px; height: 80px; }
+            #star1 {
+                width: 40px;
+                height: 40px;
+            }
+
+            #star2 {
+                width: 25px;
+                height: 25px;
+            }
+
+            #star3 {
+                width: 60px;
+                height: 60px;
+            }
+
+            #bluecircle1 {
+                width: 70px;
+                height: 70px;
+            }
+
+            #bluecircle2 {
+                width: 50px;
+                height: 50px;
+            }
+
+            #bluecircle3 {
+                width: 90px;
+                height: 90px;
+            }
+
+            #rocket1 {
+                width: 50px;
+                height: 80px;
+            }
+
+            #rocket2 {
+                width: 40px;
+                height: 60px;
+            }
+
+            #rocket3 {
+                width: 60px;
+                height: 100px;
+            }
+
+            #sphere1 {
+                width: 60px;
+                height: 60px;
+            }
+
+            #sphere2 {
+                width: 40px;
+                height: 40px;
+            }
+
+            #sphere3 {
+                width: 80px;
+                height: 80px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -645,35 +808,114 @@
                 gap: 10px;
             }
 
-            .header img { max-width: 70px; }
-            .header.scrolled img { max-width: 56px; }
+            .header img {
+                max-width: 70px;
+            }
 
-            .header h1 { font-size: 1.1rem; }
-            .header.scrolled h1 { font-size: 0.88rem; }
+            .header.scrolled img {
+                max-width: 56px;
+            }
 
-            .menu-toggle { font-size: 1.5rem; }
-            .header.scrolled .menu-toggle { font-size: 1.2rem; }
+            .header h1 {
+                font-size: 1.1rem;
+            }
 
-            .container { padding-top: 80px; }
-            section { padding: 40px 10px; }
-            h2 { font-size: 1.5rem; }
-            .carousel img { height: 200px; }
-            .property-card { padding: 12px; }
-            .form-section { padding: 20px; }
+            .header.scrolled h1 {
+                font-size: 0.88rem;
+            }
+
+            .menu-toggle {
+                font-size: 1.5rem;
+            }
+
+            .header.scrolled .menu-toggle {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding-top: 80px;
+            }
+
+            section {
+                padding: 40px 10px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .carousel img {
+                height: 200px;
+            }
+
+            .property-card {
+                padding: 12px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
 
             /* Ajuste dos elementos do parallax */
-            #star1 { width: 35px; height: 35px; }
-            #star2 { width: 20px; height: 20px; }
-            #star3 { width: 50px; height: 50px; }
-            #bluecircle1 { width: 60px; height: 60px; }
-            #bluecircle2 { width: 40px; height: 40px; }
-            #bluecircle3 { width: 80px; height: 80px; }
-            #rocket1 { width: 40px; height: 70px; }
-            #rocket2 { width: 35px; height: 50px; }
-            #rocket3 { width: 50px; height: 90px; }
-            #sphere1 { width: 50px; height: 50px; }
-            #sphere2 { width: 30px; height: 30px; }
-            #sphere3 { width: 70px; height: 70px; }
+            #star1 {
+                width: 35px;
+                height: 35px;
+            }
+
+            #star2 {
+                width: 20px;
+                height: 20px;
+            }
+
+            #star3 {
+                width: 50px;
+                height: 50px;
+            }
+
+            #bluecircle1 {
+                width: 60px;
+                height: 60px;
+            }
+
+            #bluecircle2 {
+                width: 40px;
+                height: 40px;
+            }
+
+            #bluecircle3 {
+                width: 80px;
+                height: 80px;
+            }
+
+            #rocket1 {
+                width: 40px;
+                height: 70px;
+            }
+
+            #rocket2 {
+                width: 35px;
+                height: 50px;
+            }
+
+            #rocket3 {
+                width: 50px;
+                height: 90px;
+            }
+
+            #sphere1 {
+                width: 50px;
+                height: 50px;
+            }
+
+            #sphere2 {
+                width: 30px;
+                height: 30px;
+            }
+
+            #sphere3 {
+                width: 70px;
+                height: 70px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -687,49 +929,145 @@
                 padding: 6.4px 8px;
             }
 
-            .header img { max-width: 60px; }
-            .header.scrolled img { max-width: 48px; }
+            .header img {
+                max-width: 60px;
+            }
 
-            .header h1 { font-size: 1rem; }
-            .header.scrolled h1 { font-size: 0.8rem; }
+            .header.scrolled img {
+                max-width: 48px;
+            }
 
-            .menu-toggle { font-size: 1.4rem; }
-            .header.scrolled .menu-toggle { font-size: 1.12rem; }
+            .header h1 {
+                font-size: 1rem;
+            }
 
-            .container { padding-top: 75px; padding: 75px 10px 10px; }
-            section { padding: 30px 8px; }
-            h2 { font-size: 1.4rem; }
-            .carousel img { height: 180px; }
-            .property-card { padding: 10px; }
-            .form-section { padding: 15px; }
-            .form-control, .form-select, .btn-primary { font-size: 0.95rem; }
-            .whatsapp-btn { width: 50px; height: 50px; }
-            .whatsapp-btn i { font-size: 1.5rem; }
+            .header.scrolled h1 {
+                font-size: 0.8rem;
+            }
+
+            .menu-toggle {
+                font-size: 1.4rem;
+            }
+
+            .header.scrolled .menu-toggle {
+                font-size: 1.12rem;
+            }
+
+            .container {
+                padding-top: 75px;
+                padding: 75px 10px 10px;
+            }
+
+            section {
+                padding: 30px 8px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .carousel img {
+                height: 180px;
+            }
+
+            .property-card {
+                padding: 10px;
+            }
+
+            .form-section {
+                padding: 15px;
+            }
+
+            .form-control,
+            .form-select,
+            .btn-primary {
+                font-size: 0.95rem;
+            }
+
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .whatsapp-btn i {
+                font-size: 1.5rem;
+            }
 
             /* Ajuste dos elementos do parallax */
-            #star1 { width: 30px; height: 30px; }
-            #star2 { width: 15px; height: 15px; }
-            #star3 { width: 40px; height: 40px; }
-            #bluecircle1 { width: 50px; height: 50px; }
-            #bluecircle2 { width: 30px; height: 30px; }
-            #bluecircle3 { width: 70px; height: 70px; }
-            #rocket1 { width: 35px; height: 60px; }
-            #rocket2 { width: 30px; height: 45px; }
-            #rocket3 { width: 40px; height: 80px; }
-            #sphere1 { width: 40px; height: 40px; }
-            #sphere2 { width: 25px; height: 25px; }
-            #sphere3 { width: 60px; height: 60px; }
+            #star1 {
+                width: 30px;
+                height: 30px;
+            }
+
+            #star2 {
+                width: 15px;
+                height: 15px;
+            }
+
+            #star3 {
+                width: 40px;
+                height: 40px;
+            }
+
+            #bluecircle1 {
+                width: 50px;
+                height: 50px;
+            }
+
+            #bluecircle2 {
+                width: 30px;
+                height: 30px;
+            }
+
+            #bluecircle3 {
+                width: 70px;
+                height: 70px;
+            }
+
+            #rocket1 {
+                width: 35px;
+                height: 60px;
+            }
+
+            #rocket2 {
+                width: 30px;
+                height: 45px;
+            }
+
+            #rocket3 {
+                width: 40px;
+                height: 80px;
+            }
+
+            #sphere1 {
+                width: 40px;
+                height: 40px;
+            }
+
+            #sphere2 {
+                width: 25px;
+                height: 25px;
+            }
+
+            #sphere3 {
+                width: 60px;
+                height: 60px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="parallax">
         <img src="/images/star.png" id="star1" alt="Estrela 1" onerror="console.error('Failed to load star.png')">
         <img src="/images/star.png" id="star2" alt="Estrela 2" onerror="console.error('Failed to load star.png')">
         <img src="/images/star.png" id="star3" alt="Estrela 3" onerror="console.error('Failed to load star.png')">
-        <img src="/images/bluecircle.png" id="bluecircle1" alt="Círculo Azul 1" onerror="console.error('Failed to load bluecircle.png')">
-        <img src="/images/bluecircle.png" id="bluecircle2" alt="Círculo Azul 2" onerror="console.error('Failed to load bluecircle.png')">
-        <img src="/images/bluecircle.png" id="bluecircle3" alt="Círculo Azul 3" onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/bluecircle.png" id="bluecircle1" alt="Círculo Azul 1"
+            onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/bluecircle.png" id="bluecircle2" alt="Círculo Azul 2"
+            onerror="console.error('Failed to load bluecircle.png')">
+        <img src="/images/bluecircle.png" id="bluecircle3" alt="Círculo Azul 3"
+            onerror="console.error('Failed to load bluecircle.png')">
         <img src="/images/rocket.png" id="rocket1" alt="Foguete 1" onerror="console.error('Failed to load rocket.png')">
         <img src="/images/rocket.png" id="rocket2" alt="Foguete 2" onerror="console.error('Failed to load rocket.png')">
         <img src="/images/rocket.png" id="rocket3" alt="Foguete 3" onerror="console.error('Failed to load rocket.png')">
@@ -741,7 +1079,8 @@
     <header class="header">
         <div class="logo-container">
             <a href="/index.html">
-                <img src="/images/logomarca.png" alt="Logo Instituto Valentis" onerror="this.src='/images/placeholder.png'">
+                <img src="/images/logomarca.png" alt="Logo Instituto Valentis"
+                    onerror="this.src='/images/placeholder.png'">
             </a>
             <h1>Instituto Valentis | Consulte Imóveis em Ivatuba</h1>
         </div>
@@ -777,8 +1116,10 @@
                 <form id="property-form">
                     <div class="row g-3">
                         <div class="col-12">
-                            <label for="owner" class="form-label">Nome do Imóvel <i>(Ex.: Casa para Alugar | Bairro Residencial Esperança)</i></label>
-                            <input type="text" class="form-control" id="owner" placeholder="Digite o nome do imóvel" required>
+                            <label for="owner" class="form-label">Nome do Imóvel <i>(Ex.: Casa para Alugar | Bairro
+                                    Residencial Esperança)</i></label>
+                            <input type="text" class="form-control" id="owner" placeholder="Digite o nome do imóvel"
+                                required>
                         </div>
                         <div class="col-12">
                             <label for="type" class="form-label">Tipo</label>
@@ -790,11 +1131,14 @@
                         </div>
                         <div class="col-12">
                             <label for="value" class="form-label">Valor (R$)</label>
-                            <input type="number" class="form-control" id="value" step="0.01" placeholder="Digite o valor" required>
+                            <input type="number" class="form-control" id="value" step="0.01"
+                                placeholder="Digite o valor" required>
                         </div>
                         <div class="col-12">
-                            <label for="description" class="form-label">Descrição <i>(Ex.: Quantidade de quartos, outros detalhes do imóvel, telefone para contato, etc)</i></label>
-                            <textarea class="form-control" id="description" placeholder="Descreva o imóvel" required></textarea>
+                            <label for="description" class="form-label">Descrição <i>(Ex.: Quantidade de quartos, outros
+                                    detalhes do imóvel, telefone para contato, etc)</i></label>
+                            <textarea class="form-control" id="description" placeholder="Descreva o imóvel"
+                                required></textarea>
                         </div>
                         <div class="col-12">
                             <label for="photos" class="form-label">Fotos (máx. 15)</label>
@@ -803,7 +1147,8 @@
                         <div class="col-12">
                             <label>
                                 <input type="checkbox" id="consent" required>
-                                Concordo com a <a href="/pages/politica.html" target="_blank">Política de Privacidade</a>.
+                                Concordo com a <a href="/pages/politica.html" target="_blank">Política de
+                                    Privacidade</a>.
                             </label>
                         </div>
                         <div class="col-12">
@@ -821,7 +1166,13 @@
                 <div class="card about-box">
                     <div class="card-body">
                         <h3 class="card-title">Quem Somos</h3>
-                        <p class="card-text">O <strong>Instituto Valentis</strong> é uma associação civil sem fins lucrativos, fundada em <strong>7 de fevereiro de 2024</strong>. O Instituto nasceu com o propósito de transformar vidas por meio de iniciativas que unem <strong>educação</strong>, <strong>fé cristã protestante</strong>, <strong>assistência social</strong> e <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
+                        <p class="card-text">O <strong>Instituto Valentis</strong> é uma associação civil sem fins
+                            lucrativos, fundada em <strong>7 de fevereiro de 2024</strong>. O Instituto nasceu com o
+                            propósito de transformar vidas por meio de iniciativas que unem <strong>educação</strong>,
+                            <strong>fé cristã protestante</strong>, <strong>assistência social</strong> e
+                            <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a
+                            imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com
+                            o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
                     </div>
                 </div>
             </div>
@@ -829,7 +1180,12 @@
                 <div class="card about-box">
                     <div class="card-body">
                         <h3 class="card-title">Missão</h3>
-                        <p class="card-text">Nossa missão é <strong>promover o bem-estar e o crescimento integral das pessoas</strong>, oferecendo oportunidades de aprendizado, apoio espiritual, assistência social e incentivo à inovação. Por meio de ações como palestras, cultos cristãos, doações, atendimento psicológico e fonoaudiológico, e projetos de empreendedorismo, buscamos fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>, <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
+                        <p class="card-text">Nossa missão é <strong>promover o bem-estar e o crescimento integral das
+                                pessoas</strong>, oferecendo oportunidades de aprendizado, apoio espiritual, assistência
+                            social e incentivo à inovação. Por meio de ações como palestras, cultos cristãos, doações,
+                            atendimento psicológico e fonoaudiológico, e projetos de empreendedorismo, buscamos
+                            fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>,
+                            <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
                     </div>
                 </div>
             </div>
@@ -837,7 +1193,12 @@
                 <div class="card about-box">
                     <div class="card-body">
                         <h3 class="card-title">Visão</h3>
-                        <p class="card-text">Ser uma <strong>referência global em transformação social e espiritual</strong>, reconhecida por unir fé cristã, educação de qualidade e ações concretas que geram impacto duradouro. Almejamos expandir nossas iniciativas, criando filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha acesso a ferramentas para prosperar com <strong>dignidade</strong>, <strong>esperança</strong> e <strong>propósito</strong>.</p>
+                        <p class="card-text">Ser uma <strong>referência global em transformação social e
+                                espiritual</strong>, reconhecida por unir fé cristã, educação de qualidade e ações
+                            concretas que geram impacto duradouro. Almejamos expandir nossas iniciativas, criando
+                            filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha
+                            acesso a ferramentas para prosperar com <strong>dignidade</strong>,
+                            <strong>esperança</strong> e <strong>propósito</strong>.</p>
                     </div>
                 </div>
             </div>
@@ -846,12 +1207,18 @@
                     <div class="card-body">
                         <h3 class="card-title">Valores</h3>
                         <ul class="list-unstyled">
-                            <li><strong>Fé Cristã</strong>: Vivemos e compartilhamos os ensinamentos de Jesus Cristo, guiando nossas ações com amor e integridade.</li>
-                            <li><strong>Solidariedade</strong>: Atuamos com empatia, priorizando os mais vulneráveis e promovendo a inclusão.</li>
-                            <li><strong>Transparência</strong>: Gerimos recursos com responsabilidade, assegurando confiança e conformidade.</li>
-                            <li><strong>Inovação</strong>: Buscamos soluções criativas para desafios sociais, educacionais e ambientais.</li>
-                            <li><strong>Respeito</strong>: Valorizamos a diversidade, tratando a todos com dignidade, sem distinção.</li>
-                            <li><strong>Compromisso</strong>: Dedicamo-nos incansavelmente aos nossos objetivos, com foco em resultados que transformam vidas.</li>
+                            <li><strong>Fé Cristã</strong>: Vivemos e compartilhamos os ensinamentos de Jesus Cristo,
+                                guiando nossas ações com amor e integridade.</li>
+                            <li><strong>Solidariedade</strong>: Atuamos com empatia, priorizando os mais vulneráveis e
+                                promovendo a inclusão.</li>
+                            <li><strong>Transparência</strong>: Gerimos recursos com responsabilidade, assegurando
+                                confiança e conformidade.</li>
+                            <li><strong>Inovação</strong>: Buscamos soluções criativas para desafios sociais,
+                                educacionais e ambientais.</li>
+                            <li><strong>Respeito</strong>: Valorizamos a diversidade, tratando a todos com dignidade,
+                                sem distinção.</li>
+                            <li><strong>Compromisso</strong>: Dedicamo-nos incansavelmente aos nossos objetivos, com
+                                foco em resultados que transformam vidas.</li>
                         </ul>
                     </div>
                 </div>
@@ -869,10 +1236,12 @@
 
     <footer>
         <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a></p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a>
+        </p>
     </footer>
 
-    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis"
+        class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -1252,6 +1621,31 @@
                 }
             });
         });
+        // Desativar o clique com o botão direito
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+            alert('O clique com o botão direito está desativado!');
+        });
+
+        // Bloquear atalhos comuns de inspeção (Ctrl+Shift+I, Ctrl+U, F12)
+        document.addEventListener('keydown', function (event) {
+            // Ctrl+Shift+I (Inspeção)
+            if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+                event.preventDefault();
+                alert('Acesso à inspeção bloqueado!');
+            }
+            // Ctrl+U (Visualizar código-fonte)
+            if (event.ctrlKey && event.key === 'U') {
+                event.preventDefault();
+                alert('Visualização do código-fonte bloqueada!');
+            }
+            // F12 (DevTools)
+            if (event.key === 'F12') {
+                event.preventDefault();
+                alert('Acesso às ferramentas de desenvolvedor bloqueado!');
+            }
+        });
     </script>
 </body>
+
 </html>

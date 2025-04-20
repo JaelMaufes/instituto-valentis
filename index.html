@@ -1463,6 +1463,7 @@
         document.addEventListener('contextmenu', function (event) {
             event.preventDefault();
             alert('O clique com o botão direito está desativado!');
+            alert('Por favor, respeite os direitos autorais deste site!');
         });
 
         // Bloquear atalhos comuns de inspeção (Ctrl+Shift+I, Ctrl+U, F12)
@@ -1471,16 +1472,19 @@
             if (event.ctrlKey && event.shiftKey && event.key === 'I') {
                 event.preventDefault();
                 alert('Acesso à inspeção bloqueado!');
+                alert('Por favor, respeite os direitos autorais deste site!');
             }
             // Ctrl+U (Visualizar código-fonte)
             if (event.ctrlKey && event.key === 'U') {
                 event.preventDefault();
                 alert('Visualização do código-fonte bloqueada!');
+                alert('Por favor, respeite os direitos autorais deste site!');
             }
             // F12 (DevTools)
             if (event.key === 'F12') {
                 event.preventDefault();
                 alert('Acesso às ferramentas de desenvolvedor bloqueado!');
+                alert('Por favor, respeite os direitos autorais deste site!');
             }
         });
     </script>
