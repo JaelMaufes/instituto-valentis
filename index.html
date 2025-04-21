@@ -1490,6 +1490,12 @@
                 alert('Acesso às ferramentas de desenvolvedor bloqueado!');
                 alert('Por favor, respeite os direitos autorais deste site!');
             }
+            // Ctrl+Shift+J (Console)
+            if (event.ctrlKey && event.shiftKey && event.key === 'J') {
+                event.preventDefault();
+                alert('Acesso ao console bloqueado!');
+                alert('Por favor, respeite os direitos autorais deste site!');
+            }
         });
     </script>
 </body>
