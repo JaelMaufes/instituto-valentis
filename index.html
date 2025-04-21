@@ -1077,7 +1077,8 @@
                             <strong>fé cristã protestante</strong>, <strong>assistência social</strong> e
                             <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a
                             imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com
-                            o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
+                            o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1090,7 +1091,8 @@
                             social e incentivo à inovação. Por meio de ações como palestras, cultos cristãos, doações,
                             atendimento psicológico e fonoaudiológico, e projetos de empreendedorismo, buscamos
                             fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>,
-                            <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
+                            <strong>solidariedade</strong> e <strong>excelência</strong>.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1103,7 +1105,8 @@
                             concretas que geram impacto duradouro. Almejamos expandir nossas iniciativas, criando
                             filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha
                             acesso a ferramentas para prosperar com <strong>dignidade</strong>,
-                            <strong>esperança</strong> e <strong>propósito</strong>.</p>
+                            <strong>esperança</strong> e <strong>propósito</strong>.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1475,8 +1478,9 @@
                 alert('Por favor, respeite os direitos autorais deste site!');
             }
             // Ctrl+U (Visualizar código-fonte)
-            if (event.ctrlKey && event.key === 'U') {
+            if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
                 event.preventDefault();
+                event.stopPropagation(); // Tenta impedir a propagação do evento
                 alert('Visualização do código-fonte bloqueada!');
                 alert('Por favor, respeite os direitos autorais deste site!');
             }
