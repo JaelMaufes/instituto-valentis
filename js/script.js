@@ -1,3 +1,7 @@
+/*
+ * © 2025 Instituto Valentis Todos os direitos reservados. 
+ * Proibida a cópia ou reprodução sem autorização expressa.
+ */
 document.addEventListener("DOMContentLoaded", function () {
     // Efeito de header ao rolar
     window.addEventListener('scroll', () => {
