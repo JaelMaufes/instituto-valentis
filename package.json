@@ -1,0 +1,18 @@
+{
+  "name": "samueljpcarvalho",
+  "version": "1.0.1",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "release": "standard-version"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "standard-version": "^9.5.0"
+  }
+}
