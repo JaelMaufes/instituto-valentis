@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.2.1..v1.2.2) (2025-04-26)
+
+
+### Bug Fixes
+
+* version. correção no caminho ([7ceb09d](https://github.com/JaelMaufes/instituto-valentis/site/commit/7ceb09dd2dccd79379b2bf05c0586892b47dfae6))
+
 ### [1.2.1](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.2.0..v1.2.1) (2025-04-26)
 
 ## [1.2.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.0.2..v1.2.0) (2025-04-26)
