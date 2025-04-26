@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.0.2..v1.2.0) (2025-04-26)
+
+
+### Features
+
+* informação de version no footer ([795bc3f](https://github.com/JaelMaufes/instituto-valentis/site/commit/795bc3f05ff98e46c0ac6b8cae2f3887691d22da))
+
+
+### Bug Fixes
+
+* correção do caminho do arquivo version.js ([7280976](https://github.com/JaelMaufes/instituto-valentis/site/commit/7280976651ccf90fa9261ec84214b2ff4d738957))
+* correção no caminho do arquivo version.js. Remoção do ponto (.) '/js/version.js' ([dee66cf](https://github.com/JaelMaufes/instituto-valentis/site/commit/dee66cff6ec69ba9a52ddf4a27ee0fcd4093c8c3))
+* nome da pasta version de import siteVersion from './version.js' para import siteVersion from '/js/version.js' ([ee87009](https://github.com/JaelMaufes/instituto-valentis/site/commit/ee870090ee572cf50500a128d0db209a81b04728))
+
+## [1.1.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.0.2..v1.1.0) (2025-04-26)
+
+
+### Features
+
+* informação de version no footer ([795bc3f](https://github.com/JaelMaufes/instituto-valentis/site/commit/795bc3f05ff98e46c0ac6b8cae2f3887691d22da))
+
+
+### Bug Fixes
+
+* correção do caminho do arquivo version.js ([7280976](https://github.com/JaelMaufes/instituto-valentis/site/commit/7280976651ccf90fa9261ec84214b2ff4d738957))
+* correção no caminho do arquivo version.js. Remoção do ponto (.) '/js/version.js' ([dee66cf](https://github.com/JaelMaufes/instituto-valentis/site/commit/dee66cff6ec69ba9a52ddf4a27ee0fcd4093c8c3))
+* nome da pasta version de import siteVersion from './version.js' para import siteVersion from '/js/version.js' ([ee87009](https://github.com/JaelMaufes/instituto-valentis/site/commit/ee870090ee572cf50500a128d0db209a81b04728))
+
 ### [1.0.2](https://github.com/instituto-valentis/site/compare/v1.0.1..v1.0.2) (2025-04-25)
 
 ### [1.0.1](https://github.com/instituto-valentis/site/compare/v1.0.0..v1.0.1) (2025-04-25)
