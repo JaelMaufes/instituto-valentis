@@ -15,6 +15,6 @@
   "compareUrlFormat": "https://github.com/JaelMaufes/instituto-valentis/site/compare/{{previousTag}}..{{currentTag}}",
   "issueUrlFormat": "https://github.com/JaelMaufes/instituto-valentis/site/issues/{{id}}",
   "scripts": {
-    "postchangelog": "node -e \"const fs = require('fs'); const pkg = require('./package.json'); fs.writeFileSync('./js/version.js', 'const siteVersion = \\\"' + pkg.version + '\\\";\\nexport default siteVersion;');\""
+    "postchangelog": "node -e \"const fs = require('fs'); const pkg = require('/package.json'); fs.writeFileSync('/js/version.js', 'const siteVersion = \\\"' + pkg.version + '\\\";\\nexport default siteVersion;');\""
   }
 }

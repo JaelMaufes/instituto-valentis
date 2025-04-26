@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-import siteVersion from './js/version.js';
+import siteVersion from '/js/version.js';
 
    document.addEventListener('DOMContentLoaded', () => {
        const versionElement = document.getElementById('site-version');
