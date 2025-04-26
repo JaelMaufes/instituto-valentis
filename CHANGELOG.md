@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.2.3..v2.0.0) (2025-04-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* melhoria no cadastro de imóveis
+
+### Features
+
+* melhoria no cadastro de imóveis ([94cd461](https://github.com/JaelMaufes/instituto-valentis/site/commit/94cd461d8600e5b90204bf98d8bcc1047f061507))
+* redução no tamanho da fonte do footer de 0.7rem para 0.5rem ([ea6142b](https://github.com/JaelMaufes/instituto-valentis/site/commit/ea6142be2685e4d57c6945ee89ba8f3e9bdbc2cc))
+* versão do site no rodapé ([f2d6ec6](https://github.com/JaelMaufes/instituto-valentis/site/commit/f2d6ec6cfcc8cd4a21d302c0ff3716bfaaa9c2e1))
+
+
+### Bug Fixes
+
+* add loading="lazy" imagens de carrossel ([46ed585](https://github.com/JaelMaufes/instituto-valentis/site/commit/46ed585294c46864f97129ac6ee305b678d68234))
+* exibição correta da version ([934144b](https://github.com/JaelMaufes/instituto-valentis/site/commit/934144b344c084ca7f84a0621950b7fa1188aa06))
+* version no footer ([a583692](https://github.com/JaelMaufes/instituto-valentis/site/commit/a583692b46ce13a6e9dca5eced48a864ec8b7892))
+
+
+### Documentation
+
+* adiciona texto de teste para deploy ([6c1bbb5](https://github.com/JaelMaufes/instituto-valentis/site/commit/6c1bbb59319de9dc09a8f45f00ff704b6a05e250))
+* adiciona texto de teste para deploy ([7eb5f00](https://github.com/JaelMaufes/instituto-valentis/site/commit/7eb5f0018732ec01fc6e38341aedb2e8d071d590))
+* adiciona texto de teste para deploy ([a471783](https://github.com/JaelMaufes/instituto-valentis/site/commit/a4717831b2636b0ec06321b1c49117d84d37cdf5))
+* adiciona texto para teste de automação ([3e784fc](https://github.com/JaelMaufes/instituto-valentis/site/commit/3e784fc6e8b9e83aec3cbb613262be140222deaa))
+* atualização no README ([aa42f94](https://github.com/JaelMaufes/instituto-valentis/site/commit/aa42f94fa3b958500b7457b0d124f63e31fa219a))
+
 ### [1.2.3](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.2.2..v1.2.3) (2025-04-26)
 
 
