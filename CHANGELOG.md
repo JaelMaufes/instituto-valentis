@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.3](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.2.2..v1.2.3) (2025-04-26)
+
+
+### Documentation
+
+* adiciona texto de teste ao README ([2e71c71](https://github.com/JaelMaufes/instituto-valentis/site/commit/2e71c71093fad71c58318d8099f22a528c4753ed))
+
 ### [1.2.2](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.2.1..v1.2.2) (2025-04-26)
 
 
