@@ -6,13 +6,15 @@
     "doc": "docs"
   },
   "scripts": {
-    "release": "standard-version"
+    "release": "standard-version",
+    "start": "live-server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "live-server": "^1.2.0",
     "standard-version": "^9.5.0"
   }
 }

@@ -64,20 +64,29 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('script.js carregado com sucesso.');
 
-    // Verifica se a variável siteVersion está definida
-    if (typeof siteVersion === 'undefined') {
-        console.error('Erro: siteVersion não está definida. Verifique se version.js foi carregado corretamente.');
-        return;
+    // Função para tentar preencher a versão, com retry
+    function tryFillVersion(attempts = 5, delay = 500) {
+        if (attempts <= 0) {
+            console.error('Erro: Não foi possível encontrar o elemento com id="site-version" após várias tentativas.');
+            return;
+        }
+
+        if (typeof siteVersion === 'undefined') {
+            console.error('Erro: siteVersion não está definida. Verifique se version.js foi carregado corretamente.');
+            return;
+        }
+
+        console.log('Versão do site:', siteVersion);
+
+        var versionElement = document.getElementById('site-version');
+        if (versionElement) {
+            versionElement.textContent = siteVersion;
+            console.log('Versão preenchida no rodapé com sucesso:', siteVersion);
+        } else {
+            console.warn('Elemento com id="site-version" não encontrado. Tentando novamente em', delay, 'ms...');
+            setTimeout(() => tryFillVersion(attempts - 1, delay), delay);
+        }
     }
 
-    console.log('Versão do site:', siteVersion);
-
-    // Busca o elemento com id="site-version"
-    var versionElement = document.getElementById('site-version');
-    if (versionElement) {
-        versionElement.textContent = siteVersion;
-        console.log('Versão preenchida no rodapé com sucesso:', siteVersion);
-    } else {
-        console.error('Erro: Elemento com id="site-version" não encontrado no DOM.');
-    }
+    tryFillVersion();
 });
