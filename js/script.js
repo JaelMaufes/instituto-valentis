@@ -60,3 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+import siteVersion from './version.js';
+
+   document.addEventListener('DOMContentLoaded', () => {
+       const versionElement = document.getElementById('site-version');
+       if (versionElement) {
+           versionElement.textContent = siteVersion;
+       }
+   });
