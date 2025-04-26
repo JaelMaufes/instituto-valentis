@@ -405,6 +405,28 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .property-card .whatsapp-negotiate-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primario-azul);
+            color: var(--primario-amarelo);
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .property-card .whatsapp-negotiate-btn:hover {
+            background-color: var(--primario-amarelo);
+            color: var(--primario-azul);
+        }
+
+        .property-card .whatsapp-negotiate-btn i {
+            margin-right: 5px;
+        }
+
         .property-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -1137,11 +1159,22 @@
                         <div class="col-12">
                             <label for="value" class="form-label">Valor (R$)</label>
                             <input type="number" class="form-control" id="value" step="0.01"
-                                placeholder="Digite o valor" required>
+                                placeholder="Digite o valor">
+                        </div>
+                        <div class="col-12">
+                            <label>
+                                <input type="checkbox" id="hide-value"> Não informar valor
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label for="whatsapp" class="form-label">Número de WhatsApp <i>(Ex.:
+                                    5544998985343)</i></label>
+                            <input type="text" class="form-control" id="whatsapp"
+                                placeholder="Digite o número do WhatsApp (apenas números)" required>
                         </div>
                         <div class="col-12">
                             <label for="description" class="form-label">Descrição <i>(Ex.: Quantidade de quartos, outros
-                                    detalhes do imóvel, telefone para contato, etc)</i></label>
+                                    detalhes do imóvel, etc)</i></label>
                             <textarea class="form-control" id="description" placeholder="Descreva o imóvel"
                                 required></textarea>
                         </div>
@@ -1177,7 +1210,8 @@
                             <strong>fé cristã protestante</strong>, <strong>assistência social</strong> e
                             <strong>desenvolvimento comunitário</strong>. Atuamos em áreas como capelania, apoio a
                             imigrantes, promoção de esportes, artes, pesquisa científica e sustentabilidade, sempre com
-                            o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.</p>
+                            o compromisso de servir sem discriminação e impactar positivamente o Brasil e o mundo.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1190,7 +1224,8 @@
                             social e incentivo à inovação. Por meio de ações como palestras, cultos cristãos, doações,
                             atendimento psicológico e fonoaudiológico, e projetos de empreendedorismo, buscamos
                             fortalecer comunidades, guiados pelos princípios da <strong>fé</strong>,
-                            <strong>solidariedade</strong> e <strong>excelência</strong>.</p>
+                            <strong>solidariedade</strong> e <strong>excelência</strong>.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1203,7 +1238,8 @@
                             concretas que geram impacto duradouro. Almejamos expandir nossas iniciativas, criando
                             filiais e parcerias internacionais, para construir um futuro onde cada indivíduo tenha
                             acesso a ferramentas para prosperar com <strong>dignidade</strong>,
-                            <strong>esperança</strong> e <strong>propósito</strong>.</p>
+                            <strong>esperança</strong> e <strong>propósito</strong>.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1241,7 +1277,9 @@
 
     <footer>
         <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a> | <a href="/pages/licenca.html">Licença</a></p>
+        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a> |
+            <a href="/pages/licenca.html">Licença</a>
+        </p>
     </footer>
 
     <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20o%20cadastro%20de%20imóveis"
@@ -1343,36 +1381,40 @@
             approved.forEach((property, index) => {
                 const photosHtml = property.photos?.length
                     ? `<div id="carousel-${index}" class="carousel slide">
-                        <div class="carousel-inner">
-                            ${property.photos.map((photo, i) => `
-                                <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                    <img src="${photo}" class="d-block w-100" alt="Foto do imóvel" onerror="this.src='/images/placeholder.png'">
-                                </div>
-                            `).join('')}
+                <div class="carousel-inner">
+                    ${property.photos.map((photo, i) => `
+                        <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                            <img src="${photo}" class="d-block w-100" alt="Foto do imóvel" onerror="this.src='/images/placeholder.png'">
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Anterior</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Próximo</span>
-                        </button>
-                    </div>`
+                    `).join('')}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+            </div>`
                     : '<p>Sem fotos.</p>';
 
+                const valueDisplay = property.hideValue
+                    ? `<p><strong>Valor:</strong> A negociar <a href="https://wa.me/${property.whatsapp}?text=Olá, tenho interesse no imóvel ${property.owner}. Podemos negociar o valor?" class="whatsapp-negotiate-btn" target="_blank"><i class="fab fa-whatsapp"></i> Negociar via WhatsApp</a></p>`
+                    : `<p><strong>Valor:</strong> R$ ${parseFloat(property.value || 0).toFixed(2)}</p>`;
+
                 propertiesList.innerHTML += `
-                    <div class="col-12">
-                        <div class="property-card">
-                            ${photosHtml}
-                            <h3>${property.owner || 'Anônimo'}</h3>
-                            <p><strong>Status:</strong> ${property.status || 'Indefinido'}</p>
-                            <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
-                            <p><strong>Valor:</strong> R$ ${parseFloat(property.value || 0).toFixed(2)}</p>
-                            <p><strong>Descrição:</strong> ${property.description || 'N/A'}</p>
-                        </div>
-                    </div>
-                `;
+            <div class="col-12">
+                <div class="property-card">
+                    ${photosHtml}
+                    <h3>${property.owner || 'Anônimo'}</h3>
+                    <p><strong>Status:</strong> ${property.status || 'Indefinido'}</p>
+                    <p><strong>Tipo:</strong> ${property.type === 'locacao' ? 'Locação' : 'Venda'}</p>
+                    ${valueDisplay}
+                    <p><strong>Descrição:</strong> ${property.description || 'N/A'}</p>
+                </div>
+            </div>
+        `;
             });
         }
 
@@ -1398,40 +1440,66 @@
             return urls.filter(url => url);
         }
 
-        document.getElementById('property-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const photos = document.getElementById('photos').files;
-
-            if (photos.length > 15) {
-                showFeedback('Máximo 15 fotos.', 'danger');
-                return;
-            }
-
-            try {
-                const photoUrls = await handlePhotos(photos);
-                const property = {
-                    owner: document.getElementById('owner').value,
-                    type: document.getElementById('type').value,
-                    value: document.getElementById('value').value,
-                    description: document.getElementById('description').value,
-                    status: 'disponivel',
-                    photos: photoUrls,
-                    approvalStatus: 'pending',
-                    date: new Date().toLocaleDateString('pt-BR')
-                };
-
-                properties.push(property);
-                await saveProperties();
-                document.getElementById('property-form').reset();
-                showFeedback('Imóvel cadastrado! Aguardando aprovação.', 'success');
-            } catch (error) {
-                showFeedback('Erro ao cadastrar. Verifique a conexão.', 'danger');
-            }
-        });
-
         document.addEventListener("DOMContentLoaded", function () {
             // Carregar propriedades
             loadProperties();
+
+            // Configurar a checkbox "Não informar valor"
+            const hideValueCheckbox = document.getElementById('hide-value');
+            const valueInput = document.getElementById('value');
+            hideValueCheckbox.addEventListener('change', () => {
+                if (hideValueCheckbox.checked) {
+                    valueInput.disabled = true;
+                    valueInput.value = '';
+                    valueInput.removeAttribute('required');
+                } else {
+                    valueInput.disabled = false;
+                    valueInput.setAttribute('required', '');
+                }
+            });
+
+            // Manipular o envio do formulário
+            document.getElementById('property-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const photos = document.getElementById('photos').files;
+
+                if (photos.length > 15) {
+                    showFeedback('Máximo 15 fotos.', 'danger');
+                    return;
+                }
+
+                const whatsappNumber = document.getElementById('whatsapp').value.replace(/\D/g, ''); // Remove caracteres não numéricos
+                if (!whatsappNumber) {
+                    showFeedback('Por favor, insira um número de WhatsApp válido.', 'danger');
+                    return;
+                }
+
+                try {
+                    const photoUrls = await handlePhotos(photos);
+                    const property = {
+                        owner: document.getElementById('owner').value,
+                        type: document.getElementById('type').value,
+                        value: hideValueCheckbox.checked ? null : document.getElementById('value').value,
+                        hideValue: hideValueCheckbox.checked,
+                        whatsapp: whatsappNumber,
+                        description: document.getElementById('description').value,
+                        status: 'disponivel',
+                        photos: photoUrls,
+                        approvalStatus: 'pending',
+                        date: new Date().toLocaleDateString('pt-BR')
+                    };
+
+                    properties.push(property);
+                    await saveProperties();
+                    document.getElementById('property-form').reset();
+                    hideValueCheckbox.checked = false;
+                    valueInput.disabled = false;
+                    valueInput.setAttribute('required', '');
+                    showFeedback('Imóvel cadastrado! Aguardando aprovação.', 'success');
+                } catch (error) {
+                    showFeedback('Erro ao cadastrar. Verifique a conexão.', 'danger');
+                }
+            });
 
             // Função para salvar localização no JSONBin
             async function saveLocationToJSONBin(latitude, longitude, timestamp) {
@@ -1478,24 +1546,24 @@
             btnTopo.textContent = "⬆";
             btnTopo.id = "btn-topo";
             btnTopo.style.cssText = `
-                position: fixed;
-                bottom: 90px;
-                right: 20px;
-                background-color: #022452;
-                color: #ffbf00;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                border: none;
-                display: none;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                cursor: pointer;
-                z-index: 1000;
-                font-size: 1.2rem;
-                transition: background-color 0.3s ease, color 0.3s ease;
-            `;
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        background-color: #022452;
+        color: #ffbf00;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 1000;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    `;
             btnTopo.addEventListener('mouseover', () => {
                 btnTopo.style.backgroundColor = '#ffbf00';
                 btnTopo.style.color = '#022452';
@@ -1625,6 +1693,7 @@
                 }
             });
         });
+
         // Desativar o clique com o botão direito
         document.addEventListener('contextmenu', function (event) {
             event.preventDefault();
@@ -1634,19 +1703,16 @@
 
         // Bloquear atalhos comuns de inspeção (Ctrl+Shift+I, Ctrl+U, F12)
         document.addEventListener('keydown', function (event) {
-            // Ctrl+Shift+I (Inspeção)
             if (event.ctrlKey && event.shiftKey && event.key === 'I') {
                 event.preventDefault();
                 alert('Acesso à inspeção bloqueado!');
                 alert('Por favor, respeite os direitos autorais deste site!');
             }
-            // Ctrl+U (Visualizar código-fonte)
             if (event.ctrlKey && event.key === 'U') {
                 event.preventDefault();
                 alert('Visualização do código-fonte bloqueada!');
                 alert('Por favor, respeite os direitos autorais deste site!');
             }
-            // F12 (DevTools)
             if (event.key === 'F12') {
                 event.preventDefault();
                 alert('Acesso às ferramentas de desenvolvedor bloqueado!');
