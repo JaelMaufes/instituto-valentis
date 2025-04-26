@@ -1431,16 +1431,23 @@
             menuToggle.addEventListener('click', () => {
                 mobileMenu.classList.add('active');
                 overlay.classList.add('active');
+                menuToggle.setAttribute('aria-expanded', 'true');
+                const firstMenuItem = mobileMenu.querySelector('a');
+                if (firstMenuItem) firstMenuItem.focus();
             });
 
             closeBtn.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
                 overlay.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.focus();
             });
 
             overlay.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
                 overlay.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.focus();
             });
 
             // Controle do Dropdown com Clique
@@ -1504,6 +1511,19 @@
                 alert('Por favor, respeite os direitos autorais deste site!');
             }
         });
+        async function saveLocationToJSONBin(latitude, longitude, timestamp) {
+            try {
+                const response = await fetch('/api/saveLocation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ latitude, longitude, timestamp })
+                });
+                const result = await response.json();
+                console.log(result.message);
+            } catch (error) {
+                console.error('Erro ao salvar localização:', error);
+            }
+        }
     </script>
     <script src="/js/version.js"></script>
     <script src="/js/script.js"></script>

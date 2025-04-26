@@ -1,0 +1,9 @@
+[build]
+  command = "echo 'No build command needed'"
+  publish = "."
+
+[[redirects]]
+  from = "/api/saveLocation"
+  to = "/.netlify/functions/saveLocation"
+  status = 200
+  force = true

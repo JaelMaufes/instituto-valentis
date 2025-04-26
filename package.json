@@ -16,5 +16,8 @@
   "devDependencies": {
     "live-server": "^1.2.0",
     "standard-version": "^9.5.0"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
   }
 }

@@ -73,6 +73,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (typeof siteVersion === 'undefined') {
             console.error('Erro: siteVersion não está definida. Verifique se version.js foi carregado corretamente.');
+            const script = document.createElement('script');
+            script.src = getScriptPath('version.js');
+            script.onerror = () => {
+                console.error('Erro: Não foi possível carregar version.js dinamicamente.');
+            };
+            script.onload = () => {
+                console.log('version.js carregado dinamicamente.');
+                fillVersionIfReady(attempts - 1, delay);
+            };
+            document.head.appendChild(script);
             return;
         }
 
@@ -88,5 +98,73 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function fillVersionIfReady(attempts, delay) {
+        if (typeof siteVersion !== 'undefined') {
+            tryFillVersion(attempts, delay);
+        } else {
+            console.error('Erro: siteVersion ainda não está definida após carregamento dinâmico.');
+        }
+    }
+
+    function getScriptPath(scriptName) {
+        const isInPages = window.location.pathname.includes('/pages/');
+        return isInPages ? `../js/${scriptName}` : `/js/${scriptName}`;
+    }
+
     tryFillVersion();
+
+    // Controle do Menu Lateral
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const closeBtn = document.querySelector('.mobile-menu .close-btn');
+    const overlay = document.querySelector('.overlay');
+
+    if (menuToggle && mobileMenu && closeBtn && overlay) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            const firstMenuItem = mobileMenu.querySelector('a');
+            if (firstMenuItem) firstMenuItem.focus();
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.focus();
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.focus();
+        });
+    } else {
+        console.error('Erro: Elementos do menu lateral não encontrados no DOM.');
+    }
+
+    // Controle do Dropdown com Clique
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const dropdownMenu = toggle.nextElementSibling;
+            const isActive = dropdownMenu.classList.contains('active');
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.remove('active');
+            });
+            if (!isActive) {
+                dropdownMenu.classList.add('active');
+            }
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.remove('active');
+            });
+        }
+    });
 });
