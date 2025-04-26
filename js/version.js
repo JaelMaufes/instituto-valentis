@@ -1,2 +1,1 @@
-const siteVersion = "1.0.2";
-   export default siteVersion;
+var siteVersion = "1.2.3";
