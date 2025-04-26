@@ -61,11 +61,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-import siteVersion from '/js/version.js';
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('script.js carregado com sucesso.');
 
-   document.addEventListener('DOMContentLoaded', () => {
-       const versionElement = document.getElementById('site-version');
-       if (versionElement) {
-           versionElement.textContent = siteVersion;
-       }
-   });
+    // Verifica se a variável siteVersion está definida
+    if (typeof siteVersion === 'undefined') {
+        console.error('Erro: siteVersion não está definida. Verifique se version.js foi carregado corretamente.');
+        return;
+    }
+
+    console.log('Versão do site:', siteVersion);
+
+    // Busca o elemento com id="site-version"
+    var versionElement = document.getElementById('site-version');
+    if (versionElement) {
+        versionElement.textContent = siteVersion;
+        console.log('Versão preenchida no rodapé com sucesso:', siteVersion);
+    } else {
+        console.error('Erro: Elemento com id="site-version" não encontrado no DOM.');
+    }
+});
