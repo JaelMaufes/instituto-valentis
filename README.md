@@ -5,7 +5,7 @@ O projeto utiliza HTML, CSS e JavaScript, com integrações externas como JSONBi
 Pré-requisitos
 Antes de começar, certifique-se de ter os seguintes itens instalados:
 
-Node.js e npm: Necessário para gerenciar dependências e usar a ferramenta standard-version. Baixe e instale a partir de nodejs.org. Verifique a instalação com:node -v
+Node.js e npm: Necessário para gerenciar dependências, usar a ferramenta standard-version e rodar o servidor local com live-server. Baixe e instale a partir de nodejs.org. Verifique a instalação com:node -v
 npm -v
 
 
@@ -24,17 +24,14 @@ cd instituto-valentis
 
 Nota: Substitua o URL do repositório pelo URL real do seu projeto.
 
-Instale as Dependências:O projeto utiliza standard-version para gerenciamento de versões e changelog. Instale as dependências com:
+Instale as Dependências:O projeto utiliza standard-version para gerenciamento de versões e changelog, e live-server para rodar o site localmente. Instale as dependências com:
 npm install
 
 
-Visualize o Site Localmente:Como o site é baseado em HTML estático, você pode abrir o arquivo index.html diretamente em um navegador:
-open index.html
+Visualize o Site Localmente:Use o live-server para rodar o site com recarregamento automático:
+npm start
 
-Alternativamente, use um servidor local simples com Node.js (opcional):
-npm install -g live-server
-live-server
-
+Isso abrirá o navegador automaticamente em http://localhost:8080, exibindo o index.html. Alternativamente, você pode abrir o arquivo index.html diretamente em um navegador, mas o live-server é recomendado para testar páginas em subdiretórios como /pages/.
 
 
 Estrutura do Projeto
@@ -43,11 +40,12 @@ instituto-valentis/
 │
 ├── /css/               # Arquivos de estilo (ex.: styles.css)
 ├── /docs/              # Documentos legais (ex.: termos.txt, politica.txt)
+├── /fonts/             # Fontes personalizadas
 ├── /images/            # Imagens do site (ex.: logomarca, placeholder.PNG)
-├── /js/                # Arquivos JavaScript (ex.: script.js)
+├── /js/                # Arquivos JavaScript (ex.: script.js, version.js)
+├── /node_modules/      # Dependências do Node.js
 ├── /pages/             # Páginas secundárias (ex.: sobre.html, contato.html)
-├── /scripts/           # Scripts adicionais (ex.: main.js)
-├── /styles/            # Estilos adicionais (ex.: main.css)
+│   ├── /pages-antigo/  # Páginas antigas do site
 │
 ├── index.html          # Página inicial do site
 ├── imoveisivatuba.html # Aplicação de suporte imobiliário
@@ -60,16 +58,17 @@ instituto-valentis/
 ├── .gitignore          # Arquivos e pastas ignorados pelo Git
 ├── .env                # Variáveis de ambiente (ex.: chaves de API)
 ├── .htaccess           # Configurações de segurança e redirecionamento HTTPS
+├── .versionrc.json     # Configuração da ferramenta standard-version
 ├── CHANGELOG.md        # Registro de mudanças do projeto
 ├── README.md           # Documentação do projeto
 ├── package.json        # Dependências e scripts do projeto
-├── .versionrc.json     # Configuração da ferramenta standard-version
+├── package-lock.json   # Lockfile das dependências
 
 Como Usar
 Visualizar o Site
 
-Abra o arquivo index.html em um navegador para visualizar a página inicial.
-Navegue pelas páginas secundárias (ex.: sobre.html, contato.html) acessando os links no menu.
+Use o comando npm start para iniciar o live-server e visualizar o site em http://localhost:8080.
+Navegue pelas páginas secundárias (ex.: sobre.html, contato.html) acessando os links no menu ou diretamente via URL (ex.: http://localhost:8080/pages/sobre.html).
 
 Funcionalidades Administrativas
 
@@ -143,4 +142,3 @@ Licença
 Este projeto está licenciado sob os termos disponíveis em licenca.html. Para mais detalhes, consulte o arquivo ou baixe a versão em texto (licenca.txt).
 
 Última atualização: 25 de abril de 2025
-Teste
