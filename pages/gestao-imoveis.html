@@ -7,7 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo | Instituto Valentis</title>
+    <meta name="description" content="Gestão de imóveis do Instituto Valentis - Cadastre e gerencie imóveis em Ivatuba">
+    <meta name="keywords" content="gestão de imóveis, Instituto Valentis, Ivatuba, cadastro de imóveis">
+    <meta name="author" content="Instituto Valentis">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Gestão de Imóveis | Instituto Valentis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
@@ -35,7 +39,7 @@
             <a href="/index.html">
                 <img src="/images/logomarca.png" alt="Logo Instituto Valentis" onerror="this.src='/images/placeholder.png'">
             </a>
-            <h1>Instituto Valentis | Painel Administrativo</h1>
+            <h1>Instituto Valentis | Gestão de Imóveis</h1>
         </div>
         <button class="menu-toggle" aria-label="Abrir menu">
             <i class="fas fa-bars"></i>
@@ -50,6 +54,7 @@
                     <li><a class="dropdown-item" href="/pages/imoveisivatuba.html">Solução Imobiliária</a></li>
                     <li><a class="dropdown-item" href="/index.html#sementes-de-esperanca">Sementes de Esperança</a></li>
                     <li><a class="dropdown-item" href="/index.html#tecnologia-inovacao">Inovalentis</a></li>
+                    <li><a class="dropdown-item" href="/pages/servicos-migracao.html">Serviços de Migração</a></li>
                 </ul>
             </div>
             <a href="/index.html#galeria">Galeria</a>
@@ -68,6 +73,7 @@
                     <li><a class="dropdown-item" href="/pages/imoveisivatuba.html">Solução Imobiliária</a></li>
                     <li><a class="dropdown-item" href="/index.html#sementes-de-esperanca">Sementes de Esperança</a></li>
                     <li><a class="dropdown-item" href="/index.html#tecnologia-inovacao">Inovalentis</a></li>
+                    <li><a class="dropdown-item" href="/pages/servicos-migracao.html">Serviços de Migração</a></li>
                 </ul>
             </div>
             <a href="/index.html#galeria">Galeria</a>
@@ -77,21 +83,59 @@
     </header>
 
     <div class="container">
-        <section id="admin-panel">
-            <h2>Gerenciar Imóveis</h2>
-            <div id="auth-section" class="auth-section">
-                <form id="auth-form">
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="password" required>
+        <section id="gestao-imoveis">
+            <h1>Gestão de Imóveis</h1>
+            <p class="text-center mb-5">Cadastre seu imóvel em Ivatuba para venda ou locação. Após o cadastro, ele será revisado pela nossa equipe.</p>
+
+            <div class="auth-section" id="auth-section">
+                <h2>Autenticação de Administrador</h2>
+                <div id="auth-feedback" style="display: none;"></div>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <form id="auth-form">
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                </form>
-                <div id="auth-feedback" class="alert" style="display: none;"></div>
+                </div>
             </div>
-            <div id="admin-section" class="admin-section" style="display: none;">
-                <h2>Imóveis Cadastrados</h2>
-                <div id="properties-list" class="row"></div>
+
+            <div class="admin-section" id="admin-section" style="display: none;">
+                <h2>Gerenciar Imóveis</h2>
+                <div class="row" id="properties-list"></div>
+            </div>
+
+            <div class="service-card">
+                <h3>Cadastrar Novo Imóvel</h3>
+                <form id="property-form">
+                    <div class="mb-3">
+                        <label for="owner" class="form-label">Proprietário</label>
+                        <input type="text" class="form-control" id="owner" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Tipo</label>
+                        <select class="form-select" id="type" required>
+                            <option value="venda">Venda</option>
+                            <option value="locacao">Locação</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="value" class="form-label">Valor (R$)</label>
+                        <input type="number" class="form-control" id="value" step="0.01" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="description" rows="4" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="photos" class="form-label">Fotos (URLs, separadas por vírgula)</label>
+                        <input type="text" class="form-control" id="photos">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+                </form>
             </div>
         </section>
     </div>
@@ -99,14 +143,36 @@
     <footer>
         <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
         <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a> | <a href="/pages/licenca.html">Licença</a></p>
+        <p>Versão do site: <script src="/js/version.js"></script></p>
     </footer>
 
-    <a href="https://wa.me/5544998985343?text=Olá,%20tenho%20dúvidas%20sobre%20a%20administração%20de%20imóveis" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5544998985343?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20gestão%20de%20imóveis" class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/version.js"></script>
     <script src="/js/script.js"></script>
+    <script>
+        document.getElementById('property-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const property = {
+                owner: document.getElementById('owner').value,
+                type: document.getElementById('type').value,
+                value: parseFloat(document.getElementById('value').value),
+                description: document.getElementById('description').value,
+                photos: document.getElementById('photos').value.split(',').map(url => url.trim()).filter(url => url),
+                status: 'disponivel',
+                approvalStatus: 'pending'
+            };
+            properties.push(property);
+            await saveData();
+            showFeedback('Imóvel cadastrado com sucesso!', 'success');
+            document.getElementById('property-form').reset();
+            if (document.getElementById('admin-section').style.display === 'block') {
+                displayProperties();
+            }
+        });
+    </script>
 </body>
 </html>
