@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.3.3..v1.4.0) (2025-04-28)
+
+
+### Features
+
+* update script.js ([88225ae](https://github.com/JaelMaufes/instituto-valentis/site/commit/88225ae3ba9e0f6d9976ddbdd65cb4c0854d22eb))
+
 ### [1.3.3](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.3.2..v1.3.3) (2025-04-28)
 
 ### [1.3.2](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.3.1..v1.3.2) (2025-04-28)
