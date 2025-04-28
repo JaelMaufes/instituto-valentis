@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.6.0..v1.7.0) (2025-04-28)
+
+
+### Features
+
+* update imoveisivatuba.html ([2fd81da](https://github.com/JaelMaufes/instituto-valentis/site/commit/2fd81da5a4788d2720e9ce5c74a5f189f6cc198f))
+
 ## [1.6.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.5.0..v1.6.0) (2025-04-28)
 
 
