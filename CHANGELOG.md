@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.9.0..v1.10.0) (2025-04-28)
+
+
+### Features
+
+* update gestao-imoveis.html design and UX ([3a1f019](https://github.com/JaelMaufes/instituto-valentis/site/commit/3a1f019c44129d3c4f5ee282c0717e6b8f034990))
+
 ## [1.9.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.8.0..v1.9.0) (2025-04-28)
 
 
