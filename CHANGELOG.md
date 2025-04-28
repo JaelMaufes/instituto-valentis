@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.7.0..v1.8.0) (2025-04-28)
+
+
+### Features
+
+* update index.html design and UX ([a2ad5da](https://github.com/JaelMaufes/instituto-valentis/site/commit/a2ad5daaa3b0609c738fd0af7c3add8b00041da9))
+
 ## [1.7.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.6.0..v1.7.0) (2025-04-28)
 
 
