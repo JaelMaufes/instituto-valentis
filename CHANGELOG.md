@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.10.0..v1.11.0) (2025-05-03)
+
+
+### Features
+
+* update admin-coordinates.html design and UX ([8025e40](https://github.com/JaelMaufes/instituto-valentis/site/commit/8025e40474a1998bcae551b9f5932747f7da76dd))
+
 ## [1.10.0](https://github.com/JaelMaufes/instituto-valentis/site/compare/v1.9.0..v1.10.0) (2025-04-28)
 
 
