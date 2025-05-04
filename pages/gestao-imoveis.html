@@ -7,48 +7,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gestão de imóveis do Instituto Valentis - Cadastre e gerencie imóveis em Ivatuba">
-    <meta name="keywords" content="gestão de imóveis, Instituto Valentis, Ivatuba, cadastro de imóveis">
+    <meta name="description" content="Gestão de imóveis do Instituto Valentis - Cadastre e gerencie imóveis para venda ou locação em Ivatuba.">
+    <meta name="keywords" content="gestão de imóveis, Instituto Valentis, Ivatuba, aluguel, venda, cadastro de imóveis">
     <meta name="author" content="Instituto Valentis">
-    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:title" content="Gestão de Imóveis | Instituto Valentis">
+    <meta property="og:description" content="Cadastre e gerencie imóveis em Ivatuba com o Instituto Valentis.">
+    <meta property="og:image" content="/images/logomarca.png">
+    <meta property="og:url" content="https://www.ivalentis.com/pages/gestao-imoveis.html">
     <title>Gestão de Imóveis | Instituto Valentis</title>
+    <link rel="icon" href="/images/favicon.png" type="image/png" sizes="16x16">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="/css/styles.css" as="style">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" sizes="16x16">
-    <link rel="icon" href="/images/favicon.png" type="image/png" sizes="16x16">
 </head>
 <body>
     <div class="parallax">
-        <img src="/images/star.png" id="star1" alt="Estrela 1" onerror="console.error('Failed to load star.png')">
-        <img src="/images/star.png" id="star2" alt="Estrela 2" onerror="console.error('Failed to load star.png')">
-        <img src="/images/star.png" id="star3" alt="Estrela 3" onerror="console.error('Failed to load star.png')">
-        <img src="/images/bluecircle.png" id="bluecircle1" alt="Círculo Azul 1" onerror="console.error('Failed to load bluecircle.png')">
-        <img src="/images/bluecircle.png" id="bluecircle2" alt="Círculo Azul 2" onerror="console.error('Failed to load bluecircle.png')">
-        <img src="/images/bluecircle.png" id="bluecircle3" alt="Círculo Azul 3" onerror="console.error('Failed to load bluecircle.png')">
-        <img src="/images/rocket.png" id="rocket1" alt="Foguete 1" onerror="console.error('Failed to load rocket.png')">
-        <img src="/images/rocket.png" id="rocket2" alt="Foguete 2" onerror="console.error('Failed to load rocket.png')">
-        <img src="/images/rocket.png" id="rocket3" alt="Foguete 3" onerror="console.error('Failed to load rocket.png')">
-        <img src="/images/sphere.png" id="sphere1" alt="Esfera 1" onerror="console.error('Failed to load sphere.png')">
-        <img src="/images/sphere.png" id="sphere2" alt="Esfera 2" onerror="console.error('Failed to load sphere.png')">
-        <img src="/images/sphere.png" id="sphere3" alt="Esfera 3" onerror="console.error('Failed to load sphere.png')">
+        <img src="/images/star.png" id="star1" alt="Estrela decorativa 1" loading="lazy">
+        <img src="/images/star.png" id="star2" alt="Estrela decorativa 2" loading="lazy">
+        <img src="/images/star.png" id="star3" alt="Estrela decorativa 3" loading="lazy">
+        <img src="/images/bluecircle.png" id="bluecircle1" alt="Círculo azul decorativo 1" loading="lazy">
+        <img src="/images/bluecircle.png" id="bluecircle2" alt="Círculo azul decorativo 2" loading="lazy">
+        <img src="/images/bluecircle.png" id="bluecircle3" alt="Círculo azul decorativo 3" loading="lazy">
+        <img src="/images/rocket.png" id="rocket1" alt="Foguete decorativo 1" loading="lazy">
+        <img src="/images/rocket.png" id="rocket2" alt="Foguete decorativo 2" loading="lazy">
+        <img src="/images/rocket.png" id="rocket3" alt="Foguete decorativo 3" loading="lazy">
+        <img src="/images/sphere.png" id="sphere1" alt="Esfera decorativa 1" loading="lazy">
+        <img src="/images/sphere.png" id="sphere2" alt="Esfera decorativa 2" loading="lazy">
+        <img src="/images/sphere.png" id="sphere3" alt="Esfera decorativa 3" loading="lazy">
     </div>
 
-    <header class="header">
+    <header class="header" role="banner">
         <div class="logo-container">
-            <a href="/index.html">
-                <img src="/images/logomarca.png" alt="Logo Instituto Valentis" onerror="this.src='/images/placeholder.png'">
+            <a href="/index.html" aria-label="Página inicial do Instituto Valentis">
+                <img src="/images/logomarca.png" alt="Logo Instituto Valentis" loading="eager">
             </a>
-            <h1>Instituto Valentis | Gestão de Imóveis</h1>
+            <h1>Instituto Valentis</h1>
         </div>
-        <button class="menu-toggle" aria-label="Abrir menu">
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
             <i class="fas fa-bars"></i>
         </button>
-        <nav class="navbar">
+        <nav class="navbar" role="navigation">
             <a href="/index.html">Início</a>
             <a href="/index.html#sobre">Sobre</a>
             <div class="dropdown">
-                <a class="dropdown-toggle" href="#">Projetos</a>
+                <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="false">Projetos</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/index.html#visao-geral">Visão Geral</a></li>
                     <li><a class="dropdown-item" href="/pages/imoveisivatuba.html">Solução Imobiliária</a></li>
@@ -60,14 +64,14 @@
             <a href="/index.html#galeria">Galeria</a>
             <a href="/index.html#contato">Contato</a>
         </nav>
-        <div class="mobile-menu">
+        <div class="mobile-menu" role="dialog" aria-label="Menu mobile">
             <button class="close-btn" aria-label="Fechar menu">
                 <i class="fas fa-times"></i>
             </button>
             <a href="/index.html">Início</a>
             <a href="/index.html#sobre">Sobre</a>
             <div class="dropdown">
-                <a class="dropdown-toggle" href="#">Projetos</a>
+                <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="false">Projetos</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/index.html#visao-geral">Visão Geral</a></li>
                     <li><a class="dropdown-item" href="/pages/imoveisivatuba.html">Solução Imobiliária</a></li>
@@ -79,100 +83,70 @@
             <a href="/index.html#galeria">Galeria</a>
             <a href="/index.html#contato">Contato</a>
         </div>
-        <div class="overlay"></div>
+        <div class="overlay" aria-hidden="true"></div>
     </header>
 
-    <div class="container">
-        <section id="gestao-imoveis">
-            <h1>Gestão de Imóveis</h1>
-            <p class="text-center mb-5">Cadastre seu imóvel em Ivatuba para venda ou locação. Após o cadastro, ele será revisado pela nossa equipe.</p>
-
-            <div class="auth-section" id="auth-section">
-                <h2>Autenticação de Administrador</h2>
-                <div id="auth-feedback" style="display: none;"></div>
-                <div class="row">
-                    <div class="col-md-6 mx-auto">
-                        <form id="auth-form">
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="password" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                        </form>
-                    </div>
+    <main class="container">
+        <section id="gestao-imoveis" aria-labelledby="gestao-title">
+            <h1 id="gestao-title">Gestão de Imóveis</h1>
+            <div class="auth-section card" id="auth-section" aria-labelledby="auth-title">
+                <div class="card-body">
+                    <h2 id="auth-title">Autenticação de Administrador</h2>
+                    <div id="auth-feedback" class="alert" style="display: none;"></div>
+                    <form id="auth-form" aria-describedby="auth-feedback">
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="password" required aria-required="true">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
                 </div>
             </div>
 
-            <div class="admin-section" id="admin-section" style="display: none;">
-                <h2>Gerenciar Imóveis</h2>
+            <div class="admin-section" id="admin-section" style="display: none;" aria-labelledby="admin-title">
+                <h2 id="admin-title">Gerenciar Imóveis</h2>
                 <div class="row" id="properties-list"></div>
             </div>
-
-            <div class="service-card">
-                <h3>Cadastrar Novo Imóvel</h3>
-                <form id="property-form">
-                    <div class="mb-3">
-                        <label for="owner" class="form-label">Proprietário</label>
-                        <input type="text" class="form-control" id="owner" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="type" class="form-label">Tipo</label>
-                        <select class="form-select" id="type" required>
-                            <option value="venda">Venda</option>
-                            <option value="locacao">Locação</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="value" class="form-label">Valor (R$)</label>
-                        <input type="number" class="form-control" id="value" step="0.01" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Descrição</label>
-                        <textarea class="form-control" id="description" rows="4" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="photos" class="form-label">Fotos (URLs, separadas por vírgula)</label>
-                        <input type="text" class="form-control" id="photos">
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
-                </form>
-            </div>
         </section>
-    </div>
+    </main>
 
-    <footer>
+    <footer role="contentinfo">
         <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a> | <a href="/pages/licenca.html">Licença</a></p>
-        <p>Versão do site: <script src="/js/version.js"></script></p>
+        <p>
+            <a href="/pages/politica.html">Política de Privacidade</a> |
+            <a href="/pages/termos.html">Termos de Uso</a> |
+            <a href="/pages/licenca.html">Licença</a>
+        </p>
+        <p>Versão do site: <span id="site-version"></span></p>
     </footer>
 
-    <a href="https://wa.me/5544998985343?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20gestão%20de%20imóveis" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5544998985343?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20gestão%20de%20imóveis" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/version.js"></script>
-    <script src="/js/script.js"></script>
-    <script>
-        document.getElementById('property-form')?.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const property = {
-                owner: document.getElementById('owner').value,
-                type: document.getElementById('type').value,
-                value: parseFloat(document.getElementById('value').value),
-                description: document.getElementById('description').value,
-                photos: document.getElementById('photos').value.split(',').map(url => url.trim()).filter(url => url),
-                status: 'disponivel',
-                approvalStatus: 'pending'
-            };
-            properties.push(property);
-            await saveData();
-            showFeedback('Imóvel cadastrado com sucesso!', 'success');
-            document.getElementById('property-form').reset();
-            if (document.getElementById('admin-section').style.display === 'block') {
-                displayProperties();
-            }
-        });
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="/js/version.js"></script>
+    <script defer src="/js/script.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "@id": "https://www.ivalentis.com/pages/gestao-imoveis.html",
+        "name": "Instituto Valentis - Gestão de Imóveis",
+        "url": "https://www.ivalentis.com/pages/gestao-imoveis.html",
+        "logo": "https://www.ivalentis.com/images/logomarca.png",
+        "parentOrganization": {
+            "@type": "Organization",
+            "name": "Instituto Valentis",
+            "url": "https://www.ivalentis.com"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "contato@ivalentis.com",
+            "telephone": "+5544998985343",
+            "contactType": "Customer Service"
+        }
+    }
     </script>
 </body>
 </html>

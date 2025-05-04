@@ -7,160 +7,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Serviços de migração no Brasil para estrangeiros - Instituto Valentis">
-    <meta name="keywords" content="migração, serviços para estrangeiros, Polícia Federal, autorização de residência, Brasil">
+    <meta name="description" content="Serviços de migração no Brasil para estrangeiros oferecidos pelo Instituto Valentis, com informações sobre registro, autorização de residência e mais.">
+    <meta name="keywords" content="migração, serviços para estrangeiros, Polícia Federal, autorização de residência, CRNM, Brasil, imigração">
     <meta name="author" content="Instituto Valentis">
-    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:title" content="Serviços de Migração no Brasil | Instituto Valentis">
+    <meta property="og:description" content="Informações sobre serviços de migração no Brasil para estrangeiros, incluindo registro, autorização de residência e renovação de carteira.">
+    <meta property="og:image" content="/images/logomarca.png">
+    <meta property="og:url" content="https://www.ivalentis.com/pages/servicos-migracao.html">
     <title>Serviços de Migração no Brasil | Instituto Valentis</title>
+    <link rel="icon" href="/images/favicon.png" type="image/png" sizes="16x16">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="/css/styles.css" as="style">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" sizes="16x16">
-    <link rel="icon" href="/images/favicon.png" type="image/png" sizes="16x16">
 </head>
 <body>
     <div class="parallax">
-        <img src="/images/star.png" id="star1" alt="Estrela 1" onerror="console.error('Failed to load star.png')">
-        <img src="/images/star.png" id="star2" alt="Estrela 2" onerror="console.error('Failed to load star.png')">
-        <img src="/images/star.png" id="star3" alt="Estrela 3" onerror="console.error('Failed to load star.png')">
-        <img src="/images/bluecircle.png" id="bluecircle1" alt="Círculo Azul 1" onerror="console.error('Failed to load bluecircle.png')">
-        <img src="/images/bluecircle.png" id="bluecircle2" alt="Círculo Azul 2" onerror="console.error('Failed to load bluecircle.png')">
-        <img src="/images/bluecircle.png" id="bluecircle3" alt="Círculo Azul 3" onerror="console.error('Failed to load bluecircle.png')">
-        <img src="/images/rocket.png" id="rocket1" alt="Foguete 1" onerror="console.error('Failed to load rocket.png')">
-        <img src="/images/rocket.png" id="rocket2" alt="Foguete 2" onerror="console.error('Failed to load rocket.png')">
-        <img src="/images/rocket.png" id="rocket3" alt="Foguete 3" onerror="console.error('Failed to load rocket.png')">
-        <img src="/images/sphere.png" id="sphere1" alt="Esfera 1" onerror="console.error('Failed to load sphere.png')">
-        <img src="/images/sphere.png" id="sphere2" alt="Esfera 2" onerror="console.error('Failed to load sphere.png')">
-        <img src="/images/sphere.png" id="sphere3" alt="Esfera 3" onerror="console.error('Failed to load sphere.png')">
+        <img src="/images/star.png" id="star1" alt="Estrela decorativa 1" loading="lazy">
+        <img src="/images/star.png" id="star2" alt="Estrela decorativa 2" loading="lazy">
+        <img src="/images/star.png" id="star3" alt="Estrela decorativa 3" loading="lazy">
+        <img src="/images/bluecircle.png" id="bluecircle1" alt="Círculo azul decorativo 1" loading="lazy">
+        <img src="/images/bluecircle.png" id="bluecircle2" alt="Círculo azul decorativo 2" loading="lazy">
+        <img src="/images/bluecircle.png" id="bluecircle3" alt="Círculo azul decorativo 3" loading="lazy">
+        <img src="/images/rocket.png" id="rocket1" alt="Foguete decorativo 1" loading="lazy">
+        <img src="/images/rocket.png" id="rocket2" alt="Foguete decorativo 2" loading="lazy">
+        <img src="/images/rocket.png" id="rocket3" alt="Foguete decorativo 3" loading="lazy">
+        <img src="/images/sphere.png" id="sphere1" alt="Esfera decorativa 1" loading="lazy">
+        <img src="/images/sphere.png" id="sphere2" alt="Esfera decorativa 2" loading="lazy">
+        <img src="/images/sphere.png" id="sphere3" alt="Esfera decorativa 3" loading="lazy">
     </div>
 
-    <header class="header">
+    <header class="header" role="banner">
         <div class="logo-container">
-            <a href="/index.html">
-                <img src="/images/logomarca.png" alt="Logo Instituto Valentis" onerror="this.src='/images/placeholder.png'">
+            <a href="/index.html" aria-label="Página inicial do Instituto Valentis">
+                <img src="/images/logomarca.png" alt="Logo Instituto Valentis" loading="eager">
             </a>
-            <h1>Instituto Valentis | Serviços de Migração</h1>
+            <h1>Instituto Valentis</h1>
         </div>
-        <button class="menu-toggle" aria-label="Abrir menu">
+        <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
             <i class="fas fa-bars"></i>
         </button>
-        <nav class="navbar">
+        <nav class="navbar" role="navigation">
             <a href="/index.html">Início</a>
             <a href="/index.html#sobre">Sobre</a>
             <div class="dropdown">
-                <a class="dropdown-toggle" href="#">Projetos</a>
+                <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="false">Projetos</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/index.html#visao-geral">Visão Geral</a></li>
                     <li><a class="dropdown-item" href="/pages/imoveisivatuba.html">Solução Imobiliária</a></li>
                     <li><a class="dropdown-item" href="/index.html#sementes-de-esperanca">Sementes de Esperança</a></li>
                     <li><a class="dropdown-item" href="/index.html#tecnologia-inovacao">Inovalentis</a></li>
+                    <li><a class="dropdown-item" href="/pages/gestao-imoveis.html">Gestão de Imóveis</a></li>
+                    <li><a class="dropdown-item" href="/pages/servicos-migracao.html">Serviços de Migração</a></li>
                 </ul>
             </div>
             <a href="/index.html#galeria">Galeria</a>
             <a href="/index.html#contato">Contato</a>
         </nav>
-        <div class="mobile-menu">
+        <div class="mobile-menu" role="dialog" aria-label="Menu mobile">
             <button class="close-btn" aria-label="Fechar menu">
                 <i class="fas fa-times"></i>
             </button>
             <a href="/index.html">Início</a>
             <a href="/index.html#sobre">Sobre</a>
             <div class="dropdown">
-                <a class="dropdown-toggle" href="#">Projetos</a>
+                <a class="dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="false">Projetos</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/index.html#visao-geral">Visão Geral</a></li>
                     <li><a class="dropdown-item" href="/pages/imoveisivatuba.html">Solução Imobiliária</a></li>
                     <li><a class="dropdown-item" href="/index.html#sementes-de-esperanca">Sementes de Esperança</a></li>
                     <li><a class="dropdown-item" href="/index.html#tecnologia-inovacao">Inovalentis</a></li>
+                    <li><a class="dropdown-item" href="/pages/gestao-imoveis.html">Gestão de Imóveis</a></li>
+                    <li><a class="dropdown-item" href="/pages/servicos-migracao.html">Serviços de Migração</a></li>
                 </ul>
             </div>
             <a href="/index.html#galeria">Galeria</a>
             <a href="/index.html#contato">Contato</a>
         </div>
-        <div class="overlay"></div>
+        <div class="overlay" aria-hidden="true"></div>
     </header>
 
-    <div class="container">
-        <section id="migration-services">
-            <h1>Serviços de Migração no Brasil para Estrangeiros</h1>
+    <main class="container">
+        <section id="migration-services" aria-labelledby="migration-title">
+            <h1 id="migration-title">Serviços de Migração no Brasil para Estrangeiros</h1>
             <p class="text-center mb-5">O Instituto Valentis oferece informações úteis sobre os serviços de migração no Brasil, prestados pela Polícia Federal, para ajudar estrangeiros a regularizarem sua situação no país.</p>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="service-card">
-                        <h3>Registrar-se como Estrangeiro no Brasil</h3>
-                        <p>Todo estrangeiro com visto temporário, autorização de residência deferida, ou status de refugiado, apátrida ou asilado deve se registrar na Polícia Federal. O registro é necessário para obter a Carteira de Registro Nacional Migratório (CRNM).</p>
-                        <p><strong>Prazo:</strong> 90 dias após a entrada no Brasil ou 30 dias após a publicação da autorização no Diário Oficial da União.</p>
-                        <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro/registrar-se-como-estrangeiro-no-brasil" target="_blank">Saiba mais</a></p>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="service-card card">
+                        <div class="card-body">
+                            <h3>Registrar-se como Estrangeiro no Brasil</h3>
+                            <p>Todo estrangeiro com visto temporário, autorização de residência deferida, ou status de refugiado, apátrida ou asilado deve se registrar na Polícia Federal. O registro é necessário para obter a Carteira de Registro Nacional Migratório (CRNM).</p>
+                            <p><strong>Prazo:</strong> 90 dias após a entrada no Brasil ou 30 dias após a publicação da autorização no Diário Oficial da União.</p>
+                            <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro/registrar-se-como-estrangeiro-no-brasil" target="_blank" rel="noopener noreferrer" aria-label="Saiba mais sobre registro de estrangeiros no Brasil">Saiba mais</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="service-card card">
+                        <div class="card-body">
+                            <h3>Obter Autorização de Residência</h3>
+                            <p>Estrangeiros que desejam viver no Brasil para trabalhar, estudar ou constituir família podem solicitar uma autorização de residência. Isso inclui vistos temporários para fins de trabalho, estudo, ou acolhida humanitária.</p>
+                            <p><a href="https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/autorizacao-de-residencia" target="_blank" rel="noopener noreferrer" aria-label="Saiba mais sobre autorização de residência no Brasil">Saiba mais</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="service-card card">
+                        <div class="card-body">
+                            <h3>Renovar Carteira (Temporário ou Permanente)</h3>
+                            <p>Renove sua Carteira de Registro Nacional Migratório (CRNM) se for temporária ou permanente. O serviço também permite corrigir ou alterar dados cadastrais.</p>
+                            <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank" rel="noopener noreferrer" aria-label="Saiba mais sobre renovação de carteira de registro migratório">Saiba mais</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="service-card card">
+                        <div class="card-body">
+                            <h3>Solicitar 2ª Via da Carteira de Registro Nacional Migratório</h3>
+                            <p>Obtenha uma segunda via da CRNM, idêntica à anterior (mesmo nome e data de validade), em caso de perda ou dano.</p>
+                            <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank" rel="noopener noreferrer" aria-label="Saiba mais sobre solicitação de segunda via da CRNM">Saiba mais</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="service-card card">
+                        <div class="card-body">
+                            <h3>Obter Documento Provisório de Registro Nacional Migratório</h3>
+                            <p>Solicite o Documento Provisório de Registro Nacional Migratório (DPRNM) enquanto aguarda a emissão da CRNM definitiva.</p>
+                            <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank" rel="noopener noreferrer" aria-label="Saiba mais sobre documento provisório de registro migratório">Saiba mais</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="service-card card">
+                        <div class="card-body">
+                            <h3>Prorrogar Estada como Turista no Brasil</h3>
+                            <p>Turistas estrangeiros podem solicitar a prorrogação de sua estada no Brasil, desde que atendam aos requisitos da Polícia Federal.</p>
+                            <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank" rel="noopener noreferrer" aria-label="Saiba mais sobre prorrogação de estada como turista">Saiba mais</a></p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-12">
-                    <div class="service-card">
-                        <h3>Obter Autorização de Residência</h3>
-                        <p>Estrangeiros que desejam viver no Brasil para trabalhar, estudar ou constituir família podem solicitar uma autorização de residência. Isso inclui vistos temporários para fins de trabalho, estudo, ou acolhida humanitária.</p>
-                        <p><a href="https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/autorizacao-de-residencia" target="_blank">Saiba mais</a></p>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="service-card">
-                        <h3>Renovar Carteira (Temporário ou Permanente)</h3>
-                        <p>Renove sua Carteira de Registro Nacional Migratório (CRNM) se for temporária ou permanente. O serviço também permite corrigir ou alterar dados cadastrais.</p>
-                        <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank">Saiba mais</a></p>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="service-card">
-                        <h3>Solicitar 2ª Via da Carteira de Registro Nacional Migratório</h3>
-                        <p>Obtenha uma segunda via da CRNM, idêntica à anterior (mesmo nome e data de validade), em caso de perda ou dano.</p>
-                        <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank">Saiba mais</a></p>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="service-card">
-                        <h3>Obter Documento Provisório de Registro Nacional Migratório</h3>
-                        <p>Solicite o Documento Provisório de Registro Nacional Migratório (DPRNM) enquanto aguarda a emissão da CRNM definitiva.</p>
-                        <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank">Saiba mais</a></p>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="service-card">
-                        <h3>Prorrogar Estada como Turista no Brasil</h3>
-                        <p>Turistas estrangeiros podem solicitar a prorrogação de sua estada no Brasil, desde que atendam aos requisitos da Polícia Federal.</p>
-                        <p><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank">Saiba mais</a></p>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="service-card">
-                        <h3>Links Úteis</h3>
-                        <p>Para mais informações, acesse os recursos oficiais:</p>
-                        <ul>
-                            <li><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank">Polícia Federal - Serviços de Imigração</a></li>
-                            <li><a href="https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes" target="_blank">Ministério da Justiça - Migrações</a></li>
-                            <li><a href="https://portaldeimigracao.mj.gov.br/" target="_blank">Portal de Imigração</a></li>
-                        </ul>
+                    <div class="service-card card">
+                        <div class="card-body">
+                            <h3>Links Úteis</h3>
+                            <p>Para mais informações, acesse os recursos oficiais:</p>
+                            <ul>
+                                <li><a href="https://www.gov.br/pf/pt-br/assuntos/imigracao/estrangeiro" target="_blank" rel="noopener noreferrer" aria-label="Serviços de imigração da Polícia Federal">Polícia Federal - Serviços de Imigração</a></li>
+                                <li><a href="https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes" target="_blank" rel="noopener noreferrer" aria-label="Migrações no Ministério da Justiça">Ministério da Justiça - Migrações</a></li>
+                                <li><a href="https://portaldeimigracao.mj.gov.br/" target="_blank" rel="noopener noreferrer" aria-label="Portal de Imigração do Ministério da Justiça">Portal de Imigração</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
+    </main>
 
-    <footer>
+    <footer role="contentinfo">
         <p>© 2025 Instituto Valentis - Todos os direitos reservados.</p>
-        <p><a href="/pages/politica.html">Política de Privacidade</a> | <a href="/pages/termos.html">Termos de Uso</a> | <a href="/pages/licenca.html">Licença</a></p>
+        <p>
+            <a href="/pages/politica.html">Política de Privacidade</a> |
+            <a href="/pages/termos.html">Termos de Uso</a> |
+            <a href="/pages/licenca.html">Licença</a>
+        </p>
+        <p>Versão do site: <span id="site-version"></span></p>
     </footer>
 
-    <a href="https://wa.me/5544998985343?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20de%20migração" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/5544998985343?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20de%20migração" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp sobre serviços de migração">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/version.js"></script>
-    <script src="/js/script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="/js/version.js"></script>
+    <script defer src="/js/script.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": "https://www.ivalentis.com/pages/servicos-migracao.html",
+        "name": "Serviços de Migração no Brasil",
+        "description": "Informações sobre serviços de migração no Brasil para estrangeiros, incluindo registro, autorização de residência, renovação de carteira e mais, oferecidos pelo Instituto Valentis.",
+        "provider": {
+            "@type": "Organization",
+            "name": "Instituto Valentis",
+            "url": "https://www.ivalentis.com",
+            "logo": "https://www.ivalentis.com/images/logomarca.png",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "contato@ivalentis.com",
+                "telephone": "+5544998985343",
+                "contactType": "Customer Service"
+            }
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "Brazil"
+        }
+    }
+    </script>
 </body>
 </html>
